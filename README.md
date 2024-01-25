@@ -4,6 +4,7 @@
 - Joshua Brooks Jr
 - Sajiv Gnanasekaran
 - Dr. Nguyen Ho
+
 CS496 capstone project at Loyola University Maryland
 
 ## Project Description
