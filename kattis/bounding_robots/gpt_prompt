@@ -1,0 +1,19 @@
+A robot is located on an infinite grid. The robot is capable of moving a certain distance in a certain direction. The robot does not know the size of the grid, but it knows how far it moves in each direction. If the robot tries to move outside the grid, it will hit a wall and stay in place.
+
+There are two diamonds on the grid. The robot must navigate to these diamonds, and report its final position relative to the diamonds. Specifically, the robot must report the distance it is horizontally and vertically from each diamond.
+
+Write a program to simulate the robot's movements, and determine its final position relative to the diamonds.
+
+Input:
+
+The input consists of:
+
+One line with two integers w and l (1 ≤ w, l ≤ 10000), the width and height of the grid.
+One line with two integers x and y (-10000 ≤ x < w, -10000 ≤ y < l), the initial position of the robot.
+One line with two integers dx and dy (0 ≤ dx < w, 0 ≤ dy < l), the position of the first diamond.
+One line with two integers gx and gy (0 ≤ gx < w, 0 ≤ gy < l), the position of the second diamond.
+One line with an integer n (1 ≤ n ≤ 100), the number of commands the robot will receive.
+n lines with one command each. Each command is a character c (either 'U', 'D', 'L', or 'R'), followed by an integer d (1 ≤ d ≤ 100), indicating that the robot should move d units in the direction given by c.
+Output:
+
+Output two lines. The first line should contain two integers, the horizontal and vertical distance between the robot's final position and the first diamond, respectively. The second line should contain two integers, the horizontal and vertical distance between the robot's final position and the second diamond, respectively.

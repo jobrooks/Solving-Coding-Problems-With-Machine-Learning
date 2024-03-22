@@ -1,0 +1,8 @@
+Solve in Python and justify:
+Given a positive integer N, compute all of its positive divisors.
+
+Input
+The first and only line contains the integer N (1<=N<=10^15).
+
+Output
+Output all the divisors of N, in ascending order, one per line.

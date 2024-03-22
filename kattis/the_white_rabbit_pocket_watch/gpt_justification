@@ -1,0 +1,12 @@
+We can model this problem as a graph where each location is a node and each trip is an edge between nodes with the duration of the trip as its weight. We can then use Dijkstra's algorithm to find the shortest path from Alice's location to the Rabbit's hole.
+
+To do this, we first need to represent the graph as an adjacency list. We can do this by iterating through each trip and adding an edge between each pair of consecutive locations in the trip with the duration of the trip as the weight.
+
+Once we have the adjacency list, we can run Dijkstra's algorithm starting from Alice's location and stopping once we reach the Rabbit's hole. We can keep track of the shortest time to reach each node and update it as we explore the graph.
+
+Finally, we return the shortest time to reach the Rabbit's hole.
+
+In terms of time complexity, building the adjacency list takes O(T * P) time, where T is the number of trips and P is the maximum number of locations in a trip. Running Dijkstra's algorithm takes O((N + M) log N) time, where N is the number of nodes and M is the number of edges. In this case, N = 200 and M <= 200 * 199 / 2 = 19900, so the total time complexity is dominated by Dijkstra's algorithm and is therefore O(N log N + M log N) = O(M log N). This should be fast enough to handle the constraints of the problem.
+
+
+

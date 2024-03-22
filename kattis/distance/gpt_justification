@@ -1,0 +1,5 @@
+The solution first reads the number of food trucks from the input and creates two empty lists to store the street and avenue coordinates of the food trucks. It then reads the coordinates of each food truck and appends them to the corresponding list.
+
+After initializing the total distance to zero, the solution iterates over all pairs of food trucks using nested loops. It calculates the distance between each pair of food trucks using the formula given in the problem statement and adds it to the total distance.
+
+Finally, the solution prints the total distance.

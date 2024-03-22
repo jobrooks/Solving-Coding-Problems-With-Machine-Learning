@@ -1,0 +1,1 @@
+This program reads in a string from standard input, and then loops through each character in the string. If the character is a letter in the dictionary of replacements, it replaces it with the corresponding replacement character. Otherwise, it just adds the original character to the output string. Finally, it prints the resulting string to standard output.

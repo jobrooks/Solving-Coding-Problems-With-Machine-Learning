@@ -1,0 +1,11 @@
+Explanation:
+
+We first read in the number of players n and loop through each player. For each player, we read in the number of Cog, Tablet, Compass, and Wildcard Science tokens.
+
+We calculate the score for the player's starting distribution of tokens, which is given by a*a + b*b + c*c + 7*min(a, b, c).
+
+If the player has any Wildcard Science tokens (d > 0), we consider all possible ways of distributing them among the three types of tokens. We create a temporary tuple temp representing the new distribution of tokens and calculate the score using the formula above. We append the score to a list of scores.
+
+Finally, we output the maximum score for the player by taking the maximum value in the list of scores.
+
+Note that we only need to consider three possible distributions of the wildcard tokens, since any other distribution can be obtained by permuting the types of tokens.

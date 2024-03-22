@@ -1,0 +1,26 @@
+Create a Solution in Python with proper indentation and justify 
+
+A number is said to Rise and Fall if the decimal representation can be broken up into two parts (possibly empty) where the first part has digits in nondecreasing order and the second part has digits in nonincreasing order. Note that a proper integer may not have any leading 0s.
+
+Compute the largest number less than or equal to an input number that rises and falls.
+
+Input
+The first line of input contains an integer t (1<= t<= 10^5), which is the number of test cases.
+
+Each of the next t lines contains a single integer n ( 1 <=n < 10^100000). Each is a single test case.
+
+Note: that is not a typo. The integer can be up to 10^5 digits long.
+
+The sum of the lengths of all input test cases will not exceed 10^5.
+
+Output
+For each test case, output a single line with a single integer, which is the largest number less than or equal to the n for that test case that rises and falls.
+
+Sample Input 1:
+2
+29041
+56577
+
+Sample Output 1:
+29000
+56555

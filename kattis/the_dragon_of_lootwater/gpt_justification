@@ -1,0 +1,9 @@
+We can solve this problem by sorting both the list of dragon head diameters and the list of knight heights in non-descending order, and then iterating through the dragon heads and assigning each one to the first knight in the list of knight heights who is tall enough to chop off that head. If no such knight exists, we can immediately conclude that it is not possible to slay the dragon.
+
+If we successfully assign each dragon head to a knight, we can then calculate the total cost of slaying the dragon by summing the heights of the knights who are assigned to chop off a head, multiplied by the diameter of the corresponding head. This gives us the total cost in gold coins.
+
+We use a while loop to repeatedly read in the input until we encounter the sentinel value of "0 0". For each test case, we read in the number of dragon heads and knights, and then sort the lists of head diameters and knight heights. We initialize a variable cost to 0 to keep track of the total cost in gold coins.
+
+We then iterate through the list of dragon heads using a for loop, and for each head, we iterate through the list of knight heights until we find the first knight who is tall enough to chop off the head. If we successfully assign a knight to chop off the head, we add the product of the knight's height and the head diameter to the total cost, and move on to the next head.
+
+If at any point we reach the end of the list of knight heights without finding a suitable knight to chop off the current head, we immediately print "Loowater is doomed!" and break out of the loop. Otherwise, we print the total cost after all the heads have been assigned.

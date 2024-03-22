@@ -1,0 +1,17 @@
+Given a bracket sequence s of length n, you are to determine if it is valid!
+
+A valid bracket sequence is defined recursively as:
+
+""
+(x) where x is a valid bracket sequence
+[x] where x is a valid bracket sequence
+{x} where x is a valid bracket sequence
+xy, where x and y are valid bracket sequences
+
+Input
+The first line of each contains one integer n (2<=n<=100 000) — the length of the bracket sequence.
+
+The second line of each test case contains a string s — the bracket sequence in the question. It is guaranteed that s only contains () [] {} as characters.
+
+Output
+Output a single integer — the answer to the problem.

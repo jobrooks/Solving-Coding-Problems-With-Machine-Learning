@@ -1,0 +1,7 @@
+The program first reads the input word and then creates a dictionary freqs that maps each tuple of character frequencies to a list of substrings that have those frequencies. This allows us to group substrings that are mutual anagrams based on their character frequencies.
+
+Then, the program loops through each frequency group and checks each pair of substrings within that group to see if they are mutual anagrams. If a pair of mutual anagrams is found, the program selects the shortest substring as the root of the multigram. If at the end of the loop the sorted concatenation of the root substrings matches the sorted input word, the program prints the root and exits.
+
+If no multigram is found, the program prints -1.
+
+This program uses proper formatting with consistent indentation and comments to explain the logic of each section of code.

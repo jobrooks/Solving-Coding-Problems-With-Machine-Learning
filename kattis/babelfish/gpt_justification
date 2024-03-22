@@ -1,0 +1,7 @@
+The program starts by reading in the dictionary, which consists of English words and their foreign language translations. The program stores these translations in a Python dictionary where the foreign words are the keys and the English words are the values.
+
+After reading in the dictionary, the program reads in the message, one word at a time. For each word, the program checks if it is in the dictionary. If it is, the program prints the corresponding English word. If it is not, the program prints "eh", as instructed in the problem statement.
+
+The program continues reading in and translating words until there is no more input.
+
+Note that this program assumes that the input follows the format described in the problem statement, with the dictionary entries followed by a blank line and then the message. If the input does not follow this format, the program may not work correctly.

@@ -1,0 +1,9 @@
+To solve this problem, we can use a combination of geometry and dynamic programming.
+
+For each test case, we first sort the points by their x-coordinates. Then we define dp[i][j][k] to be the number of convex quadrilaterals that have points[i] as the leftmost point, points[j] as the rightmost point, and all points in between points[i] and points[j] are below the line connecting points[i] and points[j]. k is the index of the last point below the line connecting points[i] and points[j].
+
+To calculate dp[i][j][k], we can iterate through all points between i and j that are below the line connecting points[i] and points[j]. Let's call the index of such a point l. Then the number of convex quadrilaterals with points[i], points[l], points[j], and points[k] is dp[i][l][k] * dp[l][j][l]. To avoid overcounting, we only count such quadrilaterals if l > k.
+
+Finally, we can calculate the total number of convex quadrilaterals by summing up dp[i][j][k] for all i, j, and k such that i < j and k < j.
+
+The time complexity of this algorithm is O(n^4), which is efficient enough for the given constraints.

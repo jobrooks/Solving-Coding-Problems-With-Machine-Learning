@@ -1,0 +1,7 @@
+The algorithm consists of a brute-force approach that checks all possible combinations of pitas and pizzas sold to see if they yield the expected profit. If a combination is found, it is added to a list of solutions. If no solutions are found, the program prints "none" and exits.
+
+Once all solutions have been found, the list is sorted by the number of pitas sold, and each solution is printed in order. Note that the sorting is necessary because the problem requires that solutions be printed in order of increasing number of pitas sold.
+
+The 0.001 value used for checking if a combination yields the expected profit is a small threshold used to account for floating-point errors in the calculations.
+
+Overall, the time complexity of this algorithm is O(profit_pita * profit_pizza), which is reasonable given the input constraints.

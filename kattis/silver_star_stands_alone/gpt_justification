@@ -1,0 +1,9 @@
+To solve the problem, we can use dynamic programming. Let's define dp[i] as the number of different probe trajectories that end at the i-th asteroid (i.e., the asteroid that is i AU away from Mars). We can calculate dp[i] as the sum of all dp[j] such that j<i and the distance between j and i is at most 14 AU, i.e., j+14\geq i.
+
+The base case is dp[2]=1, since the closest asteroid to Mars must be visited first. The final answer is dp[P], since we need to end at the asteroid Silver Star.
+
+Note that we pre-compute a list of primes up to 211 to avoid checking whether each i-j is a prime number. This saves time and makes the code more efficient.
+
+Also note that the range for j goes from i-1 to max(i-14, 1)-1, because the distance between i and j must be at most 14 AU. This ensures that we don't consider j values that are too far away from i.
+
+Finally, the time complexity of this algorithm is O(P^2), which is reasonable given that P is at most 211.

@@ -1,0 +1,63 @@
+To solve this problem, we need to keep track of the maximum number of bookings that overlap at any given time. If this number exceeds the number of rooms available, then we need to assign additional rooms to accommodate the extra bookings.
+
+We can use a list to keep track of the number of bookings for each minute within the given time period. For each booking, we iterate over the minutes of the booking period and increment the number of bookings for each minute. We also keep track of the maximum number of bookings for any minute.
+
+Finally, we calculate the number of rooms needed as the maximum number of bookings at any given minute, divided by the number of rooms available, rounded up to the nearest integer using the ceil function from the math module.
+
+To solve this problem, we need to keep track of the maximum number of bookings that overlap at any given time. If this number exceeds the number of rooms available, then we need to assign additional rooms to accommodate the extra bookings.
+
+We can use a list to keep track of the number of bookings for each minute within the given time period. For each booking, we iterate over the minutes of the booking period and increment the number of bookings for each minute. We also keep track of the maximum number of bookings for any minute.
+
+Finally, we calculate the number of rooms needed as the maximum number of bookings at any given minute, divided by the number of rooms available, rounded up to the nearest integer using the ceil function from the math module.
+
+Here's the Python code to implement this algorithm:
+
+python
+Copy code
+import datetime
+import math
+
+def parse_datetime(dt_str):
+    return datetime.datetime.strptime(dt_str, '%Y-%m-%d %H:%M')
+
+def calculate_rooms_needed(bookings, cleaning_time):
+    # create a list to keep track of the number of bookings for each minute
+    start_time = datetime.datetime(2013, 1, 1)
+    end_time = datetime.datetime(2017, 1, 1)
+    num_minutes = int((end_time - start_time).total_seconds() / 60)
+    num_bookings = [0] * num_minutes
+
+    # iterate over the bookings and increment the number of bookings for each minute
+    for booking in bookings:
+        start = parse_datetime(booking[1])
+        end = parse_datetime(booking[2])
+        start_index = int((start - start_time).total_seconds() / 60)
+        end_index = int((end - start_time).total_seconds() / 60)
+        for i in range(start_index, end_index):
+            num_bookings[i] += 1
+
+    # calculate the maximum number of bookings for any minute
+    max_bookings = max(num_bookings)
+
+    # calculate the number of rooms needed
+    rooms_needed = math.ceil(max_bookings / (24 * 60 / cleaning_time))
+
+    return rooms_needed
+
+# read the number of test cases
+num_cases = int(input())
+
+# iterate over the test cases
+for i in range(num_cases):
+    # read the input for this test case
+    num_bookings, cleaning_time = map(int, input().split())
+    bookings = [input().split() for j in range(num_bookings)]
+
+    # calculate the minimum number of rooms needed
+    rooms_needed = calculate_rooms_needed(bookings, cleaning_time)
+
+    # print the result
+    print(rooms_needed)
+We define a helper function parse_datetime to parse a date string into a datetime object. The calculate_rooms_needed function takes a list of bookings and the cleaning time as input and returns the minimum number of rooms needed to accommodate all bookings. We initialize a list num_bookings to keep track of the number of bookings for each minute within the given time period. We then iterate over the bookings and increment the number of bookings for each minute within the booking period. Finally, we calculate the maximum number of bookings for any minute and use this to calculate the number of rooms needed.
+
+In the main part of the code, we first read the number of test cases and then iterate over the test cases. For each test case, we read the input, calculate the minimum number of rooms needed using the calculate_rooms_needed function, and print the result.

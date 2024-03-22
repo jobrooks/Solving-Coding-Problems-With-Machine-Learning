@@ -1,0 +1,11 @@
+To solve this problem in Python, we can use a loop to iterate through each possible k-inversion, and count the number of occurrences of that inversion in the string. Specifically, we can use nested loops to compare each pair of positions (i,j) with the given distance k, and increment a counter if the pair satisfies the conditions of a k-inversion.
+In this code, we first read the input string using the input() function, and then find its length n. Then we loop through each possible k-inversion using range(1, n), since we are only interested in inversions with distance k between 1 and n-1.
+
+For each k, we initialize a counter count to zero, and then use nested loops to compare each pair of positions with distance k, and increment the counter if the pair satisfies the conditions of a k-inversion. Specifically, we check if s[i] is 'B', s[j] is 'A', and j-i=k.
+
+Finally, we print the value of the counter for each k-inversion, which gives us the desired output.
+
+This solution has a time complexity of O(n^2), since we need to compare each pair of positions with distance k. However, since the input string is limited to 1000000 characters, this should be fast enough to solve the problem in a reasonable amount of time.
+
+
+

@@ -1,0 +1,8 @@
+This problem can be solved using binary search. We first sort the houses in increasing order of their position on the street. Then, we try to place access points at various positions on the street and check if it is possible to cover all the houses with the given number of access points while ensuring that the maximum distance between any house and its closest access point is less than or equal to the current position.
+
+To check if it is possible to cover all the houses, we can use a greedy algorithm. We start with the first house and place an access point at its position. Then, we keep moving to the right until we find a house that is not covered by the current access point. We then place another access point at the position of the uncovered house and continue in the same way until all houses are covered.
+
+If at any point, we need more access points than the given number, we return False. Otherwise, we return True.
+
+Using this approach, we can find the maximum distance between any house and its closest access point by binary searching over the possible positions for the access points.
+The time complexity of this solution is O(m log m), where m is the number of houses on Main Street.

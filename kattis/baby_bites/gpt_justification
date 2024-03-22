@@ -1,0 +1,7 @@
+The program first reads in the number of bites Arild receives, and initializes a count variable to 1, which will be used to keep track of the expected count for each bite.
+
+Then, for each word spoken by Arild, the program checks if it is the string "mumble". If it is, then Arild might have mumbled an incomprehensible number, so we simply increment the count variable to move on to the next expected count.
+
+If the word is a non-negative integer, we first convert it to an integer using the int() function. Then, we check if the integer matches the current expected count. If it does, we increment the count variable to move on to the next expected count. If it doesn't, we print "something is fishy" and break out of the loop, because Arild's counting doesn't make sense.
+
+If the loop completes without breaking, that means that Arild's counting makes sense for all the bites he received, so we print "makes sense".

@@ -1,0 +1,41 @@
+solve in python and justify:
+Many are familiar with the board game Ticket To Ride1 where players compete to build a railway empire, claiming routes between cities. The game consists of a map of cities and various rail segments each connecting two adjacent cities.
+
+A key way to score points towards winning the game is to complete Destination Tickets. Each ticket specifies two distinct cities. A player earns the points that are indicated on the ticket if they have claimed one or more rail segments that form a path connecting the two cities.
+
+There is one ticket for each distinct unordered pair of cities. In our version of the game, each player is randomly given a ticket and they have an equal probability of receiving any ticket. Given a list of rail segments you have already claimed, determine the probability you earn points from the ticket you are given.
+
+Input
+The first line of input contains two integers N (2<= N <= 10^5), which is the number of cities, and M (0<= M<= 10^6), which is the number of rail segments you have claimed.
+
+The next M lines describe your claimed rail segments. Each line contains two distinct integers i (1<= i<=N) and j (1<= j<= N), which are the cities that this rail segment connects.
+
+Output
+Display the probability you earn points from the ticket you are given.
+
+Your answer should have an absolute error of at most 10^-6.
+
+Sample Input 1
+4 2
+1 2
+3 4
+Sample Output 1
+0.33333333333333333333
+
+Sample Input 2
+5 4
+1 5
+2 3
+2 4
+3 4
+Sample Output 2
+0.4
+Sample Input 3
+7 5
+1 2
+2 3
+3 4
+5 6
+6 7
+Sample Output 3 
+0.42857142857142857143

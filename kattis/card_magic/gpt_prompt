@@ -1,0 +1,10 @@
+Card Magic
+Johanna knows mind reading magic, or so she says. Her new trick consists of lining up N decks of cards, each deck having K cards numbered from 1 to K. She asks you to think of a number T between 1 and N x K and to focus your thoughts on it. Then, by scanning the energy profiles emitted from your brain activity, she carefully picks one card from each of the N decks. Magically, the sum of the numbers on the N picked cards is exactly the number that you were thinking of! After staring at her in disbelief for quite a while, you suspect it might be a trick she pulls on many people, and that she just picks the cards at random and happened to get it right with you just by chance.
+
+You start wondering just how large that chance was. You could easily compute the number of ways to pick one card from each deck, but how many of these ways have the correct sum?
+
+Input
+The first line contains three space-separated integers 1<=N<=100, 1<=K<=50, 1<=T<=N x K - the number of decks, the number of cards in each deck, and the number you were thinking of, respectively.
+
+Output
+Output a single integer – the number of ways Johanna could have picked a card from each deck, such that the picked cards sum up to T. Since this number can be very large, output it modulo 1 000 000 009.

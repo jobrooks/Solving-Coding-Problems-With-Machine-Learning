@@ -1,0 +1,29 @@
+Solve  in python and justify:
+We say that an integer sequence is increasing if the numbers in the sequence increase (rather than decrease or stay the same). For example, the following is an increasing sequence of length 7:
+(15, 27, 39, 56, 60, 80, 96)
+A subsequence of a sequence uses some of the same members, in the same order, but may leave some out. For example, if we have the following (non-increasing) sequence of length 7:
+(3, 11, 53, 21, 41, 61, 23)
+then (11, 53, 61) is a subsequence of length 3. And this subsequence also happens to be increasing. However, for this example there are longer increasing subsequences; what is the longest you can find?
+
+Write a program that, given a sequence of integers, finds a subsequence that is increasing and is as long as possible.
+
+Input
+The input consists of between 1 and 64 test cases. Each test case has two lines. The first line has a positive integer n<=100000, indicating the length of a sequence. Then follows a line containing a sequence of n integers, each in the range [-2^{31}, 2^{31}). Input ends at end of file.
+
+Output
+For each test case, output a line containing the length of a longest increasing subsequence, followed by a line containing the indices of the elements in one such sequence (the first element has index 0, the second index 1, and so on). The indices should be given in ascending order. If multiple increasing subsequences have maximal length, report any one of them.
+
+Sample Input 1	
+10
+1 2 3 4 5 6 7 8 9 10
+10
+1 1 1 1 1 1 1 1 1 1
+10
+5 19 5 81 50 28 29 1 83 23
+Sample Output 1
+10
+0 1 2 3 4 5 6 7 8 9
+1
+7
+5
+0 1 5 6 8

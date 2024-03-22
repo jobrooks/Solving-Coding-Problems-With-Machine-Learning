@@ -1,0 +1,10 @@
+Calculator
+Input
+Input contains several test cases, one per line. Each test case consists of an expression to be evaluated, containing numbers, parentheses, and the operators +, -, *, /.
+
+Normal operator precedence applies, so multiplication and division bind harder than addition and subtraction. All operators evaluate left-to-right. Implicit multiplication is not possible, so 3(1+1) is not a valid input. There may be an arbitrary amount (including 0) of spaces between tokens. Numbers are integers with absolute value at most 500.
+
+Input is terminated by end of file.
+
+Output
+For each test case, output the value of the expression, with two digits of precision after the decimal point.

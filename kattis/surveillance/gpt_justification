@@ -1,0 +1,7 @@
+Approach:
+
+Create a list of tuples with start and end range of cameras
+Sort the list based on the start range of each camera.
+Then iterate through the list and merge overlapping ranges.
+For each non-overlapping range, increment the count of cameras required.
+Time complexity: O(k log k) (sorting the camera ranges).

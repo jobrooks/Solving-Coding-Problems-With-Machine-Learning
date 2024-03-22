@@ -1,0 +1,10 @@
+Carousel
+Carl likes to ride the carousel. Carousel operators often offer discounts for buying multiple rides. He wonders which of the discounts provides the best value. Write a program to help him.
+
+Input
+The input will contain multiple test cases, up to 100. A test case starts with a line containing two integers n (1<=n<=10) and m (1<=m<=20). Carl will not take advantage of offers that require him to buy more than m tickets. Following this are n lines, each with integers a and b which each represent an offer to buy a tickets for $b.
+
+The input will be terminated by a line containing the characters 0 0.
+
+Output
+For each test case, print Buy a tickets for $b for the best offer that matches his requirements. If there are multiple best offers, print the one which buys more tickets. If there is no suitable offer, print No suitable tickets offered.

@@ -1,0 +1,10 @@
+To solve this problem, we need to find the minimum amount of paint that Joe needs to buy in order to fulfill his requirements for each color, using the available can sizes at the paint shop. We also need to calculate the amount of paint wasted in this process.
+
+We can start by reading the input values, which consist of the number of can sizes offered by the paint shop and the number of colors that Joe needs, followed by the sizes of each can and the required amounts of each color.
+
+Next, we can sort the can sizes in ascending order and process each color separately. For each color, we can loop through the available can sizes and find the smallest can that is large enough to fulfill Joe's requirements. We can keep track of the amount of paint wasted by subtracting the required amount from the size of the selected can.
+In this code, we first read the input values for the number of can sizes and colors, followed by the can sizes and required amounts of each color. We store the can sizes in a sorted list can_sizes for easy processing.
+
+We then loop through the colors and find the smallest can size that is large enough to fulfill Joe's requirements. We use a while loop to find the index of the smallest can size that is greater than or equal to the required amount. We then add the difference between the selected can size and the required amount to the total amount of paint wasted.
+
+Finally, we print the total amount of paint wasted.

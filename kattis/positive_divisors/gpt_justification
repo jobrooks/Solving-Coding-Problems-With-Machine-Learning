@@ -1,0 +1,12 @@
+One approach to solve this problem is to iterate from 1 to the square root of N, checking if each number divides N without remainder. If a divisor is found, we add both the divisor and its complement to a list of divisors. The complement is simply N divided by the divisor. Finally, we sort the list of divisors and print them one per line.
+
+In this code, we first read the input value n. We initialize an empty list divisors to store the divisors.
+
+We then enter a loop that iterates from 1 to the square root of n. Inside the loop, we check if the current number i divides n without remainder. If it does, we add both i and its complement (n // i) to the list of divisors. We only add the complement if it's not equal to i, to avoid adding the same divisor twice.
+
+After the loop, we sort the list of divisors using the sort() method. Finally, we iterate through the list of divisors and print each divisor on a new line using a for loop.
+
+Note that this code has a time complexity of O(sqrt(N)), which is efficient enough for the given input range. However, if the input range were larger, we would need to use a more efficient algorithm to compute the divisors, such as the one based on prime factorization.
+
+
+

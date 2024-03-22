@@ -1,0 +1,19 @@
+You are given a date, and you should output the corresponding zodiac sign.
+
+The zodiac signs are as follows:
+
+Aries: March 21 - April 19
+Taurus: April 20 - May 20
+Gemini: May 21 - June 20
+Cancer: June 21 - July 22
+Leo: July 23 - August 22
+Virgo: August 23 - September 22
+Libra: September 23 - October 22
+Scorpio: October 23 - November 21
+Sagittarius: November 22 - December 21
+Capricorn: December 22 - January 19
+Aquarius: January 20 - February 18
+Pisces: February 19 - March 20
+The input consists of a single line containing a date in the format "mm/dd", where "mm" is a two-digit number representing the month (with no leading zeros) and "dd" is a two-digit number representing the day (with no leading zeros).
+
+Output the corresponding zodiac sign.

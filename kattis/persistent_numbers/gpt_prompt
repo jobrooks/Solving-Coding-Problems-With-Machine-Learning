@@ -1,0 +1,36 @@
+solve in python and justify:
+The multiplicative persistence of a number is defined by Neil Sloane (Neil J.A. Sloane in The Persistence of a Number published in Journal of Recreational Mathematics 6, 1973, pp. 97-98., 1973) as the number of steps to reach a one-digit number when repeatedly multiplying the digits. For example:
+
+697 \rightarrow 378 \rightarrow 168 \rightarrow 48 \rightarrow 32 \rightarrow 6
+
+That is, the persistence of 697 is 5. The persistence of a single digit number is 0. At the time of this writing it is known that there are numbers with the persistence of 11. It is not known whether there are numbers with the persistence of 12, but it is known that if they exist then the smallest of them would have more than 3000 digits.
+
+The problem that you are to solve here is: what is the smallest number such that the first step of computing its persistence results in the given number?
+
+Input
+The input consists of multiple test cases. Each line contains a test case, which consists of a decimal number with up to 1000 digits. The input ends with a line containing -1.
+
+There will be at most 50 test cases in a single input file.
+
+Output
+For each testcase, output a single line containing one integer number satisfying the condition stated above. If no such number exists, output "There is no such number".
+
+Sample Input 1	
+0
+1
+4
+7
+18
+49
+51
+768
+-1
+Sample Output 1
+10
+11
+14
+17
+29
+77
+There is no such number.
+2688

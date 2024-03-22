@@ -1,0 +1,9 @@
+To solve this problem in Python, we can use a dictionary to keep track of each player's wins and losses, and then calculate their win average based on that information.
+Explanation:
+
+The program reads the input data in a loop until it encounters a case where n is 0, indicating the end of the input.
+For each test case, the program initializes two dictionaries to keep track of each player's wins and losses, with the keys being the player numbers 1 to n.
+The program then reads k*n*(n-1)//2 lines of input, which correspond to the k games between each pair of players. For each game, the program determines the outcome based on the players' moves, and updates the win and loss counters accordingly.
+After playing all the games, the program calculates and outputs the win average for each player, formatted to three decimal places. If a player did not win or lose any games, the output is "-".
+Finally, the program outputs a blank line to separate the output for each test case.
+Note that the formula k*n*(n-1)//2 computes the number of games that need to be played between each pair of players, since each pair plays k games and there are n*(n-1)/2 pairs of players. We use integer division // to ensure that the result is an integer, since we don't want to play a fractional number of games.

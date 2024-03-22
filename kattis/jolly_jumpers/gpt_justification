@@ -1,0 +1,19 @@
+To solve this problem in Python, we can follow these steps:
+
+Parse the input to obtain the sequence of integers.
+Compute the absolute differences between successive elements in the sequence.
+Check if all the values 1 through n-1 appear in the absolute differences.
+If all the values appear, output "Jolly"; otherwise, output "Not jolly".
+Let's go over the code in more detail:
+
+We use sys.stdin to read the input lines. The for loop iterates over the lines, one at a time.
+We extract the sequence of integers from the line using split() and map(). We use list slicing to exclude the first integer, which represents the length of the sequence.
+We compute the absolute differences between successive elements using a list comprehension. We use the abs() function to compute the absolute value of the difference.
+We create a set of the expected absolute differences using range() and set(). We expect the differences to be 1 through n-1, where n is the length of the sequence.
+We check if the set of computed absolute differences is equal to the set of expected absolute differences using the == operator. If they are equal, we output "Jolly"; otherwise, we output "Not jolly".
+
+The program reads from standard input and writes to standard output, so you can run it from the command line like this:
+$ python jolly_jumper.py < input.txt
+Where input.txt is a file containing the input data. The output will be printed to the console.
+
+Note that the program assumes that the input is well-formed, with one line per test case, and with valid integers in each line. It also assumes that the input contains at most 10 lines, as stated in the problem description.

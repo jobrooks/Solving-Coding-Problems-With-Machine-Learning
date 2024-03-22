@@ -1,0 +1,34 @@
+Solve in Python and justify:
+You are a judge, constructing a problem set for a contest. You have a pool of candidate problems. For each problem, you’ve found the probability that a team is able to solve the problem, and the time it will take them to implement the solution if they are able to solve it. All implementation times are distinct.
+
+You know the strategy that all teams will take when confronted with a problem set. First, they will determine the set of problems they can solve (assume they can do this instantly at the beginning of the contest). Then, they will solve as many of those problems as they can under the time limit. If there are many subsets of problems they can solve under the time limit, they will first break ties by the number of problems they can solve, next they will break ties by minimizing the total time it will take to solve all of those problems.
+
+Define the Difficulty of a problem to be the probability that a team will solve the problem if it is included in a problem set of size k along with k-1 other problems chosen uniformly at random from the pool. Find the Difficulties of all the problems.
+
+Input
+The first line of input contains three integers n,k  (1\le k \le n \le 50) and t (1 \le t \le 2500), where n is the number of problems in the pool, k is the number of problems to be chosen for the set, and t is the time limit of the contest.
+
+Each of the next n lines contains a real number p (0.0 <= p <= 1.0) and an integer s ( 1 <=s <=t) describing a problem, where p is the probability that a team is able to solve it, and s is the time to solve. The probabilities will have at most four decimal digits. All times to solve will be distinct.
+
+Output
+Output n lines, each containing a real number which is the Difficulty of the given problem in the order of the input. Each value must be accurate to within an absolute or relative error of 10^-6.
+
+
+Sample Input 1
+3 1 100
+0.3432 99
+0.1231 100
+0.5878 1
+Sample Output 1
+0.343200
+0.123100
+0.587800
+Sample Input 2
+3 2 100
+0.3432 99
+0.1231 100
+0.5878 2
+Sample Output 2
+0.242334
+0.065797
+0.587800

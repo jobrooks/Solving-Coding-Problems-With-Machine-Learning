@@ -1,0 +1,18 @@
+Solution to "Welcome to Code Jam":
+
+We can solve this problem by counting the number of sub-sequences of the input string that match the phrase "welcome to code jam". We can do this using dynamic programming.
+
+Let dp[i][j] be the number of sub-sequences of the first i characters of the input string that match the first j characters of the phrase "welcome to code jam". Then we can compute dp[i][j] as follows:
+
+If the i-th character of the input string matches the j-th character of the phrase, we have two options: we can either include the i-th character in the sub-sequence, in which case dp[i][j] += dp[i-1][j-1], or we can exclude it, in which case dp[i][j] += dp[i-1][j].
+If the i-th character of the input string does not match the j-th character of the phrase, we can only exclude it, in which case dp[i][j] = dp[i-1][j].
+The answer to the problem is then given by dp[n][18], where n is the length of the input string.
+
+We can compute the last 4 digits of the answer by taking the remainder of dp[n][18] modulo 10000.
+In this code, we define a constant MOD to be 10000, which is the number of digits in the answer that we care about. We then define a function count_phrases that takes an input string s and returns the number of sub-sequences of s that match the phrase "welcome to code jam". The function uses dynamic programming to compute this value, as described above.
+
+In the main part of the code, we read in the number of test cases t, and then loop over the test cases. For each test case, we read in the input string s, compute the count using the count_phrases function, and print out the result in the required format using the string format method.
+
+
+
+

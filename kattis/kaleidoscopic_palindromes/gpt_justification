@@ -1,0 +1,5 @@
+To solve this problem, we need to iterate over all numbers from a to b and check if each number is a palindrome in every base from 2 to k inclusive. A number is palindromic if it reads the same from left to right as from right to left in its base representation. To check if a number is palindromic in a given base, we can convert it to a string in that base and check if the string is a palindrome.The is_palindrome function takes a number n and a base base, and returns True if n is palindromic in that base, and False otherwise. It does this by converting n to a list of digits in the given base, and checking if the list is equal to its reverse.
+
+The palindromic_numbers function takes the range [a, b] and the maximum base k, and returns the number of numbers in the range that are palindromic in every base from 2 to k. It does this by iterating over all numbers in the range, and checking if each number is palindromic in every base using the is_palindrome function.
+
+The main program reads the input values, calls palindromic_numbers with the input values, and prints the result.

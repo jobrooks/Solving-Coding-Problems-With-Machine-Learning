@@ -1,0 +1,18 @@
+This problem can be solved using dynamic programming. Let's define a state dp[i][j] to be the number of bonsai trees with height i and weight j. We can start with the base case dp[0][0] = 1, since there is one way to create a bonsai tree with height 0 and weight 0 (i.e., an empty tree).
+
+Next, we can consider the possible ways to add a branch to an existing bonsai tree. Adding a branch to a bonsai tree with height i and weight j creates a new tree with height i+1 and weight j+1. Thus, we can update our DP state by considering the following recurrence:
+dp[i+1][j+1] += dp[i][j]
+We can also create a new bonsai tree with height 1 and weight j, by adding a single branch. This gives us the following recurrence:
+dp[1][j] += dp[0][j-1]
+
+We can combine these recurrences into a single DP loop:
+dp = [[0] * (w+1) for _ in range(h+1)]
+dp[0][0] = 1
+
+for i in range(h):
+    for j in range(w):
+        dp[i+1][j+1] = (dp[i+1][j+1] + dp[i][j]) % (10**9 + 7)
+        if j > 0:
+            dp[1][j] = (dp[1][j] + dp[0][j-1]) % (10**9 + 7)
+Finally, the answer to the problem is given by dp[h][w].
+The time complexity of this solution is O(hw), which is efficient enough to solve the problem within the given time limits.

@@ -1,0 +1,5 @@
+First, we read in the number of stops n and the maximum capacity of each bus k. Then, we loop through each stop and keep track of the number of passengers currently on the bus by subtracting the number of passengers who left and adding the number of passengers who entered at that stop. We also keep track of the maximum number of passengers we've had on the bus so far.
+
+Finally, we calculate the number of buses needed by dividing the maximum number of passengers by the maximum capacity of each bus and rounding up using integer division (//).
+
+Note that we use the expression (max_passengers + k - 1) // k to round up the division result. This is a common idiom in Python for integer division with rounding up.

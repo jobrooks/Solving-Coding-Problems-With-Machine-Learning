@@ -1,0 +1,9 @@
+To solve this problem, we can preprocess the dictionary words and create a list of lists such that the i-th list contains the indices of the string S where the i-th character of the dictionary word is present as a subsequence. This way, for each query, we can easily find all the words in the dictionary that are subsequences of the substring of S from l to r by taking the intersection of the lists corresponding to each character of the word.
+
+Once we have the list of candidate words, we can sort it lexicographically and output the k-th word or "NO SUCH WORD" if k is greater than the number of words in the list.
+
+We first read the input and preprocess the dictionary words. We use a defaultdict to create a mapping from each character to its indices in the string S. Then, for each word in the dictionary, we create a list of lists of indices where each character of the word is present as a subsequence. This is stored in the word_indices list.
+
+Next, we process each query by finding all the indices where the k-th word of the dictionary is a subsequence of the substring of S from l to r. We start by initializing subseq_indices to the list of indices corresponding to the first character of the word. Then, for each subsequent character, we take the intersection of the list of indices for that character and the current value of subseq_indices. Once we have the list of candidate indices, we construct the list of candidate words by taking all substrings of S that start and end at the candidate indices. We sort this list lexicographically and output the k-th word or "NO SUCH WORD" if k is greater than the number of words in the list.
+
+Note that we subtract 1 from the values of l, r, and k since the input is 1-indexed. Also, we only output the first 10 characters of each word if its length is greater than 10, as required by the problem statement.

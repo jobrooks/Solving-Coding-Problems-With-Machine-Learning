@@ -1,0 +1,14 @@
+Bounding Box
+The Archeologists of the Current Millenium (ACM) now and then discover ancient artifacts located at vertices of regular polygons. (Recall that an n-sided regular polygon is a polygon where all n sides have the same lengths, and the n internal angles where two sides meet are all equal.)
+
+The moving sand dunes of the desert render the excavations difficult and thus once three vertices of a polygon are discovered there is a need to cover the entire polygon with protective fabric.
+
+Input
+Input contains multiple test cases, at most 50.
+
+Each case describes one polygon. It starts with an integer 3<=n<=50, the number of vertices in the polygon, followed by three pairs of real numbers giving the x and y coordinates of three vertices of the polygon. The coordinates have absolute value at most 1000 and at most 5 digits after the decimal point.
+
+The input ends with a dummy case having n=0, this case should not be processed.
+
+Output
+For each test case, output one line giving the smallest area of a rectangle which can cover all the vertices of the polygon and whose sides are parallel to the x and y axes. You may assume that this area is at most 100 000. Your answers should have an absolute or relative error of at most 10^-9.

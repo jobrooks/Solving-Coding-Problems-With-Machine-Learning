@@ -1,0 +1,11 @@
+To solve this problem, we need to sort the prices in decreasing order, and then calculate the total cost after applying the discount. We can do this by taking every third item and subtracting its price from the total cost.
+
+Here, we start by reading in the value of n from the input, which represents the number of books.
+
+We then set up an empty list to hold the prices of each book, and use a for loop to read in the price of each book and append it to the list.
+
+We then sort the prices in decreasing order using the sort method with the reverse parameter set to True.
+
+We then initialize a variable total_cost to zero, and use another for loop to iterate over each book in the sorted list. For each book, we check whether its index modulo 3 is not equal to 2 (i.e., whether it is not the third book in a group of three). If this condition is true, we add its price to the total_cost.
+
+Finally, we output the total_cost.

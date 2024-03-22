@@ -1,0 +1,16 @@
+To solve this problem, we need to find all possible factors of N (excluding N itself), because the number of people Benny can invite should be a factor of N. We also need to make sure that the number of candies divided by the number of people is an integer. We can achieve this by iterating through all possible factors of N and checking if N divided by that factor results in an integer.
+Let's go through the code step by step:
+
+We first read the input value of N using int(input()).
+
+We initialize an empty list friends to store the possible numbers of friends Benny can invite.
+
+We iterate through all possible factors of N using the range() function with the arguments (1, int(n**0.5)+1). We only need to iterate up to the square root of N because any factor greater than the square root will have already been accounted for by a smaller factor.
+
+For each factor i, we check if i is a factor of N using the modulo operator (%). If i is a factor of N, we check if N/i is also a factor of N and if N/i divided by i results in an integer. If these conditions are satisfied, we add i and N/i to the list of friends.
+
+We sort the list of friends in ascending order using the sort() method.
+
+We output the list of friends using the * operator to unpack the list into individual arguments for the print() function.
+
+The time complexity of this algorithm is O(sqrt(N)) because we only need to iterate up to the square root of N. Therefore, this algorithm is efficient for large values of N.

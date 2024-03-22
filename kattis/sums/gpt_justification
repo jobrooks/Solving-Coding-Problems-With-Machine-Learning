@@ -1,0 +1,4 @@
+To solve this problem, we can use a sliding window approach. Let's start with the smallest possible window, which consists of two consecutive positive integers a and a+1. We keep increasing the size of the window until we find a sum that is greater than or equal to N.
+
+If the sum is equal to N, we output the solution. Otherwise, we move the window to the right by increasing its size and subtracting the leftmost element. If the sum is less than N, we add the rightmost element and move the window to the right again. We repeat this process until we find a solution or determine that there is no solution.
+The time complexity of this algorithm is O(N), since we are essentially performing a linear scan of the integers from 1 to N. However, in practice the algorithm will run much faster than this, since we break out of the loops as soon as we find a solution or determine that there is no solution.

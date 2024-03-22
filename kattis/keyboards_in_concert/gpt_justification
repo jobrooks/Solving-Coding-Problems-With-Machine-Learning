@@ -1,0 +1,13 @@
+To solve this problem, we can use a simple greedy algorithm. We start with the first instrument and try to play the tune with it as far as possible. When we reach a note that the current instrument cannot play, we switch to the next instrument that can play that note, and continue playing the tune from there. We repeat this process until we have played the entire tune.
+
+Here's the Python code to implement this algorithm:
+The code first reads the input values of n, m, and the notes playable by each instrument. We store the notes in sets for efficient lookup. Then, we read the notes of the tune and initialize the current instrument to the first one.
+
+Inside the loop, we check if the current instrument can play the current note of the tune. If so, we continue playing the tune with the current instrument. If not, we search for the next instrument that can play this note, and switch to it. We count the number of switches we make, and continue playing the tune with the new instrument.
+
+At the end, we output the total number of switches we made during the tune.
+
+The time complexity of this algorithm is O(nm), since we need to check each note of the tune with each instrument. However, the input limits are small enough that this algorithm should run efficiently.
+
+
+

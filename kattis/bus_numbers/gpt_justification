@@ -1,0 +1,7 @@
+We first read in the number of buses and the list of bus numbers, sorting the list in ascending order. We initialize the index i to 0 and an empty list output.
+
+We then loop through the sorted bus numbers list, keeping track of the current index with i. We initialize a new index j to i and loop through the list until we reach the end or the next bus number is not consecutive. When we break out of this inner loop, we know that buses[i:j+1] represents a consecutive sequence of buses.
+
+We then handle the output for the sequence. If the sequence is just one bus number, we append it to output. If it consists of two consecutive buses, we append both bus numbers to output. If it's a longer sequence, we append the range in the format "start-end". We then update i to j+1 to move on to the next sequence.
+
+Finally, we print the space-separated elements of output.

@@ -1,0 +1,17 @@
+solve in python and justify:
+Given a set of numbers, find the smallest number that is a multiple of every number in the set.
+
+Input
+Input consists of up to 500 test cases, one per line. Each test case contains at least one but no more than 1000 space-separated integers, each in the range [1, 2^{31}-1]. Input ends at end of file.
+
+Output
+For each test case, print a line with the smallest positive integer that is a multiple of every number in the set.
+
+Sample Input 1	
+2 3 5
+1 2 3 4
+399 772 163 959 242
+Sample Output 1
+30
+12
+832307365428

@@ -1,0 +1,5 @@
+First, we read in the number of words in the dictionary and the number of license plates to be processed. Then, we create a dictionary called words where the keys are sorted sets of characters from the words in the dictionary, and the values are the words themselves. For example, the word "banana" would be stored as words['aaabnn'] = 'banana'.
+
+Next, we loop through each license plate and sort its characters. Then, we loop through the keys of the words dictionary and check if the sorted license plate is a substring of the sorted key. If we find a match, we print the corresponding word and set found_word to True. If we go through all the keys without finding a match, we print "No valid word".
+
+Note that we use the join() method to convert the sorted lists of characters back into strings. This is necessary because the in operator only works with strings, not lists.

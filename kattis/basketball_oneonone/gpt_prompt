@@ -1,0 +1,17 @@
+Alice and Bob are playing a game of one-on-one. To keep track of the score, they decided to implement the following system:
+
+Each time a player scores, they gain possession of the ball.
+The game starts with possession to Alice.
+If Alice scores, she maintains possession of the ball.
+If Bob scores, he gains possession of the ball.
+The game ends when a player reaches 11 points or more and has a lead of 2 points or more. If a player has a lead of 2 points or more before reaching 11 points, the game also ends.
+If the game ends with Alice having a lead of 2 points or more, she wins. Otherwise, Bob wins.
+Given a string of uppercase characters 'A' and 'B', representing the sequence of scoring plays, determine who wins the game.
+
+Input:
+
+The input consists of a single line containing a non-empty string s of length at most 100, representing the sequence of scoring plays. Each character of the string is either 'A' or 'B', representing a score by Alice or Bob, respectively. It is guaranteed that the string represents a valid game of one-on-one according to the rules described above.
+
+Output:
+
+Output a single line containing either "A" if Alice wins or "B" if Bob wins.

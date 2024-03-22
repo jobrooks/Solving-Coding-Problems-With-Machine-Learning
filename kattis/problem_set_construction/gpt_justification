@@ -1,0 +1,16 @@
+To calculate the Difficulty of a problem, we need to consider all subsets of size k that contain the problem and calculate the probability that the team can solve all problems in the subset. Since we are interested in the case where the problem is included in the subset, we can choose k-1 problems from the remaining n-1 problems.
+
+To calculate the probability that the team can solve all problems in a subset of size k, we can use the following formula:
+
+probability = product of (1 - difficulty of problem i) for i = 1 to k
+
+where difficulty of problem i is the probability that the team can solve problem i.
+
+To calculate the Difficulty of a problem, we can use binary combinations (from itertools) to generate all subsets of size k-1 from the remaining n-1 problems, then for each subset, calculate the probability that the team can solve all problems in the subset and multiply by the probability of the problem in question. We can then average the results for all subsets to obtain the Difficulty of the problem.
+
+We first read in the input values and store the probability and time for each problem in a list called problems. We then iterate over each problem and calculate its Difficulty using the method described above. We keep track of the number of subsets that exceed the time limit and subtract this from the total number of subsets to get the effective number of subsets.
+
+Finally, we print out the Difficulties for each problem with six decimal places of precision.
+
+
+

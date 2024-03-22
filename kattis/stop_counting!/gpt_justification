@@ -1,0 +1,12 @@
+We can solve this problem using a dynamic programming approach. Let dp[i][0] denote the maximum payout if we haven't called "Stop Counting!" yet and we have seen i cards, and dp[i][1] denote the maximum payout if we have called "Stop Counting!" and we have seen i cards. Also, let sum[i] denote the sum of the first i cards. The transitions can be defined as follows:
+
+dp[i][0] = dp[i-1][0] + (card[i] / i), i.e., we do not stop counting the cards and the payout is the average of the first i cards seen so far.
+dp[i][0] = max(dp[i][0], dp[j][1] + ((sum[i] - sum[j]) / (i-j))), i.e., we stop counting the cards at jth card and start counting again from the (j+1)th card. Here, dp[j][1] denotes the maximum payout till the jth card when we have called "Stop Counting!" already. The payout for the j+1th to ith card is (sum[i] - sum[j])/(i-j).
+dp[i][1] = dp[i-1][0], i.e., we have already stopped counting the cards and do not count any more cards.
+dp[i][1] = max(dp[i][1], dp[j][0] + ((sum[i] - sum[j]) / (i-j))), i.e., we call "Start Counting!" at the jth card and the payout is calculated similarly to the previous case.
+The answer will be max(dp[i][0], dp[i][1]).
+
+Time Complexity: O(N^2)
+Space Complexity: O(N)
+
+The time complexity of this solution is O(N^2), which can handle inputs up to 10^6 in a reasonable time.

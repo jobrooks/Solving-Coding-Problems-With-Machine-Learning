@@ -1,0 +1,9 @@
+Solve this problem in python:
+You are a contractor for the small independent nation of Microisles, which is far out in the Pacific ocean, and made up of a large number of islands. The islanders travel between islands on boats, but the government has hired you to design a set of bridges that would connect all the islands together. However, they want to do this at a minimum cost. Cost is proportional to bridge length, so they want to minimize the total length of all bridges put together. You need to decide which bridges should connect which islands.
+
+Input
+The first line contains an integer 1 <= n <= 10. After that, n cases follow. Each case starts with a line containing the integer number of islands 1<=m<=750, followed by m lines each containing the real-valued horizontal and vertical position of a bridge endpoint for the corresponding island. All bridge endpoints are, of course, unique. Each coordinate is in the range [-1000] to [1000] meters and has at most 3 digits past the decimal point.
+
+Output
+For each test case, output the total length of bridges needed to connect all the islands accurate to relative and absolute error of 10^-3 meters.
+Justify your answer

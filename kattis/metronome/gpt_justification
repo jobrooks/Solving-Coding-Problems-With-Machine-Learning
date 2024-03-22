@@ -1,0 +1,3 @@
+The program first reads in the length of the song in ticks from standard input. It then calculates the number of revolutions Milo needs to wind the metronome's key by dividing the number of ticks by 4 (since the metronome produces 4 ticks per revolution).
+
+Finally, the program uses the math.ceil function to round up to the nearest integer if the fractional part of the revolutions is greater than or equal to 0.5, and math.floor to round down otherwise. The result is formatted to two decimal places and printed to standard output.

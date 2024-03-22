@@ -1,0 +1,10 @@
+To solve this problem, we need to count the number of prime numbers less than or equal to n and then determine if each query value x is prime or composite.
+
+To count the number of primes, we can use the sieve of Eratosthenes algorithm. We create a boolean array of size n+1 and initialize all its elements to True. We then iterate from 2 to sqrt(n), marking all multiples of each prime as composite. The remaining numbers are all primes.
+
+To answer each query, we can simply check if x is marked as prime in the sieve.
+We start by reading the values of n and q from the input. We then use the sieve of Eratosthenes algorithm to count the number of primes less than or equal to n. We also mark each prime number in a boolean array.
+
+We then answer each query by checking if the corresponding value x is prime or composite by looking it up in the boolean array.
+
+The output format is straightforward: we print the number of primes first, followed by the answers to the queries, one per line. For prime numbers, we print 1, and for composite numbers, we print 0.

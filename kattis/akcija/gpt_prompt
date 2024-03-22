@@ -1,0 +1,22 @@
+Every year, there is a sale in a bookstore. This year, the sale is special because every customer gets a discount, but the discount changes from customer to customer. When a customer arrives at the cash register, the cashier enters the price of each book the customer wants to buy. When the cashier enters the price of the last book, the discount that customer gets is determined based on the prices of the books that customer has bought.
+
+More specifically, if the customer has bought N books with prices P1, P2, …, PN, the cashier determines the discount as follows:
+
+Let M be the smallest integer such that N / M is an integer.
+The customer gets a discount of the sum of the M cheapest books among P1, P2, …, PN.
+For example, suppose a customer wants to buy 7 books with prices 6, 4, 3, 2, 5, 1, and 7. Then the cashier will determine the discount as follows:
+
+N = 7, so M = 1.
+The 1 cheapest book among P1, P2, …, PN is the book with price 1.
+The customer gets a discount of 1.
+The customer pays the full price for each of the K cheapest books and gets the discount on all the other books.
+
+Mirko has written a program for entering the prices of the books. Unfortunately, the program is very slow, so it takes him more than 2 seconds to enter the price of a single book. Help Mirko by writing a program that calculates the maximum possible discount that a customer can get without having to wait too long.
+
+Input:
+
+The first line of input contains an integer N (1 ≤ N ≤ 10^5), the number of books in the customer's shopping cart.
+The second line of input contains N integers Pi (1 ≤ Pi ≤ 10^5), the prices of the books.
+Output:
+
+Output a single integer, the maximum possible discount that a customer can get.

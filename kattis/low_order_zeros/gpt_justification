@@ -1,0 +1,12 @@
+The function lowest_non_zero_digit(n) takes an integer n as input and returns the lowest non-zero digit of n!. It works by computing the product of all integers from 1 to n, and then finding the lowest non-zero digit of the product.
+
+The program reads input from sys.stdin, which allows it to read input from the command line or from a file. It reads input line by line, stopping when it encounters a line with a value of zero.
+
+For each non-zero input value n, the program calls lowest_non_zero_digit(n) to compute the lowest non-zero digit of n!, and prints the result.
+
+The function lowest_non_zero_digit(n) works by iterating over all integers from 2 to n, multiplying the current value of last_digit by each integer, and reducing the result to a single digit by taking the remainder when divided by 10. If the result is zero, the function divides by 10 to remove the zero and updates last_digit accordingly. Finally, the function returns the last value of last_digit.
+
+The program correctly handles large input values up to 10^6.
+
+
+

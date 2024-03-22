@@ -1,0 +1,24 @@
+Joe’s landlord has allowed him to paint his room any colour that he wants, even multiple colours. Joe has come up with a very colourful design. Now he needs to buy the paint. Being a struggling student, Joe does not want to waste any money, so he has calculated the exact amount that he needs of each colour down to the microlitre. To his surprise, however, the local paint shop is unwilling to sell him a can of exactly 3.141592 litres of red paint. No, the shop has a set of specific paint can sizes. The shop has almost unlimited amount of paint of each color, so each can can be filled with whatever colour Joe wishes and the shop has unlimited number of cans of each size.
+
+Joe has no choice but to buy a little bit more paint than he really needs. Still, he would like to minimize the amount of paint wasted. In addition, he does not want to buy more than one can of any given colour.
+
+Input
+The first line of input contains two integers 1 \leq n \leq 100\, 000 and 1 \leq m \leq 100\, 000, the number of paint can sizes offered by the paint shop, and the number of colours that Joe needs.
+
+Each of the next n lines contains the size of a can offered by the paint shop, in microlitres. Each can contains no more than 1000
+ litres.
+
+Each of the next m lines contains the number of microlitres that Joe needs of a given colour. It is guaranteed that for each colour, the paint shop sells a can large enough to satisfy Joe’s needs.
+
+Output
+Output a single line, the total number of microlitres of paint wasted if Joe buys, for each colour, the smallest can that satisfies his needs.
+
+Sample Input 1	
+3 2
+5
+7
+9
+6
+8
+Sample Output 1
+2

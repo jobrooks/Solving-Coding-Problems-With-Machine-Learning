@@ -1,0 +1,9 @@
+The max_bishops function takes an integer n as input and returns the maximum number of bishops that can be placed on an nxn chessboard without threatening each other. The function uses the following strategy:
+
+Place the first bishop on any square of the chessboard.
+Each subsequent bishop must be placed on a square that is not in the same diagonal as any of the previously placed bishops.
+Since each bishop moves only diagonally, the bishops already placed on the board divide the remaining squares into two groups: those that can be reached by a bishop placed on a white square, and those that can be reached by a bishop placed on a black square.
+Therefore, the maximum number of non-threatening bishops that can be placed on the board is equal to the number of white squares plus the number of black squares.
+For an nxn chessboard, there are n white squares and n black squares. However, the first bishop placed can be on either a white or black square, so we subtract one from the total.
+Finally, we obtain the formula 2n - 2 for the maximum number of non-threatening bishops on an nxn chessboard.
+The program reads input from stdin and writes output to stdout. Each line of input contains an integer n, the size of the chessboard. The program computes the maximum number of non-threatening bishops for each chessboard and writes the result to stdout.

@@ -1,0 +1,7 @@
+A string of lowercase letters is called alphabetical if some of the letters can be deleted so that the only letters that remain are the letters from ‘a’ to ‘z’ in order. Given a string s, determine the minimum number of letters to add anywhere in the string to make it alphabetical.
+
+Input
+Each input will consist of a single test case. Note that your program may be run multiple times on different inputs. The only line of input contains a string s (1<=s<=50) which contains only lowercase letters.
+
+Output
+Output a single integer, which is the smallest number of letters needed to add to s to make it alphabetical.

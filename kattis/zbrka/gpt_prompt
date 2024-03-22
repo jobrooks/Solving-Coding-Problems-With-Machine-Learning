@@ -1,0 +1,19 @@
+Solve in Python with proper formatting and justify:
+Consider a sequence of N integers where each integer between 1 and N appears exactly once.
+
+A pair of numbers in the sequence is confused if the number that comes earlier in the sequence is larger than the later number.
+
+The confusion of the sequence is the number of confused pairs in it. For example, the confusion of the sequence 
+(1,4,3,2) is 3 because there are 
+ confused pairs: 
+(4,3), (4,2) and (3,2).
+
+Write a program that calculates the number of sequences of length N whose confusion is exactly C.
+
+Input
+The first and only line of input contains two integers, N (1 \le N \le 1\, 000) and C 0 \le C \le 10\, 000.
+
+Output
+Output the number of sequences modulo 1\, 000\, 000\, 007.
+
+

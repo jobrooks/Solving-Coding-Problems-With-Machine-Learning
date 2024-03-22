@@ -1,0 +1,7 @@
+Combinatorial Stanley Cup
+You have always dreamt to get your name on the Stanley Cup, but you have never played hockey. A friend of yours heard of an alternative: the Combinatorial Stanley Cup! If you solve a single programming problem, you will get your name on this purely fictional trophy. What an opportunity!
+
+The problem is simple: for a given N, find the number of odd coefficients in the binomial (1+x)^N. Oh! There’s a catch: N can be as big as 2 billions!
+
+Input
+The only line in the input is an integer 0<=N<=2 000 000 000, the degree of the binomial (1+x)^N for which you need to determine how many of its coefficients are odd.

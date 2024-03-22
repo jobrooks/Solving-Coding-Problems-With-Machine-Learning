@@ -1,0 +1,43 @@
+This is a problem of backtracking with constraints. We can represent the class members as nodes in a graph, where each edge represents a dislike relationship between two nodes. The task is to find a valid Hamiltonian path in the graph, i.e., a path that visits every node exactly once.
+
+We can use backtracking to generate all possible permutations of the nodes and check if any of them form a valid Hamiltonian path. To speed up the search, we can use the constraint that two nodes that dislike each other cannot be adjacent in the path, which allows us to prune parts of the search tree.
+
+For example, suppose we have a class of 4 students {A, B, C, D} with dislike relationships {A, C} and {B, D}. We can represent the class as a graph:
+
+css
+
+A -- C
+|    |
+B -- D
+We start by generating all permutations of the nodes:
+
+css
+
+A B C D
+A B D C
+A C B D
+A C D B
+A D B C
+A D C B
+B A C D
+B A D C
+B C A D
+B C D A
+B D A C
+B D C A
+C A B D
+C A D B
+C B A D
+C B D A
+C D A B
+C D B A
+D A B C
+D A C B
+D B A C
+D B C A
+D C A B
+D C B A
+We can then check each permutation to see if it forms a valid Hamiltonian path, respecting the dislike relationships. For example, the permutation "A B C D" forms a valid Hamiltonian path, but "A C B D" does not, because A and C dislike each other and are adjacent in the path.
+
+We can also use backtracking to generate the permutations, which allows us to prune parts of the search tree using the dislike relationships. For example, if we start with the partial permutation "A B", we can see that we cannot extend it to a valid Hamiltonian path, because A and C dislike each other and C is the only remaining node that is not adjacent to A or B. Thus, we can backtrack and try a different extension.
+The find_order function takes the number of students, their names, and a list of dislike relationships as input, and returns a valid order for the class picture, or "You all need therapy." if no such order exists.

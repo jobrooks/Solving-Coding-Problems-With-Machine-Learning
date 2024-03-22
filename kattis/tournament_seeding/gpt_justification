@@ -1,0 +1,10 @@
+To solve this problem, we need to start with seeding the players for the tournament. Since there are 2^n players, we can divide them into two groups of equal size and recursively seed the groups until we have pairs of players at the lowest level of the tournament.
+
+To maximize the number of "close" games, we want to match players with similar ratings against each other as much as possible. We can achieve this by pairing players with the closest ratings in each round. At each level of the tournament, we sort the players by rating and pair adjacent players together.
+
+We can then simulate the tournament and count the number of close games. To determine if a game is close, we compare the ratings of the two players and see if the difference is less than or equal to k.
+
+In this code, we first read in the input and seed the tournament using the algorithm described above. We then simulate the tournament by iterating through each round and counting the number of close games in that round. If all games in a round are close, we can stop because we have reached the maximum number of close games. Finally, we output the total number of close games.
+
+
+
