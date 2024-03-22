@@ -1,0 +1,9 @@
+To solve this problem, we can start by sorting both rows by price in non-decreasing order. Then, we will create two arrays, back and front, to represent the current ordering of the tiles in each row. We will initially fill back with the indices of the tiles in the back row, and front with the indices of the tiles in the front row.
+
+Next, we will iterate over the indices of the tiles in the back row, from left to right. For each index i, we will find the largest index j in the front row such that the tile at index j is shorter than the tile at index i. If such an index j exists, we will place the tile at index i behind the tile at index j in the front row. Otherwise, we will output "impossible" and exit the program.
+
+Finally, we will output the current ordering of the tiles in each row.
+The time complexity of this algorithm is O(n log n), dominated by the sorting of the rows by price. The space complexity is O(n), for storing the initial ordering of the tiles in each row.
+
+
+

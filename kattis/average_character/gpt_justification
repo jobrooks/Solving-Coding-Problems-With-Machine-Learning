@@ -1,0 +1,7 @@
+Explanation:
+
+We read the input from the user and store it in a variable called s.
+We use a list comprehension to calculate the sum of ASCII codes for all characters in s. The built-in ord() function is used to convert each character to its corresponding ASCII code.
+We count the number of characters in s using the built-in len() function and store it in a variable called n_chars.
+We calculate the average ASCII code by dividing the sum of ASCII codes by the number of characters and round down to the nearest integer using the int() function.
+We output the character with the calculated ASCII code using the built-in chr() function.

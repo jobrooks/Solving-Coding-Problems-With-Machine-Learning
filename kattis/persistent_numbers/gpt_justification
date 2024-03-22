@@ -1,0 +1,5 @@
+The multiply_digits function takes an integer n and returns the product of its digits. The persistence function takes an integer n and returns its persistence. It does this by repeatedly multiplying the digits of n until the result is a one-digit number. The find_smallest_number_with_persistence function takes an integer p and returns the smallest number with persistence p. It does this by checking each number in sequence until it finds one with persistence p.
+
+The main program reads the input and processes each test case using the find_smallest_number_with_persistence function. The program stops reading input when it encounters a line containing -1.
+
+The code is justified by defining functions for each sub-task of the problem, making the code modular and easier to read. The code is also well-commented, explaining what each function does and how they work together to solve the problem. Finally, the code is efficient enough to handle inputs with up to 1000 digits, using a simple algorithm that checks numbers in sequence until it finds the smallest one with the given persistence.

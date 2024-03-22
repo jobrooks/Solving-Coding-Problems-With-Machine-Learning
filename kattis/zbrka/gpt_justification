@@ -1,0 +1,13 @@
+To solve this problem, we need to use the concept of inversion pairs. An inversion pair is a pair of integers (i, j) such that i < j but a[i] > a[j]. The confusion of the sequence is the number of inversion pairs.
+
+The number of sequences of length N whose confusion is exactly C can be calculated using dynamic programming. Let dp[i][j] be the number of sequences of length i with j inversions. We can calculate dp[i][j] using the following recurrence:
+
+dp[i][j] = dp[i-1][j] + dp[i-1][j-1] + dp[i-1][j-2] + ... + dp[i-1][j-i+1]
+
+The first term dp[i-1][j] corresponds to the sequences of length i-1 with j inversions that we can extend by adding the number N at the end. The second term dp[i-1][j-1] corresponds to the sequences of length i-1 with j-1 inversions that we can extend by adding the number N-1 at the end. And so on, up to the term dp[i-1][j-i+1] that corresponds to the sequences of length i-1 with j-i+1 inversions that we can extend by adding the number 1 at the end.
+
+The answer is dp[N][C] % (10^9 + 7).
+
+We initialize dp[1][0] to 1, because there is only one sequence of length 1 with 0 inversions, which is [1]. Then, we use three nested loops to fill the dp table. The outer loop iterates over the lengths of the sequences from 2 to N. The middle loop iterates over the number of inversions from 0 to C. The inner loop iterates over the possible values of k, which range from max(0, j-i+1) to j, because we can only extend sequences with k inversions to sequences with j inversions if k is between j-i+1 and j.
+
+Finally, we print dp[N][C] modulo 10^9 + 7, which is the answer to the problem.

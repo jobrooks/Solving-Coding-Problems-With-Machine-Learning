@@ -1,0 +1,8 @@
+To solve this problem in Python, we can use the built-in sorted() function, which returns a sorted list of elements. However, this solution would take O(nlogn) time for each query, making the overall time complexity O(n^2 log n). Since the length of the input string can be as large as 100000, this would be too slow.
+
+A more efficient solution is to use the suffix array data structure. A suffix array is an array of integers representing the lexicographically sorted suffixes of a string. It can be constructed in O(n log n) time using various algorithms, such as the Manber-Myers algorithm or SA-IS algorithm.
+
+Once we have constructed the suffix array, we can use it to answer each query in O(log n) time by performing a binary search on the sorted suffix array. The starting position of the q_i'th smallest suffix of s can be found by looking up its index in the suffix array.
+In the find_starting_positions() function, we use a binary search to find the index of the q_i'th smallest suffix in the sorted suffix array sa. We initialize lo and hi to 0 and len(s), respectively, and repeatedly compare the suffix starting at sa[mid] with the suffix s[q:]. If the suffix at sa[mid] is smaller, we set lo = mid + 1 and continue the binary search in the upper half of the suffix array. Otherwise, we set hi = mid and continue the binary search in the lower half of the suffix array. When lo == hi, we have found the index of the q_i'th smallest suffix, which is sa[lo].
+
+Note that we use a try-except block to handle the end-of-file (EOF) error that occurs when there are no more test cases to read from input.

@@ -1,0 +1,5 @@
+The program reads in the values of p and n from the first line of the input, and then reads in n lines, each containing the type of part that Theseus bought on a given day.
+
+The set parts is used to keep track of the types of parts that have been bought so far. For each day, the program adds the new part to the set, and then checks if the set contains all p different parts. If it does, then the last replacement day is set to the current day, and the program exits the loop.
+
+If the loop completes without finding a day on which all parts were replaced, then the program outputs "paradox avoided". Otherwise, it outputs the last replacement day.

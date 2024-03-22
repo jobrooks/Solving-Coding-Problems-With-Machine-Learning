@@ -1,0 +1,17 @@
+To solve this problem, we need to determine the minimum length of the pack during the run where all the cheetahs must be running. We will simulate the movement of the cheetahs in parallel tracks, and find the point in time where the distance between the first and last cheetahs is minimized.
+
+To do this, we will first sort the cheetahs in ascending order of their start times. We will then initialize the position of the first cheetah to be 0 and the position of the last cheetah to be the distance between the first cheetah and the last cheetah at their respective start times.
+
+Next, we will simulate the movement of the cheetahs by iterating through each cheetah in order of their start times, and updating their positions based on their velocity and the time elapsed since their start time. At each iteration, we will update the position of the last cheetah as well.
+
+Finally, we will find the minimum distance between the first and last cheetahs at any point during the simulation, and output that value as the answer.
+
+We first read in the input values and sort the cheetahs by start time. We then initialize the position of the first cheetah to be 0 and the position of the last cheetah to be the distance between the first cheetah and the last cheetah at their respective start times.
+
+We then iterate through each cheetah in order of their start times, updating their positions based on their velocity and the time elapsed since their start time. At each iteration, we update the position of the last cheetah as well.
+
+Finally, we find the minimum distance between the first and last cheetahs at any point during the simulation, and output that value as the answer. We format the output value to three decimal places using the format() method.
+
+
+
+

@@ -1,0 +1,4 @@
+To solve this problem in Python, we can simply write a function to calculate the Stirling approximation of n!, and then use it to compute the value of n! / S(n) for each test case. 
+The stirling function implements the Stirling approximation formula, and the while loop reads the input test cases one by one and computes the ratio of n! to S(n) using the math.factorial function and the stirling function. The result is then printed with 10 decimal places of precision using the format method.
+
+Note that we use the math module to compute the square root, the value of pi, and the constant e.

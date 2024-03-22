@@ -1,0 +1,6 @@
+Explanation:
+
+We first read the percentage of switch points bet on option one from the input.
+Then, we compute the switch-payout-ratio for option one by dividing the percentage of switch points bet on option two by the percentage of switch points bet on option one.
+We compute the switch-payout-ratio for option two by dividing the percentage of switch points bet on option one by the percentage of switch points bet on option two.
+Finally, we print the ratios for both options with 3 decimal places using f-strings.

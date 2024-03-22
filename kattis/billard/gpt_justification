@@ -1,0 +1,9 @@
+To solve this problem, we can use some basic kinematic equations of motion for a projectile. The first step is to calculate the horizontal and vertical components of the velocity at the moment of launch, using the time of flight, and the number of bounces on each axis. Then, we can calculate the magnitude of the initial velocity using the Pythagorean theorem. Finally, we can calculate the angle of launch using inverse trigonometric functions.
+
+First, we read the input values a, b, s, m, and n, and check if they are all zeroes, which signals the end of input.
+
+Then, we calculate the distances x and y that the ball travels horizontally and vertically due to bouncing. To calculate the time of flight, we divide the given time s by the total distance travelled by the ball. This gives us a time scale in which the velocity components can be calculated as distances divided by time.
+
+The horizontal and vertical components of velocity are calculated as the product of the time of flight and the corresponding distance travelled. We then calculate the magnitude of the velocity v0 using the Pythagorean theorem.
+
+Finally, we use the inverse tangent function to calculate the angle of launch in radians, and convert it to degrees using the math.degrees() function. The angle and velocity are then output with two decimal places using the print() function with format strings.

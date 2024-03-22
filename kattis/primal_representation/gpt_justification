@@ -1,0 +1,7 @@
+To solve this problem, we need to find the prime factorization of each input integer. We can do this by trial division: we divide the input integer by all primes up to its square root, and each time we find a prime divisor, we add it to a list and divide the input integer by this prime as many times as possible. We repeat this process until the input integer becomes 1, which means that we have found all prime factors.
+
+The prime_factorization function takes an integer n as input and returns its prime factorization as a list of tuples (p, k), where p is a prime factor of n and k is its exponent. The function uses a loop to divide n by all primes up to its square root, and each time it finds a prime divisor, it adds it to the list of factors and divides n by this prime as many times as possible. Finally, if n is greater than 1, it adds the remaining factor to the list.
+
+The main program reads input integers from standard input and prints their prime factorizations by calling the prime_factorization function and formatting the output as a string with the join method. If the input integer is negative, it prepends the string "-1 " to the output to indicate the sign.
+
+This program has a time complexity of O(sqrt(n)) per input integer, where n is the absolute value of the integer, since it needs to perform trial division by all primes up to sqrt(n) to find the prime factorization. The space complexity is also O(sqrt(n)), since the list of prime factors can have at most sqrt(n) elements.

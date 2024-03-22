@@ -1,0 +1,8 @@
+To solve this problem, we need to find the longest distance between any two arrows that hit the target. We can use the distance formula to calculate the distance between two points in the Cartesian coordinate system:
+
+distance = sqrt((x2 - x1)^2 + (y2 - y1)^2)
+
+We can iterate through all pairs of arrows and calculate the distance between them. We keep track of the maximum distance found so far and return it as the result.
+We start by reading the number of shots from the input and then read the coordinates of each arrow into a list. We then iterate through all pairs of arrows and calculate the distance between them using the distance formula. We keep track of the maximum distance found so far and print it as the result.
+
+The output is formatted as a floating-point number with 6 decimal places, as required by the problem statement.

@@ -1,0 +1,6 @@
+Explanation:
+
+We read the input from the user and split it into a list of strings, each representing the number of pieces of a certain type.
+We define the correct numbers of pieces in a list called correct_pieces.
+We calculate the difference between the correct numbers and the ones found by subtracting each number in the pieces list from the corresponding number in the correct_pieces list. We use a list comprehension and the built-in zip() function to iterate over both lists simultaneously.
+We output the result using the print() function and the * operator to unpack the elements of the difference list. This way, we output each number separated by a space.

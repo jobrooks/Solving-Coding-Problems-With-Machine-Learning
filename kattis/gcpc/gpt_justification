@@ -1,0 +1,5 @@
+The update function updates the value at index i of the binary indexed tree bit by adding the value v. The query function returns the sum of the values of the elements from index 1 to index i of the binary indexed tree bit.
+
+We initialize the scores of all teams with zero solved problems and team numbers. We also initialize the binary indexed tree bit with zeros.
+
+For each event, we read the team number t and penalty p. We first remove the old penalty of team t from the binary indexed tree by calling update(bit, t, -b), where b is the old penalty of team t. We then update the scores of team t by incrementing the solved problems a if the penalty p is equal to 1, and adding the penalty p to the total penalty b. We update the binary indexed tree with the new penalty by calling update(bit, t, b). We calculate the rank of our favorite team by subtracting the sum of penalties of teams ranked lower than team 1 from the total sum of penalties, and adding 1 to account for the rank of team 1. We update the rank variable if t is equal to 1. Finally, we print the current rank.

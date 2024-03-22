@@ -1,0 +1,12 @@
+To solve this problem, we can use dynamic programming. We will define dp[i] as the smallest cost of any path starting at node i. Then, we can compute dp[i] for all nodes by doing a depth-first search (DFS) on the tree.
+
+For each node i, we will iterate over all its neighbors j, and compute the cost of the path from i to j. We can use the formula given in the problem statement to compute this cost. We will then add the penalty of node i to this cost, and take the minimum over all neighbors j. This minimum will be the value of dp[i].
+
+To avoid recomputing the same paths multiple times, we will use memoization. We will store the value of dp[i] in a dictionary memo, and return it if we have already computed it. Otherwise, we will compute dp[i] as described above, store it in memo, and return it.
+
+Finally, we will return the sum of all values of dp[i] for all nodes i.
+The time complexity of this algorithm is O(n), since we visit each node and each edge in the tree exactly once. The space complexity is also O(n), since we store the values of dp[i] and the adjacency list of the tree. Therefore, this algorithm should be efficient enough to solve the given problem within the time and memory limits.
+
+
+
+

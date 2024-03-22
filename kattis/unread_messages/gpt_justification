@@ -1,0 +1,11 @@
+To solve this problem efficiently, we need to keep track of the number of messages read by each member of the group after each message is sent. We can maintain an array read of size n that stores the index of the last message read by each member of the group. Initially, all elements of this array will be -1, indicating that no messages have been read by any member.
+
+For each message, we can update the read array by setting the element corresponding to the sender of the message to the index of the message. Then, we can iterate over the read array and count the number of messages that have not been read by each member. The sum of these counts will be the total number of unread messages in the group.
+In this code, we subtract 1 from the sender index s to convert it to 0-based indexing, which is used in Python. We then update the read array by setting read[s] to i. Finally, we iterate over the read array and count the number of elements that are less than i, which corresponds to the number of unread messages for each member. We print the sum of these counts as the total number of unread messages.
+
+The time complexity of this algorithm is O(nm), which is sufficient to handle the constraints of the problem. However, it is possible to optimize this algorithm to O(m + n) using a queue data structure to keep track of the indices of the unread messages for each member.
+
+
+
+
+

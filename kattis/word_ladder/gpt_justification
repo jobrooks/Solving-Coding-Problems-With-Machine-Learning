@@ -1,0 +1,14 @@
+The idea behind this problem is to create a word ladder of n words where each word differs from the previous word by exactly one character. We can construct the word ladder as follows:
+
+Start with a word of length n with all characters the same, let's call it "start".
+Create a list of n words where each word differs from the previous word by exactly one character.
+The last word in the list will be a word of length n with all characters the same, let's call it "end".
+To create the list of n words, we can follow these steps:
+
+Let the first word in the list be the "start" word.
+For each subsequent word in the list, we change the i-th character to a character that is not in any of the previous words at the i-th position.
+If we can't find such a character, we backtrack to the previous word and try changing the i-1th character to a character that is not in any of the previous words at the i-1th position. We repeat this process until we find a suitable character.
+We continue this process until we reach the "end" word.
+We start by creating the "start" word with all characters the same. Then, we create the first word in the list by changing the first character to "a". We then loop through the remaining indices and create each subsequent word in the list as described above.
+
+Finally, we create the "end" word with all characters the same and add it to the end of the list. We output the list of words in word ladder order.

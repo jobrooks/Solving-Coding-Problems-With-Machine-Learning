@@ -1,0 +1,8 @@
+This problem is a variation of the Shortest Path Problem. We can use the Bellman-Ford algorithm to solve this problem. The Bellman-Ford algorithm is a single-source shortest path algorithm that works with negative weight edges, but it can also detect negative weight cycles. The algorithm works by relaxing all edges n-1 times, where n is the number of nodes in the graph. If there is a negative weight cycle, the algorithm will detect it during the n-th iteration.
+
+In this problem, we need to modify the Bellman-Ford algorithm to handle the case where there are nodes that are not reachable from the starting node. We can do this by running the algorithm once and keeping track of the nodes that are reachable from the starting node. Then, for each query, we can check if the node is reachable before running the algorithm again.
+The time complexity of this algorithm is O(nm + qn), where n is the number of nodes, m is the number of edges, and q is the number of queries. This is because we run the Bellman-Ford algorithm once, which takes O(nm) time, and we handle each query separately, which takes O(n) time.
+
+
+
+

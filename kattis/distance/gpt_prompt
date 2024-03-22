@@ -1,0 +1,15 @@
+Create a Solution in Python with proper indentation and justify 
+The City of Manhattan is organized as a grid of streets and avenues, with streets running in the North-South direction and avenues running in the East-West direction. Streets are numbered from East to West starting from 1, and avenues are numbered from North to South starting from 1. Each intersection is labelled by the street and avenue number (s,a). The distance between two intersections 
+(s1,a1) and (s2,a2) is the absolute value of (s1-s2) plus the absolute value of (a1-a2).
+
+Your company operates several food trucks at different intersections in Manhattan and you want to have them spread out so they do not compete with each other. To estimate how spread out they are, you have decided to compute the total distance between every distinct pair of your food trucks. A small total distance would mean that on average, a pair of food truck is too close together.
+
+What is the total distance between every distinct pair of food trucks?
+
+Input
+The first line of input contains an integer N (2<=N<=200000), which is the number of food trucks.
+
+The next n  lines describe the food trucks’ locations. Each of these lines contains two integers  s( 1<=s<=1000000), which is the street number of this food truck, and a ( 1<=a <= 1000000), which is the avenue number of this food truck.
+
+Output
+Display the total distance between every distinct pair of food trucks.

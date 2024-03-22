@@ -1,0 +1,14 @@
+To solve this problem in Python, we can follow these steps:
+
+Read the input values n and message.
+Remove all spaces from the message and convert all letters to uppercase.
+Create an empty string ciphertext.
+Loop through each i from 0 to n-1.
+Loop through each j from i to the end of the message with a step of n.
+Append the j-th character of the message to the ciphertext.
+Print the ciphertext.
+
+For each message, this code reads the value of n and the message, removes all spaces and converts all letters to uppercase. It then creates an empty string to store the ciphertext and loops through each i from 0 to n-1. For each i, it loops through each j from i to the end of the message with a step of n and appends the j-th character of the message to the ciphertext. Finally, it prints the ciphertext. This process is repeated for each message until the input value of n is 0.
+
+
+

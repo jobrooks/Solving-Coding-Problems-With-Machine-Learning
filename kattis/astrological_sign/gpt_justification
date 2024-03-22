@@ -1,0 +1,7 @@
+First, we define a dictionary signs that maps each astrological sign to a list of tuples representing the start and end dates for that sign. Each tuple contains two strings representing the start and end dates in the format mmdd.
+
+Then, we enter a loop that reads two strings month and day from the input until there is no more input. We use zfill to pad each string with zeros to two digits.
+
+Next, we iterate over each astrological sign in signs. For each sign, we iterate over the start and end dates in the list of tuples. If the input date is between the start and end dates, we print the name of the sign and break out of the inner loop. If we have iterated over all the tuples for a sign without finding a match, we continue to the next sign.
+
+Finally, we break out of the outer loop and exit the program if there is no more input.

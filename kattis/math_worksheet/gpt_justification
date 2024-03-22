@@ -1,0 +1,4 @@
+To solve this problem, we need to parse the input, evaluate each math problem, determine the maximum width of any result in each test case, and then print out the results in the desired format.
+The parse_math_problem function takes a string representing a math problem and returns the evaluated result. The evaluate_test_case function takes a list of math problems, evaluates each one using parse_math_problem, and returns a list of results and the maximum width of any result. The print_table function takes a list of results and the maximum width, determines how many columns fit in one row based on a maximum line length of 50 characters, and then prints the results in the desired format.
+
+In the main loop, we read in each test case, parse the input, evaluate the math problems, and then print out the results in a table format with one blank line between adjacent test cases.

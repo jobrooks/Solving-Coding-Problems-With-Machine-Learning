@@ -1,0 +1,8 @@
+The solution first defines a function collatz_sequence to compute the Collatz sequence of a given starting value. The function uses a while loop to repeatedly apply the rules of the sequence until it reaches 1. It stores each value in the sequence in a list and returns the list.
+
+The solution then reads the first pair of starting values from the input and enters a loop that runs until both starting values are zero. For each pair of starting values, it computes the Collatz sequences using the collatz_sequence function and finds the first number that occurs in both sequences using the set intersection operation. It then computes the number of steps needed in both sequences to reach the intersection using the index method of lists.
+
+Finally, the solution prints the result in the required format using formatted string literals. It then reads the next pair of starting values from the input and repeats the process until both starting values are zero.
+
+
+

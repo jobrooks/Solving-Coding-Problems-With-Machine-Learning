@@ -1,0 +1,6 @@
+One way to solve this problem is to use the Knuth-Morris-Pratt (KMP) algorithm, which is a linear time string matching algorithm. The KMP algorithm preprocesses the pattern to build a failure function that tells us where to resume matching in case of a mismatch. The failure function is computed using dynamic programming and takes O(m) time, where m is the length of the pattern. The matching phase takes O(n) time, where n is the length of the text.
+
+To use this implementation to solve the problem, we can simply read each test case from input and call the find_occurrences function to find the positions of all occurrences of the pattern in the text.
+In this code, we read each pattern from standard input, followed by the corresponding text, until we reach the end of file. For each test case, we call the find_occurrences function to find the positions of all occurrences of the pattern in the text, and print them to standard output.
+
+The time complexity of this solution is O(n+m), where n is the length of the text and m is the length of the pattern. The space complexity is O(m).

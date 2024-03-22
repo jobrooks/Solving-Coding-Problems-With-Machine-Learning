@@ -1,0 +1,7 @@
+The program reads in the input until w and l are both equal to 0, indicating the end of the input. For each test case, it reads in the values of w, l, and n, and initializes the robot's position to (0, 0) and the actual position to (0, 0).
+
+Then, for each movement instruction, the program updates the actual position and the robot's position based on the direction and distance specified. If the robot's position exceeds the bounds of the room, it is set to the closest valid position along the boundary.
+
+Finally, the program prints out the robot's estimated position and the actual position, separated by a blank line.
+
+Note that the program assumes that the input is well-formed and follows the specified format. It also assumes that the input values for w, l, and n are within the valid range specified in the problem statement.

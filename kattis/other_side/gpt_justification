@@ -1,0 +1,5 @@
+The above code uses breadth-first search to find a valid sequence of moves that can transport all the items without any loss. It starts with all the items on the left bank and generates all possible valid moves from the current state. It then checks if the resulting state is valid and hasn't been visited before, and adds it to the queue if it satisfies these conditions. If the destination state is reached, the code prints "Yes" and terminates. If all states have been visited and the destination state hasn't been reached, the code prints "No".
+
+The is_valid function checks if a given state is valid by making sure that there are no sheep with wolves without John being present, no cabbages with sheep without John being present, and the number of items on the boat doesn't exceed its capacity K.
+
+The time complexity of the above code is O((W+S+C)^2), which is the number of states that need to be visited in the worst case. The space complexity is also O((W+S+C)^2), which is the size of the visited set. However, in practice, the number of states that need to be visited is much smaller than the worst case, so the code runs efficiently.

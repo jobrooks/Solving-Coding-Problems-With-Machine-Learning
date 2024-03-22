@@ -1,0 +1,11 @@
+To solve this problem, we can iterate through every vertex (lowercase x character) in the input and check for triangles formed by edges around that vertex. To check for triangles, we can consider each edge connected to the vertex and check if there is another edge connected to the same endpoint of the first edge such that it forms a right angle with the first edge. If such an edge exists, then we have found a triangle.
+
+First, we read in the input and store it in the grid list.
+
+Then, we iterate through every vertex in the input, which are located at odd indices in the grid list. For each vertex, we check if it is a lowercase x character. If it is not, then we skip it.
+
+If it is a vertex, we check for triangles formed by edges around that vertex. We check for triangles in all four directions from the vertex, using the indices of the edges in the grid list. If a triangle is found, we increment the triangles counter.
+
+Finally, we print out the number of triangles found.
+
+Overall, this solution has a time complexity of O(rc), since we iterate through every vertex in the input once. The space complexity is also O(rc), since we store the input in a 2D list.

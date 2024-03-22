@@ -1,0 +1,10 @@
+You are given a non-negative integer n. Your task is to count the number of ways to form the number n using only the digits 4 and 7. For example, if n=10, there are three ways to form the number: 4+6, 7+3, and 4+4+2.
+
+Write a program that takes the input integer n and prints the number of ways to form n using only the digits 4 and 7.
+
+Input:
+
+A single integer n (0 ≤ n ≤ 10^6).
+Output:
+
+A single integer representing the number of ways to form n using only the digits 4 and 7.

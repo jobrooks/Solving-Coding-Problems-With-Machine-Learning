@@ -1,0 +1,6 @@
+Approach:
+
+For each test case, we have the total number of arms and legs for two different types of robots. We need to find out how many robots of each type there are within each group.
+We can iterate over all possible numbers of the first type of robots and calculate the number of robots of the second type accordingly. Then we can check if this solution satisfies the given total number of arms and legs. If it does, we output the solution and break the loop.
+If we iterate over all possible numbers of the first type of robots and none of them satisfy the given total number of arms and legs, we output "?".
+Time complexity: O(n * max(lt))

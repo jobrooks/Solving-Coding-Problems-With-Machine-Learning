@@ -1,0 +1,3 @@
+The program uses a binary search to find the minimum possible maximum occurrence of a value in the array after removing exactly k elements. The is_possible function checks if it's possible to get a maximum occurrence <= limit by removing elements with higher occurrences. It does this by counting the occurrences of each value, sorting the counts in non-decreasing order, and removing the elements with the highest counts until the maximum count is <= limit. The binary search uses this function to search for the smallest limit that is possible.
+
+The program has a time complexity of O(n log n), where n is the size of the array.

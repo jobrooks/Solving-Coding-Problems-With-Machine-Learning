@@ -1,0 +1,19 @@
+You are given a list of n integers a1,a2,…,an. A sequence of consecutive integers is called a bus if it has at least two elements. Find all buses such that:
+
+the difference between the largest and smallest element in the bus is exactly k
+the buses are pairwise disjoint (i.e. they don't overlap)
+
+Input
+The input consists of:
+
+one line with two integers n and k (2≤n≤105, 1≤k≤109) — the length of the list a and the required difference.
+one line with n integers a1,a2,…,an (−109≤ai≤109) — the elements of the list a.
+Output
+If there are no buses, output a single integer 0.
+
+Otherwise, output:
+
+one line with an integer m (the number of buses)
+m lines, each containing the number of elements in the corresponding bus and the space-separated elements in non-descending order.
+
+The buses should be sorted in non-descending order of their smallest element. If there are multiple buses with the same smallest element, sort them by their size in non-descending order.

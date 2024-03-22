@@ -1,0 +1,5 @@
+The program reads the input, which includes the number of rooms in the hotel r and the number of rooms that are already booked n. It then reads the n room numbers that are already booked and stores them in a set called booked.
+
+The program then loops over all possible room numbers from 1 to r. For each room number, it checks if the room is already booked. If it is not booked, the program outputs the room number and breaks out of the loop. If the program completes the loop without finding an available room, it outputs "too late".
+
+Note that the loop uses the else clause, which executes only if the loop completes without hitting a break statement. 

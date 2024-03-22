@@ -1,0 +1,16 @@
+One possible Python solution to this problem involves iterating over the first n Champernowne words, checking if each one is divisible by k, and counting the number of divisible words.
+
+The code reads the input values n and k from a single line of input using input().split(). It then initializes a count variable to zero and iterates over the first n positive integers using a for loop.
+
+For each integer i, the code constructs the corresponding Champernowne word by concatenating the first i positive integers using a list comprehension and the join() method. The resulting word is converted to an integer using int(word) and checked if it is divisible by k using the modulo operator %.
+
+If the word is divisible by k, the count variable is incremented by one. Finally, the code prints the count of divisible Champernowne words using print(count).
+
+To justify the correctness of the algorithm, note that it constructs each Champernowne word by concatenating the first i positive integers in order. Since k is a divisor of a number if and only if it is a divisor of its digits sum, we only need to check if the digits sum of each Champernowne word is divisible by k.
+
+Since the digits sum of the first i positive integers is equal to the sum of the digits of i times (i+1)/2, we can compute the digits sum of the ith Champernowne word using the formula sum(map(int, str(i * (i+1) // 2)))).
+
+Therefore, the algorithm correctly counts the number of first n Champernowne words that are divisible by k.
+
+
+

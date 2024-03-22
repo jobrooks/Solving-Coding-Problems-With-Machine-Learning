@@ -1,0 +1,11 @@
+The approach for solving this problem is to count the maximum number of points that lie on the same line.
+
+We iterate through all possible pairs of points, then for each pair, we calculate the slope of the line between them. If two points have the same slope with respect to a third point, they are collinear. We keep track of the number of points collinear with each pair and take the maximum of these numbers as the answer.
+
+Time Complexity: O(n^2)
+
+Justification:
+
+The code reads the input for multiple test cases, loops through each pair of points, then loops through the remaining points to count the number of points that lie on the same line. Finally, the code prints the maximum number of collinear points.
+
+The time complexity of this algorithm is O(n^3), as it has three nested loops. However, the input size is small, so this algorithm is efficient enough to solve the problem within the time limit.

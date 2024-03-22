@@ -1,0 +1,12 @@
+To solve this problem, we need to find the smallest number that is a multiple of every number in the set. This is known as the least common multiple (LCM) of the set of numbers. We can use the following formula to find the LCM of two numbers:
+
+LCM(a, b) = (a * b) / GCD(a, b)
+
+where GCD(a, b) is the greatest common divisor of a and b. We can use this formula recursively to find the LCM of a set of numbers.
+
+To implement this in Python, we can use the built-in math library to find the GCD of two numbers using the gcd function. We can then use the above formula to find the LCM of the two numbers. We can repeat this process for the entire set of numbers.
+In this code, we define a function lcm that takes two numbers as input and returns their LCM. We then define a function lcm_set that takes a set of numbers as input and returns their LCM using the lcm function.
+
+We then use a while loop to read input test cases until the end of file is reached. For each test case, we read a list of integers from input and pass it to the lcm_set function to find the LCM of the set. We then print the result.
+
+

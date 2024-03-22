@@ -1,0 +1,9 @@
+Given two integers, find the absolute difference between them.
+
+Input
+Each line of input will contain two positive integers a and b where 0<a,b<10^15. Each integer is given on a separate line.
+
+The input ends with the end of file.
+
+Output
+For each line of input, output a single integer representing the absolute difference between a and b.

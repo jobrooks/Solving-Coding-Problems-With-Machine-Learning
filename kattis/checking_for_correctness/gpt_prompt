@@ -1,0 +1,18 @@
+Checking For Correctness
+In mathematics, it’s always important to check your work. Usually, this means making some sort of quick calculation (either in your head, or on paper) to ensure that the answers you find make sense.
+
+Your colleague has written an implementation of a general arithmetic system which supports arbitrarily large numbers and operations like addition, multiplication, exponentiation. She has asked you to write an independent program that checks that the answers her software gives make sense (though they may not be perfectly correct!).
+
+Write a program that checks the correctness of simple arithmetic statements of the form:
+
+    a + b
+    a * b
+    a ^ b
+
+That is, addition, multiplication, and exponentiation. The output of your program is the value of the smallest-order 4 digits of the answer. Then your colleague can check whether her software gave the same digits for that portion. If not, you know there’s a problem!
+
+Input
+Input consists of a sequence of up to 30 000 arithmetic expressions, one per line, in the format given above. All tokens are separated by single spaces. All numbers are integers in the range [0,2^32). Input ends at the end of file.
+
+Output
+For each expression, print the last 4 digits of the answer, omitting any leading zeros

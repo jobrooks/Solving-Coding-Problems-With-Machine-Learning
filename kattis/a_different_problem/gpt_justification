@@ -1,0 +1,5 @@
+First, we use a while loop to continuously read in pairs of integers until there is no more input. Within the loop, we use try and except to handle the case where there is no more input and the input() function throws an error.
+
+Inside the loop, we read in the two integers a and b using input() and split() functions. We then use the abs() function to compute the absolute difference between a and b and print it out.
+
+Overall, the code is simple and straight forward.

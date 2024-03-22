@@ -1,0 +1,38 @@
+Solve this problem in Python with proper formatting and justification:
+
+Porto’s book club is buzzing with excitement for the annual book exchange event! Every year, members bring their favorite book and try to find another book they like that is owned by someone willing to trade with them.
+
+I have been to this book exchange before, and I definitely do not want to miss it this year, but I feel that the trading should be improved. In the past, pairs of members interested in each other’s books would simply trade: imagine that person A brought a book that person B liked and vice-versa, then A and B would exchange their books.
+
+I then realized that many members were left with the same book they walked-in with... If instead of looking for pairs I looked for triplets, I could find more valid exchanges! Imagine that member A only likes member B’s book, while B only likes C’s book and C likes A’s book. These 3 people could trade their books in a cycle and everyone would be happy!
+
+But why stop at triplets? Cycles could be bigger and bigger! Could you help me find if it is possible for everyone to go out with a new book? Be careful, because members will not give their book without receiving one they like in return.
+
+Task
+Given the members of the book club and the books they like, can we find cycles so that everyone receives a new book?
+
+Input
+The first line has two integers: N, the number of people, and M, the total number of "declarations of interest". Each of the following M lines has two integers, A and B, indicating that member A likes the book that member B brought (0 <= A,B < N). Numbers A and B will never be the same (a member never likes the book he brought).
+
+Output
+You should output YES if we can find a new book for every club member and NO if that is not possible.
+
+Constraints
+2 <= N <= 10000 
+1<= M <= 20000 and M <= N^2 - N.
+
+Sample Input 1
+9 9
+0 1
+1 2
+2 0
+3 4
+4 3
+5 6
+6 7
+7 8
+8 5
+
+
+Sample Output 1:
+YES

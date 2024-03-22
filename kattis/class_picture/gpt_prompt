@@ -1,0 +1,30 @@
+Solve in Python and justify
+It’s time to take a class picture. As you know, this means all of the students have to line up in a row and smile for the camera. Of course, like any class, there are pairs of people who don’t like each other. These people refuse to stand beside each other for the picture. If possible, you must figure out an order in which to arrange the class so that nobody is standing beside a classmate they don’t like.
+
+Input
+Input contains descriptions for up to 5 classes. Class descriptions end at end of file. The description of each class begins with a number, 1 <= n <= 10, giving the number of people in the class. This is followed by the list of names for the n class members. This is followed by an integer, 0<= m<=n(n-1)/2 giving the number of pairs of people who don’t like each other. Finally, there is a sequence of m pairs of class members, each a pair of different people that refuse to stand next to each other.
+
+Each name is a sequence of upper- and lowercase letters (a-z) at most 20 characters long.
+
+Output
+For each class, your program should print out a line giving a sequence of names that could serve as an order people could stand for the class picture. If no order exists, you should simply print out "You all need therapy." If there is more than one solution, your program should print out the lexicographically earliest solution (i.e., the solution with the alphabetically earliest possible name first, then the alphabetically earliest possible name second and so on). Sort using ASCII ordering, so that uppercase letters are sorted before lowercase letters.
+
+Sample Input 1	
+5
+Ron
+George
+Bill
+Fred
+Jenny
+3
+Fred Jenny
+Bill Ron
+George Jenny
+2
+Alice
+Bob
+1
+Alice Bob
+Sample Output 1
+Bill Fred George Ron Jenny
+You all need therapy.

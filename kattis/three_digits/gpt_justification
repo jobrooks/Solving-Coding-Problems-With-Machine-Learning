@@ -1,0 +1,18 @@
+To solve this problem, we need to find the last 3 digits before the trailing zeroes in n!.
+The number of trailing zeroes in n! is determined by the number of factors of 5 in n! (as 10 = 2*5). Therefore, we need to count the number of factors of 5 in n! to find the number of trailing zeroes. However, we only need to count the number of factors of 5 up to the power of 3, because the last three digits of n! only depend on the factors of 2 and 5 up to the power of 3.
+
+For example, let's consider the number 14!. The prime factorization of 14! is given by:
+
+14! = 2^{11} * 3^5 * 5^2 * 7^2 * 11 * 13
+
+Therefore, the number of trailing zeroes in 14! is given by the minimum of the power of 2 and the power of 5, which is 2. This means that the last two digits of 14! are 00. To find the third last digit, we need to compute the value of 14! modulo 1000 and remove the last two digits. Therefore, the answer is (14! modulo 1000) / 100.
+
+We can generalize this approach to any integer n as follows:
+
+Compute the number of factors of 5 up to the power of 3 in n! by using the formula:
+(n // 5) + (n // 25) + (n // 125)
+Compute the value of n! modulo 1000.
+Remove the last two digits from the result obtained in step 2 and divide the result by 100.
+Output the result obtained in step 3.
+The time complexity of this algorithm is O(n log n) because we need to compute the value of n! and its modulo.
+

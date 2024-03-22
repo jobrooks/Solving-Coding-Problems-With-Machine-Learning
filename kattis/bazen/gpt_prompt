@@ -1,0 +1,11 @@
+Mirko and Slavko have built a grand new pool in front of their weekend getaway. The pool is an isosceles right triangle, with legs of length 250.
+
+Everything was perfect, girls were coming, the DJ was coming, and the parties were wild. But, a problem arose when they started serving food at the parties. Mirko is vegetarian, while Slavko thinks a party without sausages is no party at all. Therefore they had to divide the pool into two parts. The pool is placed into a coordinate system (as in the figure above) and divided into two parts of equal area by a line segment with both endpoints on the edges of the pool.
+
+Write a program that, given one endpoint of the dividing line segment, calculates the coordinates of the other endpoint.
+
+Input
+The first line contains two integers, the coordinates of one endpoint of the dividing line segment. That point will be on one of the edges of the pool.
+
+Output
+Output the coordinates of the other endpoint, rounded to two decimal digits.

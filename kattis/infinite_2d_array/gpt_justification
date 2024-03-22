@@ -1,0 +1,4 @@
+We can solve this problem using dynamic programming. We will first initialize the base cases as per the given formula, i.e., F_{0,0} = 0, F_{0,1} = F_{1,0} = 1. We will then use the given recurrence relation F_{i,j} = F_{i-1,j} + F_{i,j-1} to calculate the value of F_{x,y}. Since the values can be very large, we will take the modulo with 10^9+7 at each step to avoid overflow.
+Time Complexity: O(x * y)
+
+The time complexity of this solution is O(x*y) because we are filling up an x by y matrix. However, since the maximum value of x and y is 10^6, the worst case time complexity will be 10^12, which is too large. Therefore, this solution will not pass the time limit for large values of x and y. A better solution would be to use the matrix exponentiation method to calculate F_{x,y} in O(log n) time complexity.

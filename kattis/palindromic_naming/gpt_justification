@@ -1,0 +1,12 @@
+We can observe the following facts about a valid Tic Tac Toe game:
+
+The number of X's is either equal to the number of O's or is one more than the number of O's. This is because X starts the game and plays first, so X should have at least one more move than O.
+
+If X has won the game, then the number of X's is equal to the number of O's plus one.
+
+If O has won the game, then the number of X's is equal to the number of O's.
+
+If the game is a draw, then the number of X's is equal to the number of O's.
+
+Based on the above observations, we can check if a given grid is valid by counting the number of X's and O's in the grid and checking if they satisfy the above conditions. If the conditions are satisfied, then the grid is valid, otherwise, it is not valid.
+Time Complexity: O(n), where n is the number of test cases. We need to check each test case and count the number of X's and O's in each grid, which takes O(1) time. The checks to see if a grid is valid take constant time as well, so the overall time complexity is linear in the number of test cases.

@@ -1,0 +1,20 @@
+Solve in python and justify:
+This is Yet Another Tree Problem. You are given a tree, where every node has a penalty and every edge has a weight. The cost of a simple path between any two nodes is the sum of the weights of the edges in the path, plus the product of the penalties of the endpoint nodes. Note that a path can have 0 edges, and the cost of such a path is simply the square of the penalty of the node.
+
+For each node, compute the smallest cost of any path starting at that node. The final answer is the sum of all of these minimum costs.
+
+Input
+Each input will consist of a single test case. Note that your program may be run multiple times on different inputs. The first line of input will consist of a single integer n (1<= n <= 200000), which is the number of nodes. The next line will consist of n space-separated integers p (1<= p<= 1000000), which is the penalty of each node, in order. Each of the following n-1 lines will consist of three space-separated integers 
+i, j  and w (1\le i \le n, 1 \le j \le n, i \ne j, 1 \le w \le 1\, 000\,000), specifying an edge between nodes i and j with weight w.
+
+Output
+Output a single integer, which is the sum of all of the lowest cost paths for each node.
+Sample Input 1
+5
+9 7 1 1 9
+3 2 8
+5 2 10
+4 3 10
+2 1 2
+Sample Output 1
+63

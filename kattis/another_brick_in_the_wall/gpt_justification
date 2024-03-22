@@ -1,0 +1,5 @@
+The first line of the input contains the height h, width w, and number of bricks n. The second line contains the lengths of the n bricks.
+
+We initialize current_row and current_width to 0 to keep track of where we are in the construction. We use a while loop to iterate over the rows of the wall. For each row, we use another while loop to place the bricks from left to right. We check if we have run out of bricks, and if we have, we print "NO" and exit. Otherwise, we pop a brick from the list of bricks and try to place it at the current position. If we cannot place it, we break out of the loop and move to the next row. If we have successfully placed a brick, we add its length to the current width and append it to the current layer.
+
+If we have successfully placed all the bricks in a row and the current width is equal to the wall width, we move to the next row and reset the current width to 0. If at any point the current width is not equal to the wall width, we break out of the loop and print "NO". If we have successfully placed all the rows in the wall, we print "YES".

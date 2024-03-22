@@ -1,0 +1,22 @@
+The value of n! = 1\cdot 2\cdot 3 \cdot \ldots \cdot (n-1) \cdot n can be quite large, and it can be tedious to calculate. Fortunately for us, the French mathematician Abraham de Moivre (1667-1754) and the Scottish mathematician James Stirling (1692-1770) came up with a nice approximation:
+
+n!\approx S(n)=\sqrt {2\pi n}\frac{n^ n}{e^ n}.
+ 
+This is known as Stirling’s approximation.
+
+For this problem, determine how good Stirling’s approximation is for various n.
+
+Input
+Input consists of up to 500 test cases, one per line. Each test case has a single integer 0 < n < 10^5. Input ends when n=0.
+
+Output
+For each test case, print out n! / S(n) with an absolute error at most 10^(-8).
+Sample Input 1
+1
+10
+150
+0
+Sample Output 1
+1.084437551419227546611577313
+1.008365359132400245905553271
+1.000555709081632955425046604

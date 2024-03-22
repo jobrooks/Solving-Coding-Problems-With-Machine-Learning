@@ -1,0 +1,24 @@
+Traveling by car can sometimes be very boring. The natural cure for this boredom is to play a word game. In the following example the winner is he or she who has won the most rounds when the car stops. Each round starts with someone reading out loud the three letters on the license plate of an oncoming car. Whoever is first to say a word containing those letters in the same order wins the round. On the last road trip you failed miserably in this game, but this time you will be more prepared.
+Task
+For each set of three letters find the first word in a dictionary that contains these letters in the same order.
+
+Input
+The first line of input contains two positive integers N <= 5000 and M<= 10000, the number of words in the dictionary and the number of license plates to be handled. Each of the following N lines contains a word from the dictionary, a string no more than 100 characters long containing only lower case letters from the English alphabet. This is followed by M lines each containing a string of three uppercase letters from the English alphabet, representing a license plate.
+
+Output
+For each license plate in the input you should output one line containing either the first valid word in the dictionary or the sentence "No valid word" if no such word exists.
+
+Sample Input 1	
+5 3
+banana
+car
+sand
+uncharacteristically
+counterrevolutionaries
+RRR
+DNA
+SND
+Sample Output 1
+counterrevolutionaries
+No valid word
+sand

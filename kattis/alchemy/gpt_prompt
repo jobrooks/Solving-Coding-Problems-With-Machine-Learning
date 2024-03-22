@@ -1,0 +1,17 @@
+You just finished day one of your alchemy class! For your alchemy homework, you have been given a string of lowercase letters and wish to make it a palindrome. You’re only a beginner at alchemy though, so your powers are limited. In a single operation, you may choose exactly two adjacent letters and change each of them into a different lowercase letter. The resulting characters may be the same as or different from one another, so long as they were both changed by the operation.
+
+Formally, if the string before the operation is s and you chose to change characters si and si+1 to produce string t, then si not equal to ti and si+1 is not equal to ti+1 must be true, but ti = ti+1 is permitted.
+
+Compute the minimum number of operations needed to make the string a palindrome.
+
+Input
+The single line of input contains a string of 
+ n (2<= n<= 100) lowercase letters, the string you are converting into a palindrome.
+
+Output
+Output a single integer, which is the minimum number of operations needed to make the string a palindrome.
+
+#GPT did not follow the rules of the problem for its initial answer, I had to correct it in order to make actually attempt this problem.
+
+This is incorrect as you need to change two operations at a time
+Rewrite the program to need to change two letters at a time

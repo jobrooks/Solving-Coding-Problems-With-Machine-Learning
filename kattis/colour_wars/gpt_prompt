@@ -1,0 +1,8 @@
+Colour Wars
+A school is having a vote in what their primary school colour should be. While counting the votes, the principal of the school accidentally lost count of how many students there were. He then asked N distinct students "How many other students voted for the same colour as you?" where the N-th student’s response is an integer i representing the number of students that voted for the same colour. Assuming that the principal may or may not have asked all of the students this question, and each student can only vote once, find the minimum number of students that attend the school. For example: The principal asks 3 students the question. The first student says "1 other student person voted for the same colour as me." The second student says "1 other student voted for the same colour as me" and the third student says "2 other students voted for the same colour as me." Assuming that the minimum number of students would mean that the first and second student voted for the same colour, then these 2 students plus the3 students referenced from the third student makes a minimum of 5 students that attend the school.
+
+Input
+The input consists of only two lines. The first line contains the integer number of students the principal asked, N (1<=N<=10 000). The second line consists of N students’ responses where each contains an integer i (1<=i<=10 000) and they are separated by whitespaces.
+
+Output
+Output the minimum number of students located at the school as a single integer.

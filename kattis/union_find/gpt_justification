@@ -1,0 +1,9 @@
+One way to solve this problem is to use the union-find data structure. The idea behind this data structure is to represent a collection of disjoint sets, where each set is represented by a representative element. Initially, each element is its own representative, and we can join sets by setting the representative of one set to be the representative of another set.
+
+To perform a query, we can simply check if the representatives of the two elements are the same.
+In this code, we create an instance of the UnionFind class with n elements, and then process each query. If the query is a union operation, we call the union method of the UnionFind instance to join the sets containing a and b. If the query is a membership test, we call the same_set method of the UnionFind instance to check if a and b are in the same set, and print "yes" or "no" accordingly.
+
+The time complexity of this solution is O(q log n), where q is the number of operations and n is the number of elements in the base set. The space complexity is O(n).
+
+
+

@@ -1,0 +1,4 @@
+This problem can be solved using Dijkstra's algorithm, which finds the shortest path from a source node to all other nodes in a graph. In this case, the source node is the surface (node 0) and the edges have a weight of 1, representing the number of channels that need to be dug.
+
+We can build an adjacency list to represent the graph and use a priority queue to keep track of the nodes to be visited. The priority queue should be ordered by distance and then by danger level, as described in the problem statement.
+The time complexity of this solution is O(m log n), where m is the number of edges and n is the number of nodes. This is due to the use of a priority queue with heap operations. The space complexity is O(n+m) to store the adjacency list and the priority queue.

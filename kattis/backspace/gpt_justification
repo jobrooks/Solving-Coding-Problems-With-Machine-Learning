@@ -1,0 +1,1 @@
+The program reads the input string and initializes an empty stack. It then iterates over the characters in the input string. If the character is <, it pops the last character from the stack (which is equivalent to pressing the backspace key). Otherwise, it appends the character to the stack. Finally, it joins the remaining characters in the stack and prints the result. 

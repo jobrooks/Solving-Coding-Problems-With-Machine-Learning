@@ -1,0 +1,9 @@
+This problem can be solved using a variation of Dijkstra's algorithm. We can consider each cell in the grid as a node in the graph and the edges as the possible moves from one cell to another. The weight of each edge will depend on whether the boat is going with or against the current. If it is going with the current, the weight will be 0, otherwise, it will be 1.
+
+To calculate the weight of the edges, we can use the following rules:
+
+If the current is flowing north or south, the weight of moving east or west is 1, and the weight of moving northeast or northwest, or southeast or southwest is 2.
+If the current is flowing east or west, the weight of moving north or south is 1, and the weight of moving northeast or southeast, or northwest or southwest is 2.
+If the current is flowing northeast or southwest, the weight of moving north or west is 1, and the weight of moving east or south is 2.
+If the current is flowing northwest or southeast, the weight of moving north or east is 1, and the weight of moving west or south is 2.
+Once we have constructed the graph, we can run Dijkstra's algorithm starting from the source cell and ending at the destination cell. The result will be the minimum energy consumption needed to get from the starting point to the destination.

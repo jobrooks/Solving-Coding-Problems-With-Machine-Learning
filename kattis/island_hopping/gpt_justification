@@ -1,0 +1,15 @@
+I provided a solution in Python that solves the problem as described.
+
+First, I defined a helper function distance that calculates the distance between two points using the Euclidean distance formula. This will be used later to calculate the cost of the bridges.
+
+Then, I read the number of test cases and loop through each one. For each test case, I read the number of islands m and their positions as (x, y) coordinates, which are stored in a list of tuples islands.
+
+To find the minimum spanning tree of the islands, I use a greedy algorithm that starts with the first island and iteratively adds the closest non-added island to the current MST until all islands are connected. Specifically, I maintain a list mst that represents the current MST, initially containing only the index of the first island (0), and a variable total_cost that stores the total cost of all the bridges added so far. In each iteration, I loop through all the non-added islands and calculate their distance to all the islands in the current MST. The island with the smallest distance is added to the MST, and its distance to the MST is added to the total cost. This process is repeated until all islands are added to the MST.
+
+Finally, I print the total cost of the bridges needed to connect all the islands for each test case, formatted with 3 decimal places using the format method.
+
+This solution should work for all valid inputs within the given constraints, and its time complexity is O(m^2 log m) due to the use of the Euclidean distance formula and the greedy algorithm.
+
+
+
+

@@ -1,0 +1,4 @@
+To solve this problem in Python, we can use a union-find data structure to keep track of the sets. Initially, each integer in the interval is in its own set. We can then iterate over all pairs of integers in the interval, and if the two integers share a prime factor which is at least P, we merge the sets to which the two integers belong using the union-find data structure.
+
+Finally, we can count the number of distinct sets in the union-find data structure to obtain the answer.
+The time complexity of this solution is O((B-A+1)^2 alpha(B)), where alpha(B) is the inverse Ackermann function. This is efficient enough to handle the given constraints.

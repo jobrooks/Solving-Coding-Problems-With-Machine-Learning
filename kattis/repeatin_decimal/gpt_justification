@@ -1,0 +1,10 @@
+To solve this problem, we need to find the decimal value of given integer fractions up to a certain number of fractional digits. We can use long division to find the decimal representation of the fraction up to the desired number of digits.
+
+We can start by dividing the numerator by the denominator to get the integer part of the quotient and the remainder. We can then multiply the remainder by 10 and repeat the process to get the next digit of the quotient. We can continue this process until we have the desired number of fractional digits.
+In this code, we use a while loop to read input test cases until the end of file is reached. For each test case, we read three integers a, b, and c, which represent the numerator, denominator, and the number of fractional digits required.
+
+We then use long division to find the decimal representation of the fraction up to the desired number of digits. We first calculate the integer part of the quotient using integer division // and the remainder using the modulus operator %. We then use a loop to calculate the next c digits of the quotient using long division.
+
+We append each digit to a list of strings result and join them together to get the final decimal representation of the fraction. We then print this result in the required format.
+
+
