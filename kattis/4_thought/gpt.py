@@ -1,4 +1,4 @@
-# # 3.3 run-time error 0/3
+# 3.3 run-time error 0/3
 
 import itertools
 
