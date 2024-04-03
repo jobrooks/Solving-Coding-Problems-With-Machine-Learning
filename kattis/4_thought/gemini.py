@@ -1,9 +1,4 @@
-# Difficulty: 3.1
-# Justification: none
-# Result: failed
-# Tests passed: 0/3
-# Error: none
-# Response: 
+# 3.1 wrong answer 0/3
 import itertools
 
 def find_expression(n):

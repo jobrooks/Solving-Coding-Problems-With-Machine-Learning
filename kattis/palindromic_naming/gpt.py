@@ -1,4 +1,4 @@
-P# 5.3 wrong answer 0/5
+# 5.3 wrong answer 0/5
 MOD = 1000000007
 
 def count_palindromic_subsequences(s):
