@@ -1,7 +1,5 @@
-# Difficulty: 5.3
-# Result: Run-time error 
-# Tests passed: 0/53
-# Error: run-time
+# 5.3 Run-time error 0/53
+
 # Response: 
 def count_honey_production(fighting_distance, num_hives, hive_locations):
   """

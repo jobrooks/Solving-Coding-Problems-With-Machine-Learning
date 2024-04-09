@@ -1,9 +1,0 @@
-To solve this problem, we need to find the number of ways to form the number n using the digits 4 and 7. We can solve this problem using recursion, where we keep adding 4 or 7 to the current number until it equals n.
-
-Here, count_ways is a recursive function that takes an integer n and returns the number of ways to form n using the digits 4 and 7. The base case of the recursion is when n equals 0, in which case there is only one way to form the number, which is to use no digits at all.
-
-Otherwise, we loop over the two possible digits, 4 and 7, and for each digit d, we check if it can be added to the current number without exceeding n. If it can, we recursively call count_ways with the new number obtained by adding d to the current number, and add the result to count.
-
-Finally, we return the value of count as the answer to the problem.
-
-We then take the input integer n from the user, call count_ways with n, and print the result.

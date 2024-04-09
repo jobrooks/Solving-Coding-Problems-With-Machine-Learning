@@ -1,0 +1,165 @@
+Difficulty,Result,Tests
+3.0,wrong answer,1/19
+3.3,run-time error,0/3
+2.7,wrong answer,2/19
+4.0,wrong answer,0/13
+2.0,accepted,52/52
+2.3,wrong answer,0/12
+2.4,wrong answer,0/2
+3.8,run-time error,0/92
+1.7,wrong answer,0/7
+3.9,accepted,11/11
+1.4,accepted,16/16
+3.3,wrong answer,8/34
+2.2,accepted,12/12
+8.9,wrong answer,3/76
+3.5,wrong answer,2/13
+2.0,accepted,3/3
+3.8,wrong answer,1/7
+3.1,accepted,2/2
+3.2,accepted,94/94
+4.3,time limit exceeded,32/35
+1.4,accepted,18/18
+3.3,accepted,2/2
+2.1,accepted,30/30
+1.4,accepted,41/41
+4.0,wrong answer,0/2
+1.7,accepted,28/28
+2.7,wrong answer,0/54
+2.7,wrong answer,0/47
+2.3,wrong answer,0/15
+1.3,accepted,13/13
+1.9,accepted,32/32
+3.5,wrong answer,0/4
+1.4,accepted,14/14
+5.1,wrong answer,0/33
+2.6,accepted,3/3
+1.7,accepted,7/7
+1.5,accepted,49/49
+2.2,accepted,2/2
+2.0,run-time error,0/4
+1.8,accepted,33/33
+2.2,wrong answer,0/24
+2.2,accepted,25/25
+1.8,accepted,2/2
+5.2,wrong answer,0/40
+2.6,wrong answer,0/13
+1.6,wrong answer,0/16
+1.4,accepted,20/20
+2.9,wrong answer,0/19
+2.4,wrong answer,0/13
+2.4,accepted,2/2
+2.1,run-time error,0/2
+2.7,wrong answer,1/2
+1.8,time limit exceeded,4/27
+1.3,wrong answer,0/99
+1.4,accepted,10/10
+1.8,wrong answer,0/2
+2.3,accepted,3/3
+3.5,wrong answer,2/20
+1.5,accepted,63/63
+1.6,accepted,12/12
+5.6,runtime error,0/9
+1.7,accepted,23/23
+5.2,wrong answer,0/16
+4.8,wrong answer,0/34
+3.6,run-time error,0/5
+1.7,accepted,2/2
+1.5,wrong answer,0/37
+3.3,run-time error,0/9
+1.6,wrong answer,0/2
+2.5,accepted,20/20
+3.2,run-time error,0/2
+4.0,wrong answer,0/11
+3.9,accepted,23/23
+2.6,wrong answer,0/2
+5.8,wrong answer,0/4
+1.4,accepted,7/7
+3.0,Time Limit Exception,3/101
+1.3,accepted,2/2
+2.3,wrong answer,0/8
+5.8,wrong answer,1/60
+3.8,time limit exceeded,1/2
+2.3,accepted,7/7
+5.5,wrong answer,0/8
+2.5,accepted,3/3
+4.2,Wrong Answer,0/2
+3.3,wrong answer,0/20
+3.1,accepted,20/20
+1.3,accepted,5/5
+4.2,Time Limit Exception,6/22
+2.2,wrong answer,1/11
+4.6,accepted,17/17
+3.8,wrong answer,0/17
+5.5,wrong answer,0/29
+5.8,time limit exception,1/2
+4.6,wrong answer,0/15
+1.2,accepted,1/1
+5.7,wrong answer,29/30
+5.2,Memory Limit Exceeded,5/106
+2.8,Runtime Error,0/5
+3.5,accepted,3/3
+3.1,accepted,23/23
+3.1,wrong answer,1/6
+4.9,wrong answer,0/10
+4.1,time limit exception,2/57
+5.2,Wrong Answer,0/30
+5.9,wrong answer,0/15
+5.6,time limit exception,1/2
+4.2,wrong answer,0/3
+5.1,Time Limit Exception,0/38
+5.7,runtime error,0/2
+4.9,Wrong Answer,0/2
+1.3,wrong answer,1/20
+2.8,wrong answer,0/13
+4.4,wrong answer,0/3
+2.7,accepted,3/3
+5.0,wrong answer,0/4
+5.0,wrong answer,0/42
+5.3,wrong answer,0/5
+3.7,wrong answer,1/12
+4.1,time limit exception,0/3
+4.6,runtime error,0/44
+2.9,Accepted,53/53
+4.8,accepted,2/2
+4.8,memory limit exceeded,1/2
+3.6,wrong answer,0/22
+1.3,accepted,12/12
+3.6,accepted,6/6
+4.4,Wrong Answer,0/12
+4.7,time limit exception,3/12
+5.4,wrong answer,0/20
+4.0,runtime error,0/2
+3.7,accepted,8/8
+3.4,wrong answer,0/47
+4.9,runtime error,0/3
+3.4,accepted,2/2
+5.4,Wrong Answer,13/21
+4.7,runtime error,1/2
+5.3,Wrong Answer,0/21
+3.2,wrong answer,0/20
+4.4,accepted,2/2
+5.9,runtime error,0/2
+3.5,wrong answer,0/7
+5.7,wrong answer,0/56
+1.3,accepted,200/200
+3.3,wrong answer,0/2
+2.8,accepted,7/7
+2.8,accepted,13/13
+3.9,wrong answer,0/17
+5.8,wrong answer,1/21
+4.1,wrong answer,0/23
+5.1,wrong answer,0/2
+3.9,wrong answer,0/7
+5.3,Wrong Answer,0/50
+4.5,runtime error,0/13
+4.3,time limit exceeded,2/15
+4.3,wrong answer,1/16
+4.5,accepted,4/4
+4.3,wrong answer,1/7
+4.5,wrong answer,0/3
+5.3,wrong answer,0/47
+5.4,wrong answer,0/22
+5.4,run-time error,0/27
+4.7,runtime error,0/71
+5.6,Time Limit Exception,4/15
