@@ -1,3 +1,4 @@
+# 6.8 Error 1/18
 import math
 
 def connect_prob(N: int) -> float:

@@ -1,3 +1,4 @@
+# 4.2 Error 1/58
 def mod_pow(base, power, mod):
     if power == 0:
         return 1

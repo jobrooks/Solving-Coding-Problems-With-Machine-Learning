@@ -1,3 +1,4 @@
+# 5.0 Error 1/40
 n = int(input())
 scores = []
 for i in range(n):

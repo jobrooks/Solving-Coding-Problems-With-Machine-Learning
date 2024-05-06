@@ -1,3 +1,4 @@
+# 2.7 Error 1/11
 from typing import List, Tuple
 
 def solve(n: int, p: int, times: List[int]) -> Tuple[int, int]:

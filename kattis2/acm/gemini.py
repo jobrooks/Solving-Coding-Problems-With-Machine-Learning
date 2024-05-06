@@ -1,3 +1,4 @@
+# 2.1 Error 1/7
 def parse_log(log):
     """Parses a contest submission log and returns a list of tuples.
     Each tuple contains the time, problem, and result of a submission.

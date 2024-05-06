@@ -1,3 +1,4 @@
+# 5.8 Error 1/22
 n = int(input())
 adj = [[] for _ in range(n+1)]
 for _ in range(n):
