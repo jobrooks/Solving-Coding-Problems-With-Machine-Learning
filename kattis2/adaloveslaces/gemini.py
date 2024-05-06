@@ -1,84 +1,62 @@
-import sys
+from math import sqrt
 
-def count_patterns(N, d, s, t, f_min, f_max, L):
-    """Counts the number of lacing patterns that meet the given requirements.
+def count_lacing_patterns(N, d, s, t, f_min, f_max, L):
+  """Counts the number of lacing patterns that meet the given requirements.
 
-    Args:
-        N: The number of eyelets on a side.
-        d: The distance between eyelets.
-        s: The separation between the columns of eyelets.
-        t: The thickness of an eyelet.
-        f_min: The minimum free end length.
-        f_max: The maximum free end length.
-        L: The length of the shoelace.
+  Args:
+    N: The number of eyelets on a side.
+    d: The distance between eyelets (in millimeters).
+    s: The separation between the columns of eyelets (in millimeters).
+    t: The thickness of an eyelet (in millimeters).
+    f_min: The minimum free end length (in millimeters).
+    f_max: The maximum free end length (in millimeters).
+    L: The length of the shoelace (in millimeters).
 
-    Returns:
-        The number of lacing patterns that meet the given requirements.
-    """
+  Returns:
+    The number of lacing patterns that meet the given requirements.
+  """
 
-    # Check if the input is valid.
+  # Check if the given shoelace length is valid.
+  if L < 2 * (N + 1) * d + 2 * N * t + f_min:
+    return 0
 
-    if not (2 <= N <= 9 and 5 <= d <= 30 and 10 <= s <= 50 and 0 <= t <= 4 and 0 <= f_min <= f_max <= 2000 and 200 <= L <= 2000):
-        raise ValueError("Invalid input.")
+  # Calculate the total length of the shoelace that is used for lacing.
+  lace_length = L - 2 * f_min - 2 * N * t
 
-    # Compute the total length of the shoelace that is used for lacing.
+  # Calculate the number of eyelets that the shoelace can pass through.
+  num_eyelets = int((lace_length - 2 * d) / (2 * d + s))
 
-    total_length = 2 * L - f_min - f_max
+  # If the number of eyelets is odd, then the shoelace cannot be laced symmetrically.
+  if num_eyelets % 2 == 1:
+    return 0
 
-    # Compute the number of eyelets that the shoelace must pass through.
+  # Calculate the length of the shoelace that is used between each eyelet.
+  lace_length_between_eyelets = (lace_length - 2 * d) / num_eyelets
 
-    num_eyelets = total_length // (d + s + 2 * t)
+  # Calculate the free end length of the shoelace.
+  f = (lace_length - lace_length_between_eyelets * num_eyelets) / 2
 
-    # If the number of eyelets is not even, then the shoelace cannot be laced.
+  # Check if the free end length of the shoelace falls within the given range.
+  if f_min <= f <= f_max:
+    return 1
 
-    if num_eyelets % 2 != 0:
-        return 0
-
-    # Compute the number of ways to lace the shoelace.
-
-    num_patterns = 0
-    for i in range(num_eyelets // 2, num_eyelets + 1):
-        num_patterns += binomial(num_eyelets, i) * binomial(i, i // 2)
-
-    # Return the number of lacing patterns that meet the given requirements.
-
-    return num_patterns
-
-
-def binomial(n, k):
-    """Computes the binomial coefficient.
-
-    Args:
-        n: The number of items.
-        k: The number of items to choose.
-
-    Returns:
-        The binomial coefficient.
-    """
-
-    if k < 0 or k > n:
-        return 0
-    if k == 0 or k == n:
-        return 1
-    return binomial(n - 1, k - 1) + binomial(n - 1, k)
+  # Otherwise, the shoelace cannot be laced with the given requirements.
+  return 0
 
 
 def main():
-    """Gets the input and prints the number of lacing patterns for each shoelace length."""
+  """Gets the input data and prints the number of lacing patterns for each shoelace length."""
 
-    # Get the input.
+  # Get the input data.
+  N, d, s, t, f_min, f_max = map(int, input().split())
+  L_values = [int(input()) for _ in range(100)]
 
-    N, d, s, t, f_min, f_max = map(int, sys.stdin.readline().split())
-    L = list(map(int, sys.stdin.readlines()))
+  # Count the number of lacing patterns for each shoelace length.
+  num_lacing_patterns = [count_lacing_patterns(N, d, s, t, f_min, f_max, L) for L in L_values]
 
-    # Compute the number of lacing patterns for each shoelace length.
-
-    num_patterns = [count_patterns(N, d, s, t, f_min, f_max, L[i]) for i in range(len(L))]
-
-    # Print the number of lacing patterns for each shoelace length.
-
-    print(" ".join(map(str, num_patterns)))
+  # Print the number of lacing patterns for each shoelace length.
+  print(*num_lacing_patterns)
 
 
 if __name__ == "__main__":
-    main()
+  main()

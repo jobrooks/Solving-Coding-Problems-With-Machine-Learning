@@ -1,31 +1,19 @@
-def add_em_up(cards, s):
-  """
-  Determines if two cards can be chosen such that (in some orientation) they add up to s.
+import sys
 
-  Args:
-    cards: A list of integers representing the numbers on the cards.
-    s: The desired sum.
+def main():
+    n, s = map(int, sys.stdin.readline().split())
+    cards = list(map(int, sys.stdin.readline().split()))
+    for i in range(n):
+        for j in range(n):
+            if cards[i] + cards[j] == s:
+                print("YES")
+                return
+            rev_i = int(str(cards[i])[::-1])
+            rev_j = int(str(cards[j])[::-1])
+            if cards[i] + rev_j == s or rev_i + cards[j] == s:
+                print("YES")
+                return
+    print("NO")
 
-  Returns:
-    A string indicating whether or not two cards can be chosen to add up to s.
-  """
-
-  # Create a set of all the possible sums of two cards.
-  sums = set()
-  for i in range(len(cards)):
-    for j in range(i + 1, len(cards)):
-      sums.add(cards[i] + cards[j])
-
-  # Check if the desired sum is in the set of possible sums.
-  if s in sums:
-    return "YES"
-  else:
-    return "NO"
-
-
-# Get the input.
-n, s = map(int, input().split())
-cards = list(map(int, input().split()))
-
-# Print the output.
-print(add_em_up(cards, s))
+if __name__ == "__main__":
+    main()

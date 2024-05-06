@@ -1,87 +1,85 @@
 import sys
 
-def find_common_ancestor(person1, person2):
-    """Finds the common ancestor of two people in a family tree."""
-    # Get the list of ancestors of each person.
-    ancestors1 = []
-    ancestors2 = []
-    current_person = person1
-    while current_person != None:
-        ancestors1.append(current_person)
-        current_person = parent[current_person]
-    current_person = person2
-    while current_person != None:
-        ancestors2.append(current_person)
-        current_person = parent[current_person]
-    
-    # Find the first common ancestor.
-    common_ancestor = None
-    for ancestor1 in ancestors1:
-        for ancestor2 in ancestors2:
-            if ancestor1 == ancestor2:
-                common_ancestor = ancestor1
-                break
-        if common_ancestor != None:
-            break
-    
-    return common_ancestor
+class Person:
+    def __init__(self, name, parent=None):
+        self.name = name
+        self.parent = parent
+        self.children = []
 
-def get_relationship(person1, person2, common_ancestor):
-    """Gets the relationship between two people in a family tree."""
-    # Get the number of generations each person is removed from the common ancestor.
-    generations1 = ancestors[person1].index(common_ancestor) + 1
-    generations2 = ancestors[person2].index(common_ancestor) + 1
-    
-    # Determine the relationship based on the number of generations each person is removed.
-    if generations1 == 0:
-        if generations2 == 1:
-            relationship = "child of"
-        elif generations2 > 1:
-            relationship = "great^{}-grandchild of".format(generations2 - 2)
-    elif generations1 == generations2:
-        if generations2 == 1:
-            relationship = "sibling of"
+def find_common_ancestor(p1, p2):
+    ancestors = set()
+    while p1:
+        ancestors.add(p1)
+        p1 = p1.parent
+    while p2:
+        if p2 in ancestors:
+            return p2
+        p2 = p2.parent
+    return None
+
+def find_relationship(p1, p2):
+    common_ancestor = find_common_ancestor(p1, p2)
+    if not common_ancestor:
+        return "No relationship"
+
+    gen1 = 0
+    while p1 != common_ancestor:
+        p1 = p1.parent
+        gen1 += 1
+
+    gen2 = 0
+    while p2 != common_ancestor:
+        p2 = p2.parent
+        gen2 += 1
+
+    if gen1 == 0:
+        if gen2 == 1:
+            return "{} is the child of {}".format(p2.name, p1.name)
         else:
-            relationship = "{}th cousins".format(generations2 - 1)
+            return "{} is the great{} grandchild of {}".format(p2.name, ordinal(gen2 - 2), p1.name)
+
+    if gen1 == gen2:
+        if gen1 == 1:
+            return "{} and {} are siblings".format(p1.name, p2.name)
+        else:
+            return "{} and {} are {} cousins".format(p1.name, p2.name, ordinal(gen1 - 1))
+
+    if gen1 < gen2:
+        gen1, gen2 = gen2, gen1
+        p1, p2 = p2, p1
+
+    return "{} and {} are {} cousins, {} time{} removed".format(p1.name, p2.name, ordinal(gen1 - 1), gen2 - gen1, "s" if gen2 - gen1 > 1 else "")
+
+def ordinal(n):
+    if n in (11, 12, 13):
+        return "{}th".format(n)
+    elif n % 10 == 1:
+        return "{}st".format(n)
+    elif n % 10 == 2:
+        return "{}nd".format(n)
+    elif n % 10 == 3:
+        return "{}rd".format(n)
     else:
-        relationship = "{}th cousins, {} time{} removed".format(generations1 - 1, generations2 - generations1, "" if generations2 - generations1 == 1 else "s")
-    
-    return relationship
+        return "{}th".format(n)
 
-# Get the number of tree descriptions and the number of query pairs.
-t, p = map(int, input().split())
+def main():
+    t, p = map(int, sys.stdin.readline().strip().split())
 
-# Create a dictionary to store the children of each person.
-children = {}
+    people = {}
 
-# Read the tree descriptions.
-for i in range(t):
-    tree_description = input().split()
-    person = tree_description[0]
-    children[person] = tree_description[1:]
+    for i in range(t):
+        line = sys.stdin.readline().strip().split()
+        parent = people.get(line[0])
+        for child in line[1:]:
+            people[child] = Person(child, parent)
+            if parent:
+                parent.children.append(people[child])
 
-# Create a dictionary to store the ancestors of each person.
-ancestors = {}
+    for i in range(p):
+        line = sys.stdin.readline().strip().split()
+        p1 = people[line[0]]
+        p2 = people[line[1]]
+        print(find_relationship(p1, p2))
 
-# Find the ancestors of each person.
-for person in children:
-    ancestors[person] = []
-    current_person = person
-    while current_person != None:
-        ancestors[person].append(current_person)
-        current_person = parent[current_person]
-
-# Read the query pairs.
-for i in range(p):
-    pair = input().split()
-    person1 = pair[0]
-    person2 = pair[1]
-    
-    # Find the common ancestor of the two people.
-    common_ancestor = find_common_ancestor(person1, person2)
-    
-    # Get the relationship between the two people.
-    relationship = get_relationship(person1, person2, common_ancestor)
-    
-    # Print the relationship.
-    print("{} {} {}".format(person1, relationship, person2))
+if __name__ == "__main__":
+    main()

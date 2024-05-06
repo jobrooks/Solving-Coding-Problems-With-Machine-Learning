@@ -1,66 +1,89 @@
 import sys
 
-# Define the directions
-UP = "up"
-DOWN = "down"
-LEFT = "left"
-RIGHT = "right"
-
-# Initialize the maze
 maze = []
+x = 0
+y = 0
+direction = "right"
+visited = set()
 
-# Get the maze from the input
-for line in sys.stdin:
-    maze.append(line.strip())
-
-# Find the starting position
-for i in range(len(maze)):
-    for j in range(len(maze[i])):
-        if maze[i][j] == "S":
-            start_i = i
-            start_j = j
-
-# Create a stack to store the path
-path = []
-
-# Define the function to move in a direction
-def move(direction):
-    global start_i, start_j, path, maze
-
-    if direction == UP:
-        start_i -= 1
-    elif direction == DOWN:
-        start_i += 1
-    elif direction == LEFT:
-        start_j -= 1
-    elif direction == RIGHT:
-        start_j += 1
-
-    # Check if the move is valid
-    if start_i < 0 or start_i >= len(maze) or start_j < 0 or start_j >= len(maze[0]):
-        print("wrong")
-        sys.exit()
-
-    # Check if the move is a wall
-    if maze[start_i][start_j] == "*":
-        print("wall")
-    # Check if the move is a solution
-    elif maze[start_i][start_j] == "E":
-        print("solved")
-        sys.exit()
-    # Check if the move has already been made
-    elif (start_i, start_j) in path:
-        print("wrong")
-        sys.exit()
-    # Otherwise, add the move to the path and continue
+def get_input():
+  while True:
+    line = sys.stdin.readline()
+    if line == "wall\n":
+      return "wall"
+    elif line == "ok\n":
+      return "ok"
+    elif line == "solved\n":
+      return "solved"
+    elif line == "wrong\n":
+      return "wrong"
     else:
-        path.append((start_i, start_j))
-        print("ok")
+      print("Invalid input")
 
-# While the maze has not been solved
-while True:
-    # Get the direction from the input
-    direction = input()
+def move(direction):
+  global x, y
+  if direction == "right":
+    x += 1
+  elif direction == "down":
+    y += 1
+  elif direction == "left":
+    x -= 1
+  elif direction == "up":
+    y -= 1
 
-    # Move in the direction
+def main():
+  global maze, x, y, direction, visited
+
+  # Read the first line of the maze
+  line = sys.stdin.readline()
+  while line != "":
+    maze.append(line)
+    line = sys.stdin.readline()
+
+  # Get the starting position
+  for i in range(len(maze)):
+    for j in range(len(maze[i])):
+      if maze[i][j] == "S":
+        x = j
+        y = i
+        break
+
+  # Start the game loop
+  while True:
+    # Check if we have visited this cell before
+    if (x, y) in visited:
+      print("wrong\n")
+      return
+
+    # Mark the current cell as visited
+    visited.add((x, y))
+
+    # Get the input from the judging software
+    response = get_input()
+
+    # Check if we have solved the maze
+    if response == "solved":
+      print("solved\n")
+      return
+
+    # Check if we have hit a wall
+    if response == "wall":
+      # Change the direction based on the current direction
+      if direction == "right":
+        direction = "down"
+      elif direction == "down":
+        direction = "left"
+      elif direction == "left":
+        direction = "up"
+      elif direction == "up":
+        direction = "right"
+
+      # Move one step in the new direction
+      move(direction)
+      continue
+
+    # Move one step in the current direction
     move(direction)
+
+if __name__ == "__main__":
+  main()

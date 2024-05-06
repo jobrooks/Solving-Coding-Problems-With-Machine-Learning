@@ -1,73 +1,56 @@
 import sys
 
-def transpose(piece, min, max, octave_min, octave_max):
-    """
-    Transpose the piece to the given range.
+def transpose(piece, low, high):
+  """
+  Transpose the piece so that it is within the given vocal range.
 
-    Args:
-        piece: The piece to transpose.
-        min: The lowest tone Anton can sing.
-        max: The highest tone Anton can sing.
-        octave_min: The lowest octave Anton can sing.
-        octave_max: The highest octave Anton can sing.
+  Args:
+    piece: The piece of music as a list of tones.
+    low: The lowest tone that the singer can sing.
+    high: The highest tone that the singer can sing.
 
-    Returns:
-        The transposed piece.
-    """
-    transposed_piece = []
-    for tone in piece:
-        note, octave = tone[:-1], int(tone[-1])
-        if octave < octave_min or octave > octave_max:
-            return None
-        interval = ord(note) - ord(min[:-1])
-        if interval < 0 or interval > ord(max[:-1]) - ord(min[:-1]):
-            return None
-        transposed_note = chr(ord(note) + interval)
-        transposed_octave = octave
-        if transposed_note > 'G':
-            transposed_octave += 1
-        elif transposed_note < 'C':
-            transposed_octave -= 1
-        transposed_piece.append(transposed_note + str(transposed_octave))
-    return transposed_piece
+  Returns:
+    The minimum number of accidentals in any transposition of the piece that keeps it in the singer's vocal range.
+  """
 
-def count_accidentals(piece):
-    """
-    Count the number of accidentals in the piece.
+  # Find the minimum number of tones to transpose the piece up or down.
+  min_up = sys.maxsize
+  min_down = sys.maxsize
+  for tone in piece:
+    if tone < low:
+      min_up = min(min_up, low - tone)
+    elif tone > high:
+      min_down = min(min_down, tone - high)
 
-    Args:
-        piece: The piece to count the accidentals in.
+  # Transpose the piece up or down by the minimum number of tones.
+  if min_up < min_down:
+    transposed_piece = [tone + min_up for tone in piece]
+  else:
+    transposed_piece = [tone - min_down for tone in piece]
 
-    Returns:
-        The number of accidentals in the piece.
-    """
-    accidentals = 0
-    for tone in piece:
-        if '#' in tone:
-            accidentals += 1
-    return accidentals
+  # Count the number of accidentals in the transposed piece.
+  num_accidentals = 0
+  for tone in transposed_piece:
+    if "#" in tone:
+      num_accidentals += 1
+
+  return num_accidentals
 
 def main():
-    """
-    Read the input and output the answer.
-    """
-    n = int(sys.stdin.readline())
-    min, max = sys.stdin.readline().split()
-    piece = sys.stdin.readline().split()
-    octave_min = int(min[-1])
-    octave_max = int(max[-1])
-    min_accidentals = 1000000
-    num_transpositions = 0
-    for i in range(-12, 13):
-        transposed_piece = transpose(piece, min, max, octave_min + i, octave_max + i)
-        if transposed_piece is not None:
-            accidentals = count_accidentals(transposed_piece)
-            if accidentals < min_accidentals:
-                min_accidentals = accidentals
-                num_transpositions = 1
-            elif accidentals == min_accidentals:
-                num_transpositions += 1
-    print(min_accidentals, num_transpositions)
+  """
+  Read the input and output the minimum number of accidentals in any transposition of the piece that keeps it in the singer's vocal range.
+  """
+
+  # Read the input.
+  n = int(input())
+  low, high = input().split()
+  piece = input().split()
+
+  # Transpose the piece and count the number of accidentals.
+  num_accidentals = transpose(piece, low, high)
+
+  # Output the minimum number of accidentals.
+  print(num_accidentals)
 
 if __name__ == "__main__":
-    main()
+  main()

@@ -1,44 +1,58 @@
 import sys
-import math
 
-mod = int(1e9) + 7
+N = 0
+Q = 0
+boxes = []
+a = []
+b = []
+queries = []
 
-def fastpow(x: int, p: int) -> int:
-    if p == 0:
-        return 1
+def initialize():
+  global N, Q, boxes, a, b, queries
+  N, Q = [int(x) for x in sys.stdin.read().split()]
+  boxes = [[] for _ in range(N)]
+  a = [0] * N
+  b = [0] * N
+  queries = [[] for _ in range(Q)]
 
-    if p == 1:
-        return x
+def read_queries():
+  for i in range(Q):
+    query = sys.stdin.read().split()
+    query_type = int(query[0])
+    if query_type == 1:
+      u = int(query[1])
+      v = int(query[2])
+      queries[i] = [u, v]
+    elif query_type == 2:
+      queries[i] = [query_type]
 
-    val = fastpow(x, int(p / 2)) % mod
-    val = (val * val) % mod
+def compute_a_and_b():
+  for i in range(Q):
+    query = queries[i]
+    if query[0] == 1:
+      u = query[1] - 1
+      v = query[2] - 1
+      for j in range(u, v + 1):
+        a[j] += 1
+        b[j] += a[j]
 
-    if p % 2 != 0:
-        return (val * x) % mod
+def compute_e_a():
+  e_a = 0
+  for i in range(N):
+    e_a += a[i] ** 2
+  return e_a
 
-    return val % mod
+def compute_answer():
+  for i in range(Q):
+    query = queries[i]
+    if query[0] == 2:
+      e_a = compute_e_a()
+      print((e_a % (10 ** 9 + 7)) * pow(b[N - 1], -1, 10 ** 9 + 7) % (10 ** 9 + 7))
 
-def modinv(x: int) -> int:
-    return fastpow(x, mod - 2) % mod
+def main():
+  initialize()
+  read_queries()
+  compute_a_and_b()
+  compute_answer()
 
-n, q = map(int, input().split())
-a = [0] * (n + 1)
-
-for _ in range(q):
-    query = list(map(int, input().split()))
-
-    if len(query) == 3:
-        t, u, v = query
-        diff = v - u + 1
-        prob = (diff - 1) / diff
-        a[u] += 1
-        a[v + 1] -= 1
-    else:
-        ans_num = 0
-        ans_den = 1
-
-        for i in range(1, n + 1):
-            ans_num = (ans_num + a[i] ** 2) % mod
-            ans_den = (ans_den * i) % mod
-
-        print((ans_num * modinv(ans_den)) % mod)
+main()

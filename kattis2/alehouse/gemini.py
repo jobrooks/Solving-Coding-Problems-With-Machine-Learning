@@ -1,24 +1,23 @@
-import bisect
+import sys
 
-def main():
-    n, k = map(int, input().split())
-    times = []
-    for _ in range(n):
-        a, b = map(int, input().split())
-        times.append((a, 1))
-        times.append((b, -1))
-    times.sort()
+n, k = map(int, input().split())
+times = []
+ 
+for line in sys.stdin:
+    a, b = map(int, line.split())
+    times.append((a, b))
 
-    max_friends = 0
-    cur_friends = 0
-    cur_time = 0
-    for time, delta in times:
-        if cur_time + delta <= k:
-            cur_friends += delta
-            max_friends = max(max_friends, cur_friends)
-        cur_time = time
+ans = 0
+for i in range(n):
+    l, r = times[i]
+    for j in range(n):
+        if i == j:
+            continue
 
-    print(max_friends)
+        a, b = times[j]
+        if a >= l + k or b <= r:
+            continue
+        
+        ans += 1
 
-if __name__ == "__main__":
-    main()
+print(ans // 2)

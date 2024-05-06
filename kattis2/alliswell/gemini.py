@@ -1,100 +1,37 @@
 import sys
-import heapq
+from math import sqrt
 
-def dijkstra(grid, start, end, hearing_ranges):
-  """
-  Dijkstra's algorithm to find the shortest path from start to end.
+r, c, p = map(int, input().split())
+ranges = list(map(int, input().split()))
+grid = [list(input().split()) for _ in range(r)]
+INF = sys.maxsize
 
-  Args:
-    grid: A 2D grid of weights.
-    start: The starting cell.
-    end: The ending cell.
-    hearing_ranges: A dictionary of person letters to their hearing ranges.
-
-  Returns:
-    The shortest path from start to end, or -1 if no path exists.
-  """
-
-  # Initialize the distance to each cell to infinity.
-  distance = {}
-  for row in range(len(grid)):
-    for col in range(len(grid[0])):
-      distance[(row, col)] = float('inf')
-
-  # Set the distance to the starting cell to 0.
-  distance[start] = 0
-
-  # Initialize the priority queue with the starting cell.
-  pq = [(0, start)]
-
-  # While the priority queue is not empty,
-  while pq:
-
-    # Get the cell with the smallest distance from the priority queue.
-    dist, cell = heapq.heappop(pq)
-
-    # If this cell is the end cell,
-    if cell == end:
-      # Return the distance.
-      return dist
-
-    # For each neighbor of the cell,
-    for neighbor in [(cell[0] - 1, cell[1]), (cell[0] + 1, cell[1]),
-                    (cell[0], cell[1] - 1), (cell[0], cell[1] + 1)]:
-
-      # If the neighbor is within the grid,
-      if 0 <= neighbor[0] < len(grid) and 0 <= neighbor[1] < len(grid[0]):
-
-        # If the neighbor is not an obstacle,
-        if grid[neighbor[0]][neighbor[1]] != 'X':
-
-          # If the neighbor is a person,
-          if grid[neighbor[0]][neighbor[1]] in hearing_ranges:
-
-            # If the distance to the neighbor is greater than the distance to the
-            # current cell plus the time it takes to enter the neighbor,
-            if distance[neighbor] > dist + grid[neighbor[0]][neighbor[1]]:
-
-              # Update the distance to the neighbor.
-              distance[neighbor] = dist + grid[neighbor[0]][neighbor[1]]
-
-              # Add the neighbor to the priority queue.
-              heapq.heappush(pq, (distance[neighbor], neighbor))
-
-  # If no path was found,
-  return -1
-
-def main():
-
-  # Read the input.
-  r, c, p = map(int, input().split())
-  hearing_ranges = {}
-  for i in range(p):
-    hearing_ranges[chr(ord('A') + i)] = int(input())
-  grid = []
-  for i in range(r):
-    grid.append(input().split())
-
-  # Find the starting cell.
-  for i in range(r):
+# Find the starting position for the watchman
+for i in range(r):
     for j in range(c):
-      if grid[i][j] == 'A':
-        start = (i, j)
+        if grid[i][j] == 'A':
+            start_row, start_col = i, j
+            break
 
-  # Find the ending cell.
-  for i in range(r):
-    for j in range(c):
-      if grid[i][j] == 'Z':
-        end = (i, j)
+# Initialize the distance grid
+distance_grid = [[[INF] * (p + 1) for _ in range(c)] for _ in range(r)]
+distance_grid[start_row][start_col][0] = 0
 
-  # Find the shortest path from the starting cell to the ending cell.
-  dist = dijkstra(grid, start, end, hearing_ranges)
+# Perform BFS to compute the shortest distance to each person
+queue = [(start_row, start_col, 0)]
+while queue:
+    curr_row, curr_col, curr_person = queue.pop(0)
+    for dr, dc in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+        next_row, next_col = curr_row + dr, curr_col + dc
+        if 0 <= next_row < r and 0 <= next_col < c:
+            next_cost = distance_grid[curr_row][curr_col][curr_person] + int(grid[next_row][next_col])
+            if next_cost < distance_grid[next_row][next_col][curr_person]:
+                distance_grid[next_row][next_col][curr_person] = next_cost
+                if grid[next_row][next_col] == chr(ord('A') + curr_person + 1):
+                    queue.append((next_row, next_col, curr_person + 1))
 
-  # Print the output.
-  if dist == -1:
+# Check if all people can be reached
+if distance_grid[start_row][start_col][p] == INF:
     print(-1)
-  else:
-    print(dist)
-
-if __name__ == "__main__":
-  main()
+else:
+    print(distance_grid[start_row][start_col][p])

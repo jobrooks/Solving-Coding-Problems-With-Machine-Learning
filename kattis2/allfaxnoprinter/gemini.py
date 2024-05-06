@@ -1,26 +1,27 @@
-import heapq
+import bisect
+N, K = map(int, input().split())
 
-n, k = map(int, input().split())
 jobs = []
-for _ in range(n):
+for _ in range(N):
     t, l = map(int, input().split())
-    jobs.append((t, l))
+    jobs.append((t,l))
 
-jobs.sort()
+done = [0] * N
+machines = []
 
-pq = []  # min-heap of job end times
-cnt = 0  # number of completed jobs
-ans = []  # answer for each job
+for i in range(N):
+    t, l = jobs[i]
+    idx = bisect.bisect_left(machines, t)
+    if idx < K:
+        done[i] = 1
+        machines[idx] = t + l
+    else:
+        # remove a job that ends first
+        machines[idx - K] = t + l
 
-for t, l in jobs:
-    # remove finished jobs from the heap
-    while pq and pq[0] <= t:
-        heapq.heappop(pq)
+ans = []
+for i in range(N):
+    ans.append(max(K, sum(done[:i+1])) - sum(done[:i+1]))
 
-    # add the current job to the heap
-    heapq.heappush(pq, t + l)
-
-    # update the answer
-    ans.append(max(0, len(pq) - k))
-
-print(*ans, sep="\n")
+for x in ans:
+    print(x)

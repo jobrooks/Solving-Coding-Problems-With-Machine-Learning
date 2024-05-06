@@ -1,47 +1,51 @@
-import re
+from typing import Tuple
 
-def is_alcohol(smiles):
-  # Remove hydrogen atoms from the SMILES string.
-  smiles = re.sub(r"[H]", "", smiles)
+Hydroxy = 'O'
+Carbon = 'C'
 
-  # Split the SMILES string into a list of atoms and bonds.
-  atoms = []
-  bonds = []
-  for i in range(len(smiles)):
-    if smiles[i].isalpha():
-      atoms.append(smiles[i])
-    else:
-      bonds.append(smiles[i])
+Mapping = {
+    'H': 1,
+    'O': 2,
+    'N': 3,
+    'F': 1,
+}
 
-  # Create a dictionary of atoms and their neighbors.
-  neighbors = {}
-  for i in range(len(atoms)):
-    neighbors[atoms[i]] = []
-    for j in range(i + 1, len(atoms)):
-      if bonds[j] == "=":
-        neighbors[atoms[i]].append(atoms[j])
-        neighbors[atoms[j]].append(atoms[i])
-      elif bonds[j] == "-":
-        neighbors[atoms[i]].append(atoms[j])
-        neighbors[atoms[j]].append(atoms[i])
+def count_neighbors(molecule: str, atom: str, idx: int) -> int:
+    cnt = 0
+    for i in range(idx, len(molecule)):
+        if molecule[i] == atom:
+            cnt += 1
+        elif molecule[i].isdigit():
+            continue
+        else:
+            break
+    for i in range(idx - 1, -1, -1):
+        if molecule[i] == atom:
+            cnt += 1
+        elif molecule[i].isdigit():
+            continue
+        else:
+            break
+    return cnt
 
-  # Check if the compound contains a hydroxy group.
-  is_alcohol = False
-  for atom in atoms:
-    if atom == "O" and len(neighbors[atom]) == 1:
-      is_alcohol = True
-      break
-
-  # Check the number of carbon atoms bonded to the carbon atom that is bonded to the hydroxy group.
-  alcohol_type = 0
-  if is_alcohol:
-    for neighbor in neighbors[atom]:
-      if neighbor == "C":
-        alcohol_type += 1
-
-  return alcohol_type
-
-if __name__ == "__main__":
-  smiles = input()
-  alcohol_type = is_alcohol(smiles)
-  print(alcohol_type)
+def classify_alcohol(molecule: str) -> Tuple[int, ...]:
+    is_alcohol = False
+    alcohol_type = set()
+    idx = 0
+    while idx < len(molecule):
+        if molecule[idx] != Hydroxy:
+            idx += 1
+            continue
+        is_alcohol = True
+        atom = molecule[idx - 1]
+        neighbors = count_neighbors(molecule, Carbon, idx - 1)
+        if neighbors == 0 or neighbors == 1:
+            alcohol_type.add(1)
+        elif neighbors == 2:
+            alcohol_type.add(2)
+        elif neighbors == 3:
+            alcohol_type.add(3)
+        idx += 1
+    if not is_alcohol:
+        return (0,)
+    return tuple(sorted(alcohol_type))

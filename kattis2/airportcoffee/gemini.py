@@ -1,36 +1,54 @@
-from bisect import bisect
+import sys
 
-with open('coffee.in', 'r') as f:
-    l, a, b, t, r = [int(x) for x in f.readline().split()]
-    n = int(f.readline())
-    coffee_locs = [int(x) for x in f.readline().split()]
+def main():
+    # Read input
+    ell, a, b, t, r = map(int, sys.stdin.readline().split())
+    n = int(sys.stdin.readline())
+    coffee_carts = list(map(int, sys.stdin.readline().split()))
 
-# Compute the time needed to purchase and consume coffee at a single location
-purchase_duration = t + r
+    # Calculate the optimal time to get to the departure gate without buying coffee
+    no_coffee_time = ell / a
 
-# Compute the time saved by purchasing coffee at each location
-savings = [min(purchase_duration, (l - loc) / (b - a) * t) for loc in coffee_locs]
+    # Initialize the dp table
+    dp = [[10**9 for _ in range(n + 1)] for _ in range(n + 1)]
+    dp[0][0] = 0
 
-# Find the locations where the time saved is greater than the cost of purchasing coffee
-eligible_locs = [loc for loc, time_saved in zip(coffee_locs, savings) if time_saved > purchase_duration]
+    # Iterate over the coffee carts
+    for i in range(n):
+        # Calculate the time to get to the current coffee cart
+        time_to_cart = coffee_carts[i] / a
 
-# Sort the eligible locations by time saved
-eligible_locs.sort(key=lambda loc: savings[coffee_locs.index(loc)])
+        # Iterate over the number of coffees already purchased
+        for j in range(i + 1):
+            # Calculate the time to get to the departure gate if we buy coffee at the current cart
+            time_with_coffee = time_to_cart + t + r + (ell - coffee_carts[i]) / b
 
-# Purchase coffee at the locations with the highest time savings
-num_purchases = 0
-total_time_saved = 0
-for loc in eligible_locs:
-    if total_time_saved + savings[coffee_locs.index(loc)] < l / b * t:
-        total_time_saved += savings[coffee_locs.index(loc)]
-        num_purchases += 1
-    else:
-        break
+            # Update the dp table
+            dp[i + 1][j + 1] = min(dp[i + 1][j + 1], dp[i][j] + time_with_coffee)
 
-# Output the number of purchases
-with open('coffee.out', 'w') as f:
-    f.write(str(num_purchases) + '\n')
+    # Find the minimum time to get to the departure gate
+    min_time = 10**9
+    for j in range(n + 1):
+        min_time = min(min_time, dp[n][j])
 
-# Output the indices of the coffee carts where purchases should be made
-    locs_purchased = [coffee_locs.index(loc) for loc in eligible_locs[:num_purchases]]
-    f.write(' '.join(str(loc) for loc in locs_purchased))
+    # Check if it is possible to get to the departure gate on time
+    if min_time > no_coffee_time:
+        print(-1)
+        return
+
+    # Reconstruct the optimal solution
+    i = n
+    j = 0
+    coffee_carts_used = []
+    while i > 0:
+        if dp[i][j] < dp[i - 1][j]:
+            coffee_carts_used.append(i - 1)
+            j += 1
+        i -= 1
+
+    # Print the output
+    print(len(coffee_carts_used))
+    print(' '.join(map(str, coffee_carts_used)))
+
+if __name__ == '__main__':
+    main()

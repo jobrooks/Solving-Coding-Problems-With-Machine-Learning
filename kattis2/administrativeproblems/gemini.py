@@ -1,60 +1,51 @@
-cars = {}
-events = {}
+from collections import defaultdict, namedtuple
+from sys import stdin, stdout
 
-def car_cost(car, distance):
-  return cars[car][2] + distance * cars[car][3]
+Event = namedtuple('Event', ['time', 'spy', 'type', 'data'])
 
-def check_consistency(spy):
-  if len(events[spy]) % 2 != 0:
-    return False
+def is_consistent(events):
+    spies = defaultdict(lambda: {'car': None, 'debt': 0})
+    for event in events:
+        spy = spies[event.spy]
+        if event.type == 'p':
+            if spy['car'] is not None:
+                return False
+            spy['car'] = event.data
+            spy['debt'] += catalog[event.data].pickup
+        elif event.type == 'r':
+            if spy['car'] is None or spy['car'] != event.data:
+                return False
+            spy['car'] = None
+            spy['debt'] += catalog[event.data].price_per_km * event.data
+        elif event.type == 'a':
+            if spy['car'] is None or spy['car'] != event.data:
+                return False
+            spy['debt'] += round(catalog[event.data].price * event.data / 100)
+        else:
+            return False
+    return all(spy['car'] is None for spy in spies.values())
 
-  for i in range(len(events[spy]) // 2):
-    if events[spy][i][0] != 'p' or events[spy][i+1][0] != 'r':
-      return False
+def main():
+    num_cases = int(stdin.readline())
+    for case in range(num_cases):
+        num_cars, num_events = map(int, stdin.readline().split())
 
-    if events[spy][i][1] != events[spy][i+1][1]:
-      return False
+        global catalog
+        catalog = {}
+        for _ in range(num_cars):
+            name, price, pickup, price_per_km = stdin.readline().split()
+            catalog[name] = namedtuple('Car', ['name', 'price', 'pickup', 'price_per_km'])(name, int(price), int(pickup), int(price_per_km))
 
-  return True
+        events = []
+        for _ in range(num_events):
+            time, spy, type_, data = stdin.readline().split()
+            events.append(Event(int(time), spy, type_, data))
 
-def calculate_cost(events, cars):
-  spy_costs = {}
-  for spy in events:
-    if not check_consistency(spy):
-      spy_costs[spy] = "INCONSISTENT"
-      continue
+        events.sort()
 
-    cost = 0
-    for i in range(len(events[spy]) // 2):
-      car = events[spy][i][1]
-      distance = events[spy][i+1][1]
-      cost += car_cost(car, distance)
+        for spy in sorted(set(event.spy for event in events)):
+            spy_events = [event for event in events if event.spy == spy]
+            stdout.write('{} {}\n'.format(spy, 'INCONSISTENT' if not is_consistent(spy_events) else sum(spy['debt'] for spy in spies.values())))
 
-      for j in range(i+1, len(events[spy])):
-        if events[spy][j][1] == car:
-          cost += car_cost(car, 0.01 * cars[car][1] * int(events[spy][j][1]))
-          break
-    spy_costs[spy] = cost
-
-  return spy_costs
-
-for test_case in range(int(input())):
-  n, m = map(int, input().split())
-  for i in range(n):
-    name, price, pickup_cost, cost_per_km = input().split()
-    cars[name] = [int(price), int(pickup_cost), int(cost_per_km)]
-  for i in range(m):
-    t, spy, event_type = input().split()
-    if event_type == 'p' or event_type == 'r':
-      car = input()
-      if spy not in events:
-        events[spy] = []
-      events[spy].append([event_type, car, t])
-    elif event_type == 'a':
-      severity = input()
-      if spy not in events:
-        events[spy] = []
-      events[spy].append(['a', int(severity), t])
-
-  for spy, costs in sorted(calculate_cost(events, cars).items()):
-    print(spy, costs)
+if __name__ == "__main__":
+    main()

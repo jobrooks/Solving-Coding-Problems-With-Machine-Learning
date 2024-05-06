@@ -1,34 +1,41 @@
-#!/bin/python
-
 import sys
-from collections import deque
+input = sys.stdin.readline
 
-def main():
-    r, c = map(int, input().split())
-    orig = [[0] * c for _ in range(r)]
-    pref = [[0] * c for _ in range(r)]
-    for i in range(r):
-        orig[i] = list(map(int, input().split()))
-    for i in range(r):
-        pref[i] = list(map(int, input().split()))
-    
-    swaps = []
-    for i in range(r):
-        for j in range(c):
-            orig[i][pref[i].index(orig[i][j])] = pref[i][j]
-    
-    for i in range(r):
-        for j in range(c):
-            if orig[i][j] != pref[i][j]:
-                for k in range(j+1, c):
-                    if orig[i][k] == pref[i][j]:
-                        swaps.append((i+1, j+1, i+1, k+1))
-                        orig[i][j], orig[i][k] = orig[i][k], orig[i][j]
-                        break
-    
-    print(len(swaps))
-    for swap in swaps:
-        print(*swap)
+r, c = map(int, input().split())
+grid = [list(map(int, input().split())) for _ in range(r)]
+desired = [list(map(int, input().split())) for _ in range(r)]
 
-if __name__ == "__main__":
-    main()
+# Construct a sorted list of all heights in the grid
+heights = sorted(set([item for row in grid for item in row]))
+
+# Create a dictionary to map each height to its corresponding coordinates in the grid
+pos = {}
+for i in range(r):
+    for j in range(c):
+        pos[grid[i][j]] = (i, j)
+
+# Function to perform a swap between two students
+def swap(i1, j1, i2, j2):
+    grid[i1][j1], grid[i2][j2] = grid[i2][j2], grid[i1][j1]
+
+# Perform swaps until the desired arrangement is achieved
+k = 0
+while grid != desired:
+    # Find the minimum height that is not in its desired position
+    h = min([h for h in heights if pos[h] != desired[pos[h][0]][pos[h][1]]])
+
+    # Swap the student with minimum height with the student in its desired position
+    i, j = pos[h]
+    i_d, j_d = desired[i][j]
+    swap(i, j, i_d, j_d)
+
+    # Update the position of the swapped students
+    pos[grid[i][j]] = (i, j)
+    pos[grid[i_d][j_d]] = (i_d, j_d)
+    
+    k += 1
+
+print(k)
+for _ in range(k):
+    i1, j1, i2, j2 = map(int, input().split())
+    swap(i1 - 1, j1 - 1, i2 - 1, j2 - 1)

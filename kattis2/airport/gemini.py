@@ -1,72 +1,62 @@
-import sys
-from typing import List, Tuple
-
-def cross(o: Tuple[float, float], a: Tuple[float, float], b: Tuple[float, float]) -> float:
-    """
-    Returns the cross product of the vector oa and the vector ob.
-    """
-    return (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0])
-
-def dot(a: Tuple[float, float], b: Tuple[float, float]) -> float:
-    """
-    Returns the dot product of the vectors a and b.
-    """
-    return a[0] * b[0] + a[1] * b[1]
-
-def dist2(a: Tuple[float, float], b: Tuple[float, float]) -> float:
-    """
-    Returns the squared distance between the points a and b.
-    """
-    dx = a[0] - b[0]
-    dy = a[1] - b[1]
-    return dx*dx + dy*dy
-
-def project_point_on_line(p: Tuple[float, float], a: Tuple[float, float], b: Tuple[float, float]) -> Tuple[float, float]:
-    """
-    Projects the point p onto the line defined by the points a and b.
-    """
-    ab = b[0] - a[0], b[1] - a[1]
-    ap = p[0] - a[0], p[1] - a[1]
-    dot_ab_ap = dot(ab, ap)
-    ab_norm_sqr = dot(ab, ab)
-    return [a[0] + dot_ab_ap / ab_norm_sqr * ab[0], a[1] + dot_ab_ap / ab_norm_sqr * ab[1]]
-
-def get_squared_length_of_longest_landing_strip(polygon: List[Tuple[float, float]]) -> float:
-    """
-    Returns the squared length of the longest landing strip that can be built on the island.
-    """
-    n = len(polygon)
-
-    # Find the convex hull of the polygon.
-    hull = []
-    for i in range(n):
-        while len(hull) >= 2 and cross(hull[-2], hull[-1], polygon[i]) <= 0:
-            hull.pop()
-        hull.append(polygon[i])
-
-    # Find the longest line segment in the convex hull.
-    max_dist2 = 0
-    for i in range(len(hull)):
-        for j in range(i+1, len(hull)):
-            max_dist2 = max(max_dist2, dist2(hull[i], hull[j]))
-
-    # Check if any of the edges of the polygon are intersected by a line longer than the longest line segment in the convex hull.
-    for i in range(n):
-        for j in range(i+1, n):
-            a, b = polygon[i], polygon[j]
-            for k in range(len(hull)):
-                l, r = hull[k], hull[(k+1) % len(hull)]
-                if cross(a, b, l) * cross(a, b, r) <= 0 and cross(l, r, a) * cross(l, r, b) <= 0:
-                    max_dist2 = max(max_dist2, dist2(project_point_on_line(l, a, b), project_point_on_line(r, a, b)))
-
-    return max_dist2
+import math
 
 def main():
-    n = int(sys.stdin.readline())
-    polygon = [tuple(map(int, sys.stdin.readline().split())) for _ in range(n)]
+    # Read the number of vertices in the polygon
+    n = int(input())
 
-    max_dist2 = get_squared_length_of_longest_landing_strip(polygon)
-    print(max_dist2**0.5)
+    # Read the coordinates of the polygon vertices
+    vertices = []
+    for i in range(n):
+        vertices.append(tuple(map(int, input().split())))
+
+    # Initialize the maximum length of the landing strip
+    max_length = 0
+
+    # Iterate over all pairs of vertices
+    for i in range(n):
+        for j in range(i + 1, n):
+            # Compute the length of the landing strip between vertices i and j
+            length = math.sqrt((vertices[i][0] - vertices[j][0])**2 + (vertices[i][1] - vertices[j][1])**2)
+
+            # Check if the landing strip intersects the polygon
+            intersects = False
+            for k in range(n):
+                if k == i or k == j:
+                    continue
+                if is_intersecting(vertices[i], vertices[j], vertices[k]):
+                    intersects = True
+                    break
+
+            # Update the maximum length of the landing strip if it does not intersect
+            if not intersects:
+                max_length = max(max_length, length)
+
+    # Print the maximum length of the landing strip
+    print(max_length)
+
+# Check if two line segments intersect
+def is_intersecting(p1, p2, p3):
+    # Check if the two line segments are colinear
+    if (p1[0] - p2[0]) * (p3[1] - p2[1]) == (p3[0] - p2[0]) * (p1[1] - p2[1]):
+        return False
+
+    # Check if the two line segments intersect at the endpoints
+    if (p1[0] <= p3[0] <= p2[0] or p1[0] >= p3[0] >= p2[0]) and (p1[1] <= p3[1] <= p2[1] or p1[1] >= p3[1] >= p2[1]):
+        return True
+
+    # Compute the cross product of the vectors formed by the line segments
+    cross_product = (p1[0] - p3[0]) * (p2[1] - p3[1]) - (p2[0] - p3[0]) * (p1[1] - p3[1])
+
+    # Check if the cross product is zero, which indicates that the line segments are parallel
+    if cross_product == 0:
+        return False
+
+    # Check if the cross product is positive, which indicates that the line segments intersect on the left side
+    if cross_product > 0:
+        return True
+
+    # Otherwise, the line segments intersect on the right side
+    return False
 
 if __name__ == "__main__":
     main()

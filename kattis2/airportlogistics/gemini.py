@@ -1,60 +1,46 @@
 import math
 
-def distance(x1, y1, x2, y2):
-    return math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+# Get the coordinates of the starting and ending points.
+x_a, y_a, x_b, y_b = map(float, input().split())
 
-def on_conveyor(x, y, x1, y1, x2, y2):
-    if (x1 - x2) * (y - y1) == (y1 - y2) * (x - x1):
-        if (x1 <= x <= x2) or (x2 <= x <= x1):
-            return True
-    return False
+# Get the number of conveyors.
+n = int(input())
 
-def get_min_time(x_a, y_a, x_b, y_b, conveyors):
-    # If there are no conveyors, just walk on the floor
-    if len(conveyors) == 0:
-        return distance(x_a, y_a, x_b, y_b)
+# Get the coordinates of the start and end points of each conveyor.
+conveyors = []
+for _ in range(n):
+    x1, y1, x2, y2 = map(float, input().split())
+    conveyors.append(((x1, y1), (x2, y2)))
 
-    # Create a graph of the conveyors
-    graph = {}
-    for conveyor in conveyors:
-        x1, y1, x2, y2 = conveyor
-        if (x1, y1) not in graph:
-            graph[(x1, y1)] = []
-        graph[(x1, y1)].append((x2, y2))
-        if (x2, y2) not in graph:
-            graph[(x2, y2)] = []
-        graph[(x2, y2)].append((x1, y1))
+# Initialize the distance to the starting point.
+distance = math.sqrt((x_a - x_b)**2 + (y_a - y_b)**2)
 
-    # Find the shortest path from A to B using Dijkstra's algorithm
-    distances = {}
-    for node in graph:
-        distances[node] = float("inf")
-    distances[(x_a, y_a)] = 0
+# Find the shortest path to the ending point.
+for conveyor in conveyors:
+    # Check if the starting point is on the conveyor.
+    if (x_a, y_a) in conveyor:
+        # Check if the ending point is on the conveyor.
+        if (x_b, y_b) in conveyor:
+            # Calculate the distance on the conveyor.
+            distance_on_conveyor = math.sqrt((x_b - x_a)**2 + (y_b - y_a)**2) / 2
+            # Update the distance.
+            distance = min(distance, distance_on_conveyor)
+        else:
+            # Calculate the distance to the end of the conveyor.
+            distance_to_end = math.sqrt((x2 - x_a)**2 + (y2 - y_a)**2) / 2
+            # Calculate the distance from the end of the conveyor to the ending point.
+            distance_from_end = math.sqrt((x_b - x2)**2 + (y_b - y2)**2)
+            # Update the distance.
+            distance = min(distance, distance_to_end + distance_from_end)
+    else:
+        # Check if the ending point is on the conveyor.
+        if (x_b, y_b) in conveyor:
+            # Calculate the distance to the start of the conveyor.
+            distance_to_start = math.sqrt((x1 - x_b)**2 + (y1 - y_b)**2) / 2
+            # Calculate the distance from the start of the conveyor to the ending point.
+            distance_from_start = math.sqrt((x_a - x1)**2 + (y_a - y1)**2)
+            # Update the distance.
+            distance = min(distance, distance_to_start + distance_from_start)
 
-    queue = [(0, (x_a, y_a))]
-    while queue:
-        current_distance, current_node = queue.pop(0)
-        if current_node == (x_b, y_b):
-            return current_distance
-        for neighbor in graph[current_node]:
-            if current_distance + 1 < distances[neighbor]:
-                distances[neighbor] = current_distance + 1
-                queue.append((current_distance + 1, neighbor))
-
-    # If there is no path from A to B, return -1
-    return -1
-
-if __name__ == "__main__":
-    # Parse the input
-    x_a, y_a, x_b, y_b = map(float, input().split())
-    n = int(input())
-    conveyors = []
-    for i in range(n):
-        x1, y1, x2, y2 = map(float, input().split())
-        conveyors.append((x1, y1, x2, y2))
-
-    # Get the minimum time to get from A to B
-    min_time = get_min_time(x_a, y_a, x_b, y_b, conveyors)
-
-    # Print the minimum time
-    print(min_time)
+# Print the minimum time to get to the ending point.
+print(distance)

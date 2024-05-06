@@ -1,33 +1,43 @@
-import sys
-
-def cross(o, a, b):
-    return (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0])
-
-def area(polygon):
-    n = len(polygon)
-    area = 0.0
-    for i in range(n):
-        area += cross(polygon[i], polygon[(i + 1) % n], polygon[(i + 2) % n])
-    return abs(area) / 2.0
+import math
 
 def main():
+    # Read the input
     n = int(input())
     polygons = []
     for _ in range(n):
         m = int(input())
-        polygon = []
+        vertices = []
         for _ in range(m):
             x, y = map(int, input().split())
-            polygon.append((x, y))
-        polygons.append(polygon)
+            vertices.append((x, y))
+        polygons.append(vertices)
 
-    paint = 0.0
-    canvas = 0.0
+    # Calculate the total amount of paint used and the total amount of canvas covered
+    total_paint = 0
+    total_canvas = 0
     for polygon in polygons:
-        paint += area(polygon)
-        canvas += area(polygon) / 2.0
+        # Calculate the area of the polygon
+        area = 0
+        for i in range(len(polygon)):
+            x1, y1 = polygon[i]
+            x2, y2 = polygon[(i + 1) % len(polygon)]
+            area += (x1 * y2 - x2 * y1)
+        area = abs(area) / 2
 
-    print('{:.6f} {:.6f}'.format(paint, canvas))
+        # Calculate the perimeter of the polygon
+        perimeter = 0
+        for i in range(len(polygon)):
+            x1, y1 = polygon[i]
+            x2, y2 = polygon[(i + 1) % len(polygon)]
+            perimeter += math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+
+        # Update the total paint and canvas
+        total_paint += area
+        total_canvas += perimeter
+
+    # Print the output
+    print(total_paint)
+    print(total_canvas)
 
 if __name__ == "__main__":
     main()

@@ -1,38 +1,47 @@
 import sys
-from math import sqrt
+from collections import deque
+from typing import List, Tuple
 
-def solve(n, ap):
-    # Sort the access points by their x-coordinates
-    ap.sort(key=lambda x: x[0])
+def main():
+    n = int(input())
+    access_points = [list(map(int, input().split())) for _ in range(n)]
 
-    # Initialize the minimum cost to connect each team to its access point
-    min_cost = [0] * n
+    # Sort the access points by their x-coordinate
+    access_points.sort(key=lambda x: x[0])
 
-    # Iterate over the teams in order of their x-coordinates
-    for i in range(n):
-        # Find the access point with the closest x-coordinate
-        j = bisect.bisect_left(ap, (min_cost[i], -sys.maxsize))
+    # Create a deque to store the x-coordinates of the teams
+    x_coordinates = deque()
 
-        # Calculate the cost of connecting the team to the access point
-        cost = (min_cost[i] - ap[j][0]) ** 2 + (ap[j][1] - i) ** 2
+    # Create a list to store the y-coordinates of the teams
+    y_coordinates = []
 
-        # Update the minimum cost to connect the team to its access point
-        min_cost[i] = cost
+    # Iterate over the access points
+    for x, y in access_points:
+        # If the team is the first team, or if the team's x-coordinate is greater than
+        # the previous team's x-coordinate, add the team's x-coordinate to the deque
+        if not x_coordinates or x > x_coordinates[-1]:
+            x_coordinates.append(x)
+            y_coordinates.append(deque())
 
-    # Return the minimum total cost of all UTP cables required to connect the teams to their access points
-    return min_cost[-1]
+        # Add the team's y-coordinate to the deque for its x-coordinate
+        y_coordinates[-1].append(y)
 
-# Get the number of teams
-n = int(input())
+    # Calculate the minimum total cost of all UTP cables
+    total_cost = 0
+    for x_coordinate in x_coordinates:
+        y_coordinate = 0
+        while y_coordinates:
+            if not y_coordinates[0]:
+                y_coordinates.popleft()
+                continue
 
-# Get the locations of the access points
-ap = []
-for i in range(n):
-    s, t = map(int, input().split())
-    ap.append((s, t))
+            y = y_coordinates[0].popleft()
+            total_cost += (x_coordinate - y_coordinate) ** 2
+            y_coordinate = y
 
-# Solve the problem
-result = solve(n, ap)
+    # Print the minimum total cost
+    total_cost = round(total_cost, 6)
+    print(total_cost)
 
-# Print the result
-print(result)
+if __name__ == "__main__":
+    main()

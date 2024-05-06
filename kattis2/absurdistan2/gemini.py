@@ -1,16 +1,23 @@
-from decimal import Decimal, getcontext
+import math
 
-getcontext().prec = 102
+def connect_prob(N: int) -> float:
+    """
+    Calculates the probability that a randomly generated road network with N cities and N roads is connected.
 
-def fact(n):
-    return Decimal(1) if n == 0 else n * fact(n - 1)
+    Args:
+        N (int): The number of cities in the network.
 
-def binomial(n, k):
-    return fact(n) / (fact(k) * fact(n - k))
+    Returns:
+        float: The probability that the network is connected.
+    """
 
-def prob_connected(n):
-    return Decimal(1.000000000000) - Decimal(2.0) / binomial(n, (n - 1) // 2)
+    # The probability that a single city is not connected to the rest of the network is (N-1)/N.
+    single_city_not_connected_prob = (N - 1) / N
 
-n = int(input())
+    # The probability that all N cities are not connected to the rest of the network is the product of the probabilities for each city.
+    all_cities_not_connected_prob = single_city_not_connected_prob ** N
 
-print(prob_connected(n))
+    # The probability that the network is connected is 1 minus the probability that it is not connected.
+    connected_prob = 1 - all_cities_not_connected_prob
+
+    return connected_prob

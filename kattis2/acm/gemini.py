@@ -1,37 +1,62 @@
-def main():
-  """Calculates the number of problems solved and the total time measure (including penalties) for a team."""
+def parse_log(log):
+    """Parses a contest submission log and returns a list of tuples.
+    Each tuple contains the time, problem, and result of a submission.
 
-  # Read the input.
-  log = []
-  while True:
-    line = input()
-    if line == "-1":
-      break
-    m, p, r = line.split()
-    log.append((int(m), p, r))
+    Args:
+        log: A string containing the contest submission log.
 
-  # Initialize the variables to keep track of the number of problems solved and the total time measure.
-  num_problems_solved = 0
-  total_time = 0
+    Returns:
+        A list of tuples representing the contest submission log.
+    """
 
-  # Process the log.
-  problems_solved = set()
-  for m, p, r in log:
-    # If the problem has not been solved yet, and the submission is correct, increment the number of problems solved.
-    if p not in problems_solved and r == "right":
-      num_problems_solved += 1
-      problems_solved.add(p)
+    submissions = []
+    for line in log.split("\n"):
+        if line == "-1":
+            break
+        time, problem, result = line.split()
+        submissions.append((int(time), problem, result))
+    return submissions
 
-    # Add the time taken to solve the problem to the total time.
-    if r == "right":
-      total_time += m
-    elif p in problems_solved:
-      # If the problem has been solved before, add a 20-minute penalty for each wrong submission.
-      total_time += 20
 
-  # Print the output.
-  print(num_problems_solved, total_time)
+def calculate_score(submissions):
+    """Calculates the primary and secondary scores for a team.
+
+    The primary score is the number of problems that were solved.
+    The secondary score is the sum of those submission times that resulted
+    in right answers, plus a 20-minute penalty for each wrong submission of
+    a problem that is ultimately solved.
+
+    Args:
+        submissions: A list of tuples representing the contest submission log.
+
+    Returns:
+        A tuple containing the primary and secondary scores.
+    """
+
+    primary_score = 0
+    secondary_score = 0
+    solved_problems = set()
+    penalty_minutes = {}
+
+    for time, problem, result in submissions:
+        if problem not in penalty_minutes:
+            penalty_minutes[problem] = 0
+        if result == "right":
+            if problem not in solved_problems:
+                primary_score += 1
+                solved_problems.add(problem)
+            secondary_score += time
+        else:
+            if problem in solved_problems:
+                penalty_minutes[problem] += 20
+
+    secondary_score += sum(penalty_minutes.values())
+
+    return primary_score, secondary_score
 
 
 if __name__ == "__main__":
-  main()
+    log = input()
+    submissions = parse_log(log)
+    primary_score, secondary_score = calculate_score(submissions)
+    print(primary_score, secondary_score)

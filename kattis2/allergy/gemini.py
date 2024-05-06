@@ -1,7 +1,13 @@
+import sys
+
 k = int(input())
-d = [int(input()) for _ in range(k)]
-d.sort()
-ans = d[-1] + 1
-for i in range(k - 1):
-    ans += d[i] + 1
-print(ans)
+allergens = [int(input()) for _ in range(k)]
+
+# Find the maximum live duration among the allergens
+max_duration = max(allergens)
+
+# The number of days for the shortest conclusive non-adaptive test scheme is
+# equal to the maximum live duration of the allergens
+num_days = max_duration
+
+print(num_days)

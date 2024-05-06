@@ -2,25 +2,19 @@ import sys
 input = sys.stdin.readline
 
 n, d = map(int, input().split())
-frogs = []
-for _ in range(n):
-    l, w, h = map(int, input().split())
-    frogs.append((l, w, h))
+frogs = [list(map(int, input().split())) for _ in range(n)]
 
-frogs.sort(key=lambda x: x[0])
+frogs.sort(key=lambda x: x[2], reverse=True)  # Sort frogs by height in descending order
 
-dp = [0] * n
+dp = [0] * (n + 1)
+dp[0] = 1
 
 for i in range(n):
     l, w, h = frogs[i]
-    if h + l > d:
-        dp[i] = 1
-        continue
-
+    if l > d:
+        dp[i + 1] = max(dp[i + 1], dp[i] + 1)
     for j in range(i):
-        if w > frogs[j][1]:
-            continue
-        if h + frogs[j][2] + l > d:
-            dp[i] = max(dp[i], dp[j] + 1)
+        if l + frogs[j][2] > d and w + frogs[j][1] <= frogs[j][1]:
+            dp[i + 1] = max(dp[i + 1], dp[j] + 1)
 
 print(max(dp))

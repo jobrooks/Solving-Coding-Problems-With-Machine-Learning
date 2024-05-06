@@ -1,59 +1,70 @@
-import math
-from collections import Counter
-
-def count_error_prone(n, limits):
-  """Counts the number of error-prone cooking times in an alien microwave.
+def is_error_prone(time, limits):
+  """
+  Checks if the given time is error-prone.
 
   Args:
-    n: The number of time types in the alien time scheme.
-    limits: A list of integers representing the number of partitions in each time type.
+    time: A string representing the cooking time.
+    limits: A list of integers representing the limits for each digit in the
+      cooking time.
+
+  Returns:
+    True if the given time is error-prone, False otherwise.
+  """
+
+  # Check if any of the digits exceeds the limit.
+  for i in range(len(time)):
+    if int(time[i]) > limits[i]:
+      return False
+
+  # Check if any of the digits can be omitted without changing the validity of
+  # the cooking time.
+  for i in range(len(time)):
+    new_time = time[:i] + time[i + 1:]
+    if len(new_time) == 0 or int(new_time) >= 1:
+      return True
+
+  # The cooking time is not error-prone.
+  return False
+
+
+def count_error_prone_times(limits):
+  """
+  Counts the number of error-prone cooking times.
+
+  Args:
+    limits: A list of integers representing the limits for each digit in the
+      cooking time.
 
   Returns:
     The number of error-prone cooking times.
   """
 
-  # Initialize a counter to store the number of each type of cooking time.
-  counts = Counter()
+  # Initialize the count to 0.
+  count = 0
 
   # Iterate over all possible cooking times.
-  for i in range(10 ** n):
-    # Convert the integer to a string.
-    time_str = str(i)
+  for h in range(limits[0] + 1):
+    for m in range(limits[1] + 1):
+      for s in range(limits[2] + 1):
 
-    # Pad the string with leading zeros.
-    time_str = time_str.zfill(n)
+        # Convert the cooking time to a string.
+        time = str(h).zfill(2) + str(m).zfill(2) + str(s).zfill(2)
 
-    # Check if the cooking time is valid.
-    valid = True
-    for j in range(n):
-      if int(time_str[j]) >= limits[j]:
-        valid = False
-        break
+        # Check if the cooking time is error-prone.
+        if is_error_prone(time, limits):
+          # Increment the count.
+          count += 1
 
-    # If the cooking time is valid, increment the counter.
-    if valid:
-      counts[time_str] += 1
-
-  # Initialize a set to store the error-prone cooking times.
-  error_prone = set()
-
-  # Iterate over the counter.
-  for time_str, count in counts.items():
-    # If the count is greater than 1, then the cooking time is error-prone.
-    if count > 1:
-      error_prone.add(time_str)
-
-  # Return the number of error-prone cooking times.
-  return len(error_prone)
+  # Return the count.
+  return count
 
 
-if __name__ == "__main__":
-  # Read the input.
-  n = int(input())
-  limits = [int(x) for x in input().split()]
+# Get the input.
+n = int(input())
+limits = [int(input()) for _ in range(n)]
 
-  # Count the number of error-prone cooking times.
-  error_prone = count_error_prone(n, limits)
+# Count the number of error-prone cooking times.
+count = count_error_prone_times(limits)
 
-  # Print the number of error-prone cooking times.
-  print(error_prone)
+# Print the count.
+print(count)

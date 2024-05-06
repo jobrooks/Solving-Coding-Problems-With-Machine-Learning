@@ -1,21 +1,17 @@
-from collections import defaultdict
-
 n = int(input())
-roads = defaultdict(list)
-for i in range(n):
+adj = [[] for _ in range(n+1)]
+for _ in range(n):
     a, b = map(int, input().split())
-    roads[a].append(b)
-    roads[b].append(a)
+    adj[a].append(b)
+    adj[b].append(a)
 
-visited = set()
-for city in roads:
-    if city not in visited:
-        visited.add(city)
-        stack = [city]
-        while stack:
-            current = stack.pop()
-            for neighbor in roads[current]:
-                if neighbor not in visited:
-                    print(current, neighbor)
-                    visited.add(neighbor)
-                    stack.append(neighbor)
+used = [False] * (n+1)
+for i in range(1, n+1):
+    if used[i]:
+        continue
+    used[i] = True
+    print(i, adj[i][0])
+    used[adj[i][0]] = True
+    for j in adj[i][1:]:
+        print(adj[i][0], j)
+        used[j] = True

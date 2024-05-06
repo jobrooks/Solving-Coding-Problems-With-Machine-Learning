@@ -1,30 +1,48 @@
-Nmax = 13
-Tmax = 999
+from typing import List, Tuple
 
-def main():
-  N, p = map(int, input().split())
-  D = list(map(int, input().split()))
+def solve(n: int, p: int, times: List[int]) -> Tuple[int, int]:
+    """
+    Args:
+        n: The number of problems.
+        p: The index of the problem to solve first.
+        times: The time to solve each problem.
 
-  MinTime = [[0] * (1<<N) for _ in range(N)]
-  MinTime[0][1<<p] = D[p]
+    Returns:
+        The number of problems that can be solved and the penalty time.
+    """
 
-  for k in range(1, 1<<N):
-    if (k & (k+1)) != 0 or (k>>p)&1 == 0: continue
-    for i in range(N):
-      if i == p or (k>>(i))&1 == 0: continue
-      for j in range(N):
-        if i == j or (k>>(j))&1 == 0: continue
-        MinTime[i][k|(1<<i)] = min(MinTime[i][k|(1<<i)],
-          MinTime[j][k] + D[i])
+    # Check if the problem can be solved in time.
+    if times[p] > 300:
+        return 0, 0
 
-  ansTime = 1<<31
-  ansNum = 0
-  for i in range(N):
-    if MinTime[i][(1<<N)-1] <= Tmax:
-      if MinTime[i][(1<<N)-1] < ansTime:
-        ansTime = MinTime[i][(1<<N)-1]
-        ansNum = i
+    # Sort the problems in ascending order of time.
+    times.sort()
 
-  print(ansNum, ansTime)
+    # Find the number of problems that can be solved.
+    num_problems = 0
+    for i in range(n):
+        if i == p:
+            continue
+        if times[num_problems] + times[i] <= 300:
+            num_problems += 1
+        else:
+            break
 
-main()
+    # Find the penalty time.
+    penalty_time = 0
+    for i in range(num_problems):
+        penalty_time += times[i]
+
+    return num_problems, penalty_time
+
+
+if __name__ == "__main__":
+    # Read the input.
+    n, p = map(int, input().split())
+    times = list(map(int, input().split()))
+
+    # Solve the problem.
+    num_problems, penalty_time = solve(n, p, times)
+
+    # Print the output.
+    print(num_problems, penalty_time)

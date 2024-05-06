@@ -1,29 +1,49 @@
-from collections import deque
+import sys
 
-def bfs(grid, start, end):
-    queue = deque([(start, "")])
-    while queue:
-        (row, col), path = queue.popleft()
-        if (row, col) == end:
-            return path
-        for (dr, dc) in [(0, 1), (1, 0), (-1, 0), (0, -1)]:
-            nr, nc = row + dr, col + dc
-            if 0 <= nr < len(grid) and 0 <= nc < len(grid[0]) and grid[nr][nc] != 'X' and (nr, nc) not in path:
-                queue.append(((nr, nc), path + "RLDU"[dr + dc]))
-    return None
+sys.setrecursionlimit(10 ** 6)
 
-for _ in range(int(input())):
-    n, m = map(int, input().split())
-    grid = [['.'] * m for _ in range(n)]
-    start = tuple(map(int, input().split()))
-    end = tuple(map(int, input().split()))
-    ban = tuple(map(int, input().split()))
-    grid[end[0] - 1][end[1] - 1] = 'G'
-    grid[start[0] - 1][start[1] - 1] = 'B'
-    grid[ban[0] - 1][ban[1] - 1] = 'X'
-    path = bfs(grid, start, end)
-    if path is None:
-        print("NO")
-    else:
-        print("YES")
-        print(path)
+def dfs(r, c, d):
+    global ans, vis
+
+    if r == r_g and c == c_g:
+        if len(s) < len(ans) or (len(s) == len(ans) and s < ans):
+            ans = s
+        return
+
+    if vis[r][c][d] == 1 or (r == r_u and c == c_u):
+        return
+
+    vis[r][c][d] = 1
+    s += d
+    dfs(r, c + 1, 'R')
+    dfs(r, c - 1, 'L')
+    dfs(r + 1, c, 'D')
+    dfs(r - 1, c, 'U')
+    s = s[:-1]
+    vis[r][c][d] = 0
+
+if __name__ == '__main__':
+    while True:
+        n, m = map(int, input().split())
+        if n == 0 and m == 0:
+            break
+
+        r_b, c_b = map(int, input().split())
+        r_c, c_c = map(int, input().split())
+        r_g, c_g = map(int, input().split())
+        r_u, c_u = map(int, input().split())
+        input()
+
+        s = ''
+        ans = 'ZZZZZZZZZZZZZZZZZZZZZ'
+        vis = [[[0] * 4 for _ in range(m + 1)] for _ in range(n + 1)]
+        dfs(r_b, c_b, 'R')
+        dfs(r_b, c_b, 'L')
+        dfs(r_b, c_b, 'D')
+        dfs(r_b, c_b, 'U')
+
+        if ans == 'ZZZZZZZZZZZZZZZZZZZZZ':
+            print('NO')
+        else:
+            print('YES')
+            print(ans)

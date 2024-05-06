@@ -1,41 +1,42 @@
-import math
+import sys
 
-def binomial(x):
-  """Returns a tuple (n, k) representing the most elegant binomial coefficient for x.
-  
-  The most elegant solution has the smallest value of n, and of those with the smallest
-  n it should choose the one with the smallest value of k.
+def binomial_coefficient(n, k):
+  """
+  Computes the binomial coefficient of n choose k.
 
   Args:
-    x: A positive integer.
+    n: The first number in the binomial coefficient.
+    k: The second number in the binomial coefficient.
 
   Returns:
-    A tuple (n, k) such that n choose k equals x, with ties broken as explained
-    above.
+    The binomial coefficient of n choose k.
   """
 
-  # Find the largest integer n such that n choose 1 <= x.
-
-  n = 1
-  while n * (n + 1) <= x * 2:
-    n += 1
-
-  # Find the largest integer k such that n choose k <= x.
-
-  k = n - 1
-  while math.factorial(n) / (math.factorial(k) * math.factorial(n - k)) <= x:
-    k += 1
-
-  return (n, k)
-
+  if k < 0 or k > n:
+    return 0
+  if k == 0 or k == n:
+    return 1
+  return binomial_coefficient(n - 1, k - 1) + binomial_coefficient(n - 1, k)
 
 def main():
-  """Gets an integer x from the user and prints its most elegant binomial coefficient."""
+  """
+  Gets the input from the user and prints the output.
+  """
 
+  # Get the input from the user.
   x = int(input())
-  n, k = binomial(x)
-  print(n, k)
 
+  # Find the smallest n and k such that n choose k equals x.
+  n = 1
+  k = 0
+  while binomial_coefficient(n, k) != x:
+    if binomial_coefficient(n, k) < x:
+      k += 1
+    else:
+      n += 1
+
+  # Print the output.
+  print(n, k)
 
 if __name__ == "__main__":
   main()

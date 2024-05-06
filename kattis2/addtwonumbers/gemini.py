@@ -1,2 +1,5 @@
-a, b = map(int, input().split())
+line = input()
+a, b = line.split()
+a = int(a)
+b = int(b)
 print(a + b)

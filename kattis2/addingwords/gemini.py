@@ -1,49 +1,28 @@
-# Open the input file and read each line
-with open("input.txt", "r") as f:
-    lines = f.readlines()
+import sys
 
-# Initialise the dictionary to store the word-number pairs
-word_values = {}
+# Initialize the dictionary of variables to their values
+variables = {}
 
-# Process each line in the input file
-for line in lines:
-    # Split the line into tokens
+# Read the input commands
+for line in sys.stdin:
+    # Split the command into tokens
     tokens = line.split()
 
-    # Check if the command is a definition
+    # If the command is a definition, add the variable to the dictionary
     if tokens[0] == "def":
-        # Get the variable name and value
-        variable = tokens[1]
-        value = int(tokens[2])
+        variables[tokens[1]] = int(tokens[2])
 
-        # Update the dictionary with the new value
-        word_values[variable] = value
-
-    # Check if the command is a calculation
+    # If the command is a calculation, evaluate the calculation and print the result
     elif tokens[0] == "calc":
-        # Initialise the result to 0
         result = 0
-
-        # Iterate over the tokens in the calculation
-        for token in tokens[1:]:
-            # Check if the token is a variable or an operator
-            if token in word_values:
-                # If it's a variable, add its value to the result
-                result += word_values[token]
-            elif token in "+-":
-                # If it's an operator, use it to update the result
-                operator = token
+        for token in tokens[1:-1]:
+            if token in variables:
+                result += variables[token]
             else:
-                # If it's not a variable or an operator, the calculation is invalid
                 result = "unknown"
                 break
+        print(result)
 
-        # Check if the result is valid
-        if result != "unknown":
-            # Print the result
-            print(result)
-
-    # Check if the command is a clear
+    # If the command is a clear, clear the dictionary of variables
     elif tokens[0] == "clear":
-        # Clear the dictionary
-        word_values.clear()
+        variables.clear()

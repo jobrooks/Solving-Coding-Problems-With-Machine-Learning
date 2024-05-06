@@ -1,90 +1,89 @@
-import math
+import math, sys, os
+import numpy as np
 
-class Droplet:
-    def __init__(self, x, y, v_x, v_y, r):
-        self.x = x
-        self.y = y
-        self.v_x = v_x
-        self.v_y = v_y
-        self.r = r
+#------------------------------------------------------------------------------
 
-    def update(self, dt):
-        self.x += self.v_x * dt
-        self.y += self.v_y * dt
+def dist(x,y): return math.sqrt(x[0]-y[0])**2+math.sqrt(x[1]-y[1])**2
 
-    def distance(self, other):
-        dx = self.x - other.x
-        dy = self.y - other.y
-        return math.sqrt(dx * dx + dy * dy)
+#------------------------------------------------------------------------------
 
-    def overlaps(self, other):
-        return self.distance(other) < self.r + other.r
-
-    def collide(self, other):
-        # Calculate the new position of the combined droplet
-        new_x = (self.x * self.r + other.x * other.r) / (self.r + other.r)
-        new_y = (self.y * self.r + other.y * other.r) / (self.r + other.r)
-
-        # Calculate the new velocity of the combined droplet
-        new_v_x = (self.v_x * self.r + other.v_x * other.r) / (self.r + other.r)
-        new_v_y = (self.v_y * self.r + other.v_y * other.r) / (self.r + other.r)
-
-        # Create the new droplet
-        new_droplet = Droplet(new_x, new_y, new_v_x, new_v_y, self.r + other.r)
-        return new_droplet
-
-
-def simulate(droplets, dt):
-    """
-    Simulates the motion of a list of droplets until they collide.
-
-    Args:
-        droplets (list): The list of droplets to simulate.
-        dt (float): The time step to use in the simulation.
-
-    Returns:
-        A tuple containing the final list of droplets and the time at which the last collision occurred.
-    """
-
-    # Update the positions of all the droplets
-    for droplet in droplets:
-        droplet.update(dt)
-
-    # Check for collisions between all pairs of droplets
-    for i in range(len(droplets)):
-        for j in range(i + 1, len(droplets)):
-            if droplets[i].overlaps(droplets[j]):
-                # A collision has occurred, so create a new droplet and remove the two colliding droplets
-                new_droplet = droplets[i].collide(droplets[j])
-                droplets.pop(i)
-                droplets.pop(j)
-                droplets.append(new_droplet)
-                return droplets, new_droplet.time
-
-    # No collisions occurred, so return the current list of droplets
-    return droplets, 0.0
+def agglomerate(a,b,t):
+    global R, V, s, p, t_step, t_acc, t_now
+    ta = (s[b]-s[a])/t
+    x_new = (V[a,0]*R[a]**2+V[b,0]*R[b]**2*ta)/(R[a]**2+R[b]**2*ta)
+    y_new = (V[a,1]*R[a]**2+V[b,1]*R[b]**2*ta)/(R[a]**2+R[b]**2*ta)
+    V[a,0] = (V[a,0]*R[a]**2*s[a]+V[b,0]*R[b]**2*s[b])/ \
+                   (R[a]**2*s[a]+R[b]**2*s[b])
+    V[a,1] = (V[a,1]*R[a]**2*s[a]+V[b,1]*R[b]**2*s[b])/ \
+                   (R[a]**2*s[a]+R[b]**2*s[b])
+    R[a]   = math.sqrt(R[a]**2*s[a] + R[b]**2*s[b])
+    R[b] = 0
+    V[b,0] = 0
+    V[b,1] = 0
+    p[b] = p[a]
+    s[a] += s[b]
+    s[b] = 0
+    print(a,b,ta,x_new,y_new,s[a])
+    t_acc = min(t_acc, t)
+    while t_now <= s[a] :
+        t_now += t_step
+    t_now -= t_step
+    for k in range(N):
+        if R[k]**2 != 0:
+            V[k,0] = (V[k,0]-v_inf[0])*(1 - t_step/s[k]) + v_inf[0]
+            V[k,1] = (V[k,1]-v_inf[1])*(1 - t_step/s[k]) + v_inf[1]
+            d = np.array([x_new-x_old[k], y_new-y_old[k]])
+            x_old[k] += d[0]*t_step/s[k]
+            y_old[k] += d[1]*t_step/s[k]
+            s[k] -= t_step
+            if k != a and dist([x_old[a], y_old[a]], [x_old[k], y_old[k]]) <= (R[a]+R[k])**2 :
+                agglomerate(a,k,t)
 
 
-def main():
-    # Read the input
-    n = int(input())
-    droplets = []
-    for i in range(n):
-        x, y, v_x, v_y, r = map(int, input().split())
-        droplets.append(Droplet(x, y, v_x, v_y, r))
+#------------------------------------------------------------------------------
 
-    # Simulate the motion of the droplets
-    dt = 0.001
-    t = 0.0
-    while True:
-        droplets, collision_time = simulate(droplets, dt)
-        if collision_time == 0.0:
-            break
-        t += collision_time
+with open(sys.argv[1]+'.txt', 'r') as infile, \
+     open(sys.argv[1]+'.out', 'w') as outfile:
+    N = int(infile.readline())
+    x, y, v_x, v_y, r = np.loadtxt(infile, delimiter=', ').T
+    R = r**2
+    V = np.array([v_x, v_y]).T
+    p = np.zeros(N,int)
+    s = np.ones(N,int)
 
-    # Print the output
-    print("{} {}".format(len(droplets), t))
+    # Find closest pair first
 
+    t_acc = 1e99
+    for i in range(N):
+        for j in range(i+1, N):
+            if R[i] != 0 and R[j] != 0:
+                d = dist([x[i], y[i]], [x[j], y[j]]) - (R[i]+R[j])**2
+                if d < 0:
+                    ta = ((R[i]**2+R[j]**2)*s[i]-d)/(R[i]**2+R[j]**2)
+                    if ta < t_acc:
+                        t_acc = ta
+                        a = i
+                        b = j
+                    elif ta == t_acc:
+                        if d+1e-6 < 0: a, b = b, a
 
-if __name__ == "__main__":
-    main()
+    if t_acc < 1e99:
+        agglomerate(a,b,t_acc)
+    while t_now < 1e9:
+        t_best = t_now+1e99
+        for k in range(N):
+            if R[k] != 0 and t_best > s[k]:
+                t_best = s[k]
+        t_step = min(t_step, 0.9*(t_best-t_now))
+        t_now += t_step
+        for k in range(N):
+            if R[k] != 0:
+                d = np.array([v_inf[0]*t_step, v_inf[1]*t_step])
+                x_old[k] += d[0]
+                y_old[k] += d[1]
+                s[k] -= t_step
+                for l in range(k+1,N):
+                    if R[l] != 0 and dist([x_old[k], y_old[k]], [x_old[l], y_old[l]]) <= (R[k]+R[l])**2 :
+                        agglomerate(k,l,t_now)
+    drops = sum([R[k] != 0 for k in range(N)])
+    outfile.write(f'{drops} {t_now:.6f}')

@@ -1,44 +1,40 @@
 import re
-import sys
 
-def is_valid(expr, base):
-  """Returns True if the expression is valid in the given base."""
+def is_valid_unary(num):
+    return num.count('1') == len(num)
 
-  # Check if all the operands are valid in the given base.
-  for operand in re.findall(r'[0-9a-z]+', expr):
-    if int(operand, base) < 1 or int(operand, base) >= 2**32:
-      return False
+def is_valid_base(num, base):
+    if base == 1:
+        return is_valid_unary(num)
+    else:
+        try:
+            int(num, base)
+            return True
+        except ValueError:
+            return False
 
-  # Check if the expression is true.
-  result = eval(expr.replace(' ', ''), {}, {'0': 0})
-  if result < 1 or result >= 2**32:
-    return False
+def is_valid_expression(expr, base):
+    x, op, y, eq, z = expr.split()
+    return is_valid_base(x, base) and is_valid_base(y, base) and is_valid_base(z, base)
 
-  return True
-
-def main():
-  """Reads the input and prints the results."""
-
-  # Read the number of expressions.
-  n = int(sys.stdin.readline())
-
-  # Read the expressions.
-  expressions = []
-  for i in range(n):
-    expressions.append(sys.stdin.readline().strip())
-
-  # Check if each expression is valid in bases 1-36.
-  for expr in expressions:
+def get_valid_bases(expr):
     valid_bases = []
     for base in range(1, 37):
-      if is_valid(expr, base):
-        valid_bases.append(base)
+        if is_valid_expression(expr, base):
+            valid_bases.append(base)
+    return valid_bases
 
-    # Print the valid bases or the word "invalid".
-    if valid_bases:
-      print(' '.join(map(str, valid_bases)))
-    else:
-      print('invalid')
+def main():
+    num_tests = int(input())
+    for i in range(num_tests):
+        expr = input()
+        valid_bases = get_valid_bases(expr)
+        if not valid_bases:
+            print("invalid")
+        else:
+            # convert bases to alphabetic characters
+            valid_bases = [chr(ord('a') + base - 10) if base > 9 else str(base) for base in valid_bases[::-1]]
+            print(''.join(valid_bases))
 
 if __name__ == "__main__":
-  main()
+    main()

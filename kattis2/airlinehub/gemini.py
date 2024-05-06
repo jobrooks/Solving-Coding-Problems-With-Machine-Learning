@@ -1,53 +1,76 @@
 import math
 
 def distance(lat1, lon1, lat2, lon2):
-  """Calculates the distance between two points on a sphere."""
-  # Convert latitudes and longitudes to radians
+  """
+  Calculates the distance between two points on the Earth's surface using the
+  Haversine formula.
+
+  Args:
+    lat1: The latitude of the first point in degrees.
+    lon1: The longitude of the first point in degrees.
+    lat2: The latitude of the second point in degrees.
+    lon2: The longitude of the second point in degrees.
+
+  Returns:
+    The distance between the two points in kilometers.
+  """
+
+  # Convert the latitudes and longitudes to radians.
   lat1 = math.radians(lat1)
   lon1 = math.radians(lon1)
   lat2 = math.radians(lat2)
   lon2 = math.radians(lon2)
 
-  # Calculate the distance using the Haversine formula
-  dlon = lon2 - lon1
+  # Calculate the difference between the latitudes and longitudes.
   dlat = lat2 - lat1
-  a = math.sin(dlat / 2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2)**2
+  dlon = lon2 - lon1
+
+  # Calculate the Haversine formula.
+  a = math.sin(dlat / 2) ** 2 + math.cos(lat1) * math.cos(lat2) * math.sin(
+      dlon / 2) ** 2
   c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
-  return 6371 * c  # Distance in kilometers
 
-def find_hub(airports):
-  """Finds the airport that minimizes the maximum direct flying distance to all other airports."""
-  # Calculate the distance matrix between all pairs of airports
-  distances = [[distance(lat1, lon1, lat2, lon2) for lat2, lon2 in airports] for lat1, lon1 in airports]
+  # Calculate the distance in kilometers.
+  distance = 6371 * c
 
-  # Find the airport with the minimum maximum distance
-  min_max_distance = float('inf')
-  hub = None
-  for i in range(len(airports)):
-    max_distance = max(distances[i])
-    if max_distance < min_max_distance:
-      min_max_distance = max_distance
-      hub = airports[i]
-
-  return hub
+  return distance
 
 def main():
-  # Read the input
-  with open('input.txt', 'r') as f:
-    lines = f.readlines()
+  """
+  Finds the airport that best serves as a hub for World Wide Flyer.
 
-  # Parse the input and find the hub for each set of airports
-  for line in lines:
-    n = int(line.strip())
-    airports = []
-    for i in range(n):
-      lat, lon = map(float, f.readline().strip().split())
-      airports.append((lat, lon))
+  Args:
+    None.
 
-    hub = find_hub(airports)
+  Returns:
+    None.
+  """
 
-    # Print the latitude and longitude of the hub
-    print('{:.2f} {:.2f}'.format(hub[0], hub[1]))
+  # Read the input data.
+  n = int(input())
+  airports = []
+  for i in range(n):
+    lat, lon = map(float, input().split())
+    airports.append((lat, lon))
 
-if __name__ == '__main__':
+  # Find the airport that minimizes the maximum direct flying distance from the
+  # hub to any other airport in the world.
+  min_max_distance = float('inf')
+  hub_airport = None
+  for airport in airports:
+    max_distance = 0
+    for other_airport in airports:
+      if airport == other_airport:
+        continue
+      max_distance = max(max_distance, distance(airport[0], airport[1],
+                                               other_airport[0],
+                                               other_airport[1]))
+    if max_distance < min_max_distance:
+      min_max_distance = max_distance
+      hub_airport = airport
+
+  # Print the latitude and longitude of the airport that best serves as a hub.
+  print("{0:.2f} {1:.2f}".format(hub_airport[0], hub_airport[1]))
+
+if __name__ == "__main__":
   main()

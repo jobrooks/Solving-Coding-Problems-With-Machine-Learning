@@ -1,18 +1,12 @@
-from sys import stdin, stdout
+N, Q = map(int, input().split())
 
-n, q = map(int, stdin.readline().split())
-
-stones = [0] * n
-
-for _ in range(q):
-    query = stdin.readline().split()
-    if query[0] == '1':
-        l, r, a, b = map(int, query[1:])
-        for i in range(l-1, r):
-            stones[i] = (stones[i] + ((i-l+1)*a) % b) % b
+boxes = [0] * (N + 1)
+for _ in range(Q):
+    t, *x = map(int, input().split())
+    if t == 1:
+        l, r, a, b = x
+        for i in range(l, r + 1):
+            boxes[i] = (i - l + 1) * a % b
     else:
-        l, r = map(int, query[1:])
-        cnt = 0
-        for i in range(l-1, r):
-            cnt += stones[i]
-        stdout.write(str(cnt) + '\n')
+        l, r = x
+        print(sum(boxes[l:r + 1]))
