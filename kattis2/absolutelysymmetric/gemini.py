@@ -1,17 +1,41 @@
-import numpy as np
+# 4.0 Error 1/36
+from collections import deque
+from typing import List
 
-n = int(input())
-A = np.array([[int(x) for x in input().split()] for _ in range(n)])
+def main():
+    n = int(input())
+    a = [[int(x) for x in input().split()] for _ in range(n)]
 
-if np.abs(A).tolist() == np.abs(A.T).tolist():
-    k = 1
-    X1 = np.abs(A)
-else:
-    k = 2
-    X1 = np.abs(A[:, ::2]) - np.abs(A[:, 1::2])
-    X2 = np.abs(A[:, 1::2]) + np.abs(A[:, ::2])
+    # Check if the matrix is absolutely symmetric
+    for i in range(n):
+        for j in range(n):
+            if abs(a[i][j]) != abs(a[j][i]):
+                print(-1)
+                return
 
-print(k)
-for X in [X1, X2]:
-    for x in X.tolist():
-        print(*x)
+    # Decompose the matrix into a sum of absolutely symmetric matrices
+    x = [[0 for _ in range(n)] for _ in range(n)]
+    q = deque([(a, 0)])
+    while q:
+        a, k = q.popleft()
+        if k == n:
+            continue
+        for i in range(n):
+            for j in range(n):
+                if abs(a[i][j]) != abs(a[j][i]):
+                    x[i][j] += a[i][j]
+                    a[i][j] = -a[i][j]
+                    q.append((a, k + 1))
+                    x[i][j] -= a[i][j]
+                    a[i][j] = -a[i][j]
+
+    # Print the decomposed matrices
+    print(k)
+    for i in range(k):
+        for j in range(n):
+            for l in range(n):
+                print(x[j][l], end=' ')
+            print()
+
+if __name__ == "__main__":
+    main()

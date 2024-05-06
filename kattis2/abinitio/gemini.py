@@ -1,61 +1,46 @@
-from collections import defaultdict
+# 7.1 Error 1/17
+import sys
 
-def power(x, y):
-    ret = 1
-    while y > 0:
-        if y % 2 == 0:
-            x = x * x
-            x = x % mod
-            y = y / 2
-        else:
-            ret = ret * x
-            ret = ret % mod
-            y = y - 1
-    return ret
-
-def hash_function(arr):
-    arr.sort()
-    ret = 0
-    for i in range(len(arr)):
-        ret += (arr[i] * power(base, i))
-        ret = ret % mod
-    return ret
-
+# Read input
 v, e, q = map(int, input().split())
-adj = defaultdict(list)
-
-for i in range(e):
+edges = []
+for _ in range(e):
     a, b = map(int, input().split())
-    adj[a].append(b)
+    edges.append((a, b))
 
-for i in range(q):
-    query = int(input())
-    if query == 1:
+queries = []
+for _ in range(q):
+    query = list(map(int, input().split()))
+    if query[0] == 1:
+        # Add a new vertex
         v += 1
-        adj[v] = []
-    elif query == 2:
-        a, b = map(int, input().split())
-        adj[a].append(b)
-    elif query == 3:
-        a = int(input())
-        del adj[a]
-    elif query == 4:
-        a, b = map(int, input().split())
-        adj[a].remove(b)
-    elif query == 5:
-        new_adj = defaultdict(list)
-        for i in adj:
-            for j in adj[i]:
-                new_adj[j].append(i)
-        adj = new_adj
-    elif query == 6:
-        new_adj = defaultdict(list)
-        for i in range(v):
-            for j in adj[i]:
-                if i not in adj[j]:
-                    new_adj[i].append(j)
-        adj = new_adj
+    elif query[0] == 2:
+        # Add a new edge
+        x, y = query[1:]
+        edges.append((x, y))
+    elif query[0] == 3:
+        # Delete all edges incident to a vertex
+        x = query[1]
+        edges = [edge for edge in edges if edge[0] != x and edge[1] != x]
+    elif query[0] == 4:
+        # Remove an edge
+        x, y = query[1:]
+        edges = [edge for edge in edges if not (edge[0] == x and edge[1] == y)]
+    elif query[0] == 5:
+        # Transpose the graph
+        edges = [(b, a) for a, b in edges]
+    elif query[0] == 6:
+        # Complement the graph
+        edges = [(a, b) for a, b in edges] + [(a, b) for a, b in range(v) if a != b and (a, b) not in edges]
 
+# Compute outdegrees and hashes
+outdegrees = [0] * v
+hashes = [0] * v
+for a, b in edges:
+    outdegrees[a] += 1
+    hashes[a] = (hashes[a] * 7 + b) % (10 ** 9 + 7)
+
+# Output the final graph
 print(v)
 for i in range(v):
-    print(len(adj[i]), hash_function(adj[i]))
+    print(outdegrees[i], hashes[i])

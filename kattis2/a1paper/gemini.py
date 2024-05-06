@@ -1,26 +1,28 @@
+# 4.2 Error 1/13
 import math
 
 def main():
+    # Read the input
     n = int(input())
     papers = [int(x) for x in input().split()]
 
     # Check if there are enough papers to make an A1 paper
-    if sum(papers) == 0:
+    total_area = 0
+    for i in range(n - 1):
+        total_area += papers[i] * (2 ** (-3 / 4 - i * 1 / 4)) ** 2
+
+    if total_area < 1:
         print("impossible")
         return
 
-    # Calculate the length of the A1 paper
-    a1_length = 2**(-5/4) * 2**(-3/4)
-
-    # Calculate the length of the tape needed to join the papers together
+    # Compute the minimum amount of tape needed
     tape_length = 0
-    for i in range(n-1, 0, -1):
+    for i in range(n - 2, -1, -1):
         if papers[i] > 0:
-            tape_length += a1_length * (2**(i-1)/2) * papers[i]
-            a1_length *= 2**(1/4)
+            tape_length += papers[i] * (2 ** (-3 / 4 - i * 1 / 4))
 
-    # Print the length of the tape
-    print("{:.10f}".format(tape_length))
+    # Print the output
+    print(tape_length)
 
 if __name__ == "__main__":
     main()

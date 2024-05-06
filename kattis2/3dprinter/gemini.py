@@ -1,7 +1,10 @@
-n = int(input())
-days = 1
-printers = 1
-while printers < n:
-    printers = printers * 2
-    days += 1
-print(days)
+# 2.9 Error 1/33
+import math
+
+def main():
+    n = int(input())
+    days = math.ceil(math.log2(n))
+    print(days)
+
+if __name__ == "__main__":
+    main()

@@ -1,30 +1,33 @@
+# 5.1 Error 1/38
 from collections import defaultdict
 
 def main():
-    n_stores = int(input())
-    n_items = int(input())
-    stores = defaultdict(list)
-    for _ in range(n_items):
+    # Read the number of stores and items
+    n, k = map(int, input().split())
+
+    # Read the inventory of each store
+    inventory = defaultdict(set)
+    for i in range(k):
         store, item = input().split()
-        store = int(store)
-        stores[store].append(item)
+        inventory[int(store)].add(item)
 
-    n_purchases = int(input())
-    purchases = []
-    for _ in range(n_purchases):
-        purchases.append(input())
+    # Read the list of items purchased
+    m = int(input())
+    purchases = [input() for _ in range(m)]
 
-    breadcrumbs = [None] * len(purchases)
-    for i in range(len(purchases)):
-        purchase = purchases[i]
-        for j in range(len(stores)):
-            if purchase in stores[j]:
-                breadcrumbs[i] = j
-                break
+    # Check if it is possible to determine which store each item was purchased from
+    possible = True
+    store = 0
+    for purchase in purchases:
+        if purchase not in inventory[store]:
+            possible = False
+            break
+        store = (store + 1) % n
 
-    if None in breadcrumbs:
+    # Print the result
+    if not possible:
         print("impossible")
-    elif len(set(breadcrumbs)) == len(breadcrumbs):
+    elif inventory[store] == set(purchases):
         print("unique")
     else:
         print("ambiguous")
