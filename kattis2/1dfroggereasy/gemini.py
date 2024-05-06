@@ -1,71 +1,103 @@
-# 3.5 Error 1/38
-import sys
-
-def frogger(n, s, m, board):
+# 3.5 wrong answer 1/38
+def is_valid(n, s, m, board):
     """
-    Simulates the Frogger game.
+    Checks if the given Frogger game instance is valid.
 
-    Parameters:
-    n: The number of board squares.
-    s: The index of the frog's starting square.
-    m: The magic number.
-    board: A list of the numbers in the board squares.
+    Args:
+        n (int): Number of board squares.
+        s (int): Index of the frog's starting square.
+        m (int): Magic number.
+        board (list): List of non-zero integers representing the numbers in the board squares.
 
     Returns:
-    A tuple of the frog's fate and the number of hops the frog makes before encountering its fate.
+        bool: True if the game instance is valid, False otherwise.
     """
 
-    # Initialize the frog's position and the number of hops.
-    position = s
-    hops = 0
+    if not (1 <= n <= 200):
+        return False
+    if not (1 <= s <= n):
+        return False
+    if m not in board:
+        return False
+    for number in board:
+        if not (-200 <= number <= 200):
+            return False
+    return True
 
-    # Create a set of the squares that the frog has visited.
+
+def play_game(n, s, m, board):
+    """
+    Plays the Frogger game and returns the frog's fate and the number of hops it makes.
+
+    Args:
+        n (int): Number of board squares.
+        s (int): Index of the frog's starting square.
+        m (int): Magic number.
+        board (list): List of non-zero integers representing the numbers in the board squares.
+
+    Returns:
+        tuple: A tuple containing the frog's fate (one of {'magic', 'left', 'right', 'cycle'}) and the number of hops it makes.
+    """
+
     visited = set()
+    fate = None
+    num_hops = 0
+    current_square = s
 
-    # Loop until the frog encounters its fate.
     while True:
+        # Check if the frog has won.
+        if current_square == m:
+            fate = "magic"
+            break
+
+        # Check if the frog has fallen off the left end of the board.
+        if current_square <= 1:
+            fate = "left"
+            break
+
+        # Check if the frog has fallen off the right end of the board.
+        if current_square >= n:
+            fate = "right"
+            break
+
+        # Check if the frog has hopped onto a square where it has been before.
+        if current_square in visited:
+            fate = "cycle"
+            break
+
+        # Add the current square to the set of visited squares.
+        visited.add(current_square)
+
+        # Get the number on the current square.
+        number = board[current_square - 1]
 
         # Increment the number of hops.
-        hops += 1
+        num_hops += 1
 
-        # Get the number in the square where the frog is.
-        number = board[position - 1]
-
-        # If the frog is on a square containing the magic number, the frog wins.
-        if number == m:
-            return 'magic', hops
-
-        # If the frog is on a square containing a positive integer, the frog makes a length-k hop to the right.
-        elif number > 0:
-            position += number
-
-        # If the frog is on a square containing a negative integer, the frog makes a length-|k| hop to the left.
+        # Make the hop.
+        if number > 0:
+            current_square += number
         else:
-            position -= abs(number)
+            current_square -= abs(number)
 
-        # If the frog falls off the left end of the board, the frog loses.
-        if position < 1:
-            return 'left', hops
-
-        # If the frog falls off the right end of the board, the frog loses.
-        elif position > n:
-            return 'right', hops
-
-        # If the frog hops onto a square where the frog has been before, the frog is trapped in a cycle.
-        if position in visited:
-            return 'cycle', hops
-
-        # Add the frog's current position to the set of visited squares.
-        visited.add(position)
+    return fate, num_hops
 
 
-# Read the input.
-n, s, m = map(int, input().split())
-board = list(map(int, input().split()))
+def main():
+    """
+    Gets the input, validates it, and plays the Frogger game.
+    """
 
-# Simulate the game.
-fate, hops = frogger(n, s, m, board)
+    n, s, m = map(int, input().split())
+    board = list(map(int, input().split()))
 
-# Print the output.
-print(fate)
-print(hops)
+    if not is_valid(n, s, m, board):
+        print("Invalid game instance.")
+    else:
+        fate, num_hops = play_game(n, s, m, board)
+        print(fate)
+        print(num_hops)
+
+
+if __name__ == "__main__":
+    main()

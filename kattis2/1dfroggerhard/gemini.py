@@ -1,46 +1,63 @@
-# 8.6 Error 1/12
+# 8.6 wrong answer 1/12
 import sys
 
-def frogger(n, board, magic):
-  """Counts the number of winning instances of Frogger.
-
-  Args:
-    n: The number of board squares.
-    board: A list of the numbers in the board squares in order from left to right.
-    magic: The magic number for this instance of the game.
-
-  Returns:
-    The number of winning instances.
-  """
-
-  # Initialize the dp table.
-  dp = [[0 for _ in range(n+1)] for _ in range(n+1)]
-
-  # Set the base cases.
-  dp[0][0] = 1
-  for i in range(1, n+1):
-    dp[i][i] = 1 if board[i-1] == magic else 0
-
-  # Fill in the dp table.
-  for i in range(1, n+1):
-    for j in range(i+1, n+1):
-      if board[j-1] > 0:
-        dp[i][j] = dp[i][j-board[j-1]]
-      elif board[j-1] < 0:
-        dp[i][j] = dp[i][j-abs(board[j-1])]
-
-  # Return the number of winning instances.
-  return dp[0][n]
-
-
-if __name__ == "__main__":
+def main():
   # Read the input.
   n = int(sys.stdin.readline())
   board = [int(x) for x in sys.stdin.readline().split()]
-  magic = int(sys.stdin.readline())
+
+  # Create a dictionary to store the number of times each square has been visited.
+  visited = {}
 
   # Count the number of winning instances.
-  num_winning_instances = frogger(n, board, magic)
+  count = 0
+  for start in range(1, n + 1):
+    for magic in range(1, n + 1):
+      if play(start, magic, board, visited):
+        count += 1
 
   # Print the output.
-  print(num_winning_instances)
+  print(count)
+
+def play(start, magic, board, visited):
+  """
+  Plays a game of Frogger.
+
+  Args:
+    start: The starting position of the frog.
+    magic: The magic number.
+    board: The board.
+    visited: A dictionary to store the number of times each square has been visited.
+
+  Returns:
+    True if the game is won, False otherwise.
+  """
+
+  # Check if the game has already been played.
+  if start in visited:
+    return False
+
+  # Update the number of times the square has been visited.
+  visited[start] = visited.get(start, 0) + 1
+
+  # Check if the game has been won.
+  if start == magic:
+    return True
+
+  # Check if the game has been lost.
+  if start < 1 or start > len(board):
+    return False
+
+  # Check if the frog is trapped in a cycle.
+  if visited[start] > 1:
+    return False
+
+  # Make a hop.
+  hop = board[start - 1]
+  if hop > 0:
+    return play(start + hop, magic, board, visited)
+  else:
+    return play(start - abs(hop), magic, board, visited)
+
+if __name__ == "__main__":
+  main()
