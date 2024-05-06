@@ -1,3 +1,4 @@
+# 3.5 Error 1/38
 import sys
 
 def frogger(n, s, m, board):

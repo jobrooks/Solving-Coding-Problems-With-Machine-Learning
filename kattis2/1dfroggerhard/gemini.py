@@ -1,3 +1,4 @@
+# 8.6 Error 1/12
 import sys
 
 def frogger(n, board, magic):
