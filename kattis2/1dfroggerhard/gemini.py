@@ -1,48 +1,45 @@
-def count_winning_instances(board, magic_number):
-  """Counts the number of winning instances of a Frogger game.
+import sys
+
+def frogger(n, board, magic):
+  """Counts the number of winning instances of Frogger.
 
   Args:
-    board: A list of n integers representing the board squares.
-    magic_number: The integer that the frog must land on to win.
+    n: The number of board squares.
+    board: A list of the numbers in the board squares in order from left to right.
+    magic: The magic number for this instance of the game.
 
   Returns:
     The number of winning instances.
   """
 
-  # Create a dictionary to store the number of times each square has been visited.
-  visited = {}
-  for square in board:
-    visited[square] = 0
+  # Initialize the dp table.
+  dp = [[0 for _ in range(n+1)] for _ in range(n+1)]
 
-  # Start the frog at the first square.
-  position = 1
+  # Set the base cases.
+  dp[0][0] = 1
+  for i in range(1, n+1):
+    dp[i][i] = 1 if board[i-1] == magic else 0
 
-  # Keep playing until the frog wins or loses.
-  while True:
-    # Check if the frog has won.
-    if board[position - 1] == magic_number:
-      return 1
+  # Fill in the dp table.
+  for i in range(1, n+1):
+    for j in range(i+1, n+1):
+      if board[j-1] > 0:
+        dp[i][j] = dp[i][j-board[j-1]]
+      elif board[j-1] < 0:
+        dp[i][j] = dp[i][j-abs(board[j-1])]
 
-    # Check if the frog has lost.
-    if position < 1 or position > len(board) or visited[board[position - 1]] >= 1:
-      return 0
-
-    # Mark the current square as visited.
-    visited[board[position - 1]] += 1
-
-    # Move the frog.
-    position += board[position - 1]
+  # Return the number of winning instances.
+  return dp[0][n]
 
 
-# Read the input.
-n = int(input())
-board = [int(x) for x in input().split()]
-magic_number = int(input())
+if __name__ == "__main__":
+  # Read the input.
+  n = int(sys.stdin.readline())
+  board = [int(x) for x in sys.stdin.readline().split()]
+  magic = int(sys.stdin.readline())
 
-# Count the number of winning instances.
-count = 0
-for starting_position in range(1, n + 1):
-  count += count_winning_instances(board, magic_number)
+  # Count the number of winning instances.
+  num_winning_instances = frogger(n, board, magic)
 
-# Print the output.
-print(count)
+  # Print the output.
+  print(num_winning_instances)
