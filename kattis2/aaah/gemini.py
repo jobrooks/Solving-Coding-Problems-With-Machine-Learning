@@ -1,8 +1,8 @@
-# 1.6 Error 2/52
-jon_marius = input()
-doctor = input()
+# 1.6 wrong answer 2/52
+jon_aah = input()
+doctor_aah = input()
 
-if jon_marius == doctor:
+if jon_aah == doctor_aah:
     print("go")
 else:
     print("no")

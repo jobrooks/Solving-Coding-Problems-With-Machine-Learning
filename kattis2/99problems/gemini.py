@@ -1,11 +1,8 @@
-# 2.9 Error 1/19
-import math
-
+# 2.9 wrong answer 1/19
 n = int(input())
-x = math.ceil(n/100) * 100
-y = math.floor(n/100) * 100 + 99
-
-if abs(x-n) > abs(y-n):
-    print(y)
+x = (n // 100) * 100
+if n % 100 >= 50:
+    x += 99
 else:
-    print(x)
+    x += (n % 100 // 10) * 100 + 99
+print(x)

@@ -1,10 +1,8 @@
-# 2.9 Error 1/33
+# 2.9 wrong answer 1/33
 import math
 
-def main():
-    n = int(input())
-    days = math.ceil(math.log2(n))
-    print(days)
+n = int(input())
 
-if __name__ == "__main__":
-    main()
+days = math.ceil(math.log(n, 2))
+
+print(days)

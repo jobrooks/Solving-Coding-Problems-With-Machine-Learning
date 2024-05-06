@@ -1,46 +1,68 @@
-# 7.1 Error 1/17
+# 7.1 wrong answer 1/17
 import sys
+from collections import defaultdict
+
+input = sys.stdin.readline
 
 # Read input
-v, e, q = map(int, input().split())
-edges = []
-for _ in range(e):
-    a, b = map(int, input().split())
-    edges.append((a, b))
+V, E, Q = map(int, input().split())
+edges = [list(map(int, input().split())) for _ in range(E)]
+queries = [list(map(int, input().split())) for _ in range(Q)]
 
-queries = []
-for _ in range(q):
-    query = list(map(int, input().split()))
-    if query[0] == 1:
-        # Add a new vertex
-        v += 1
-    elif query[0] == 2:
-        # Add a new edge
-        x, y = query[1:]
-        edges.append((x, y))
-    elif query[0] == 3:
-        # Delete all edges incident to a vertex
-        x = query[1]
-        edges = [edge for edge in edges if edge[0] != x and edge[1] != x]
-    elif query[0] == 4:
-        # Remove an edge
-        x, y = query[1:]
-        edges = [edge for edge in edges if not (edge[0] == x and edge[1] == y)]
-    elif query[0] == 5:
-        # Transpose the graph
-        edges = [(b, a) for a, b in edges]
-    elif query[0] == 6:
-        # Complement the graph
-        edges = [(a, b) for a, b in edges] + [(a, b) for a, b in range(v) if a != b and (a, b) not in edges]
+# Initialize graph
+graph = defaultdict(list)
+for u, v in edges:
+    graph[u].append(v)
 
-# Compute outdegrees and hashes
-outdegrees = [0] * v
-hashes = [0] * v
-for a, b in edges:
-    outdegrees[a] += 1
-    hashes[a] = (hashes[a] * 7 + b) % (10 ** 9 + 7)
+# Initialize hashes
+hashes = defaultdict(int)
 
-# Output the final graph
-print(v)
-for i in range(v):
-    print(outdegrees[i], hashes[i])
+# Process queries
+for query in queries:
+    type = query[0]
+
+    # Add vertex
+    if type == 1:
+        graph[V] = []
+        hashes[V] = 0
+        V += 1
+
+    # Add edge
+    elif type == 2:
+        u, v = query[1], query[2]
+        graph[u].append(v)
+        hashes[u] = hashes[u] * 7 % (10 ** 9 + 7) + v
+
+    # Delete vertex
+    elif type == 3:
+        u = query[1]
+        for v in graph[u]:
+            hashes[v] = hashes[v] // 7 % (10 ** 9 + 7)
+        del graph[u]
+        del hashes[u]
+
+    # Remove edge
+    elif type == 4:
+        u, v = query[1], query[2]
+        graph[u].remove(v)
+        hashes[u] = hashes[u] // 7 % (10 ** 9 + 7)
+
+    # Transpose graph
+    elif type == 5:
+        graph_transpose = defaultdict(list)
+        for u in graph:
+            for v in graph[u]:
+                graph_transpose[v].append(u)
+        graph = graph_transpose
+
+    # Complement graph
+    elif type == 6:
+        for u in graph:
+            for v in range(V):
+                if v not in graph[u]:
+                    graph[u].append(v)
+
+# Output result
+print(V)
+for u in range(V):
+    print(len(graph[u]), hashes[u] % (10 ** 9 + 7))

@@ -2,35 +2,43 @@
 from collections import defaultdict
 
 def main():
-    # Read the number of stores and items
-    n, k = map(int, input().split())
+    # Read the number of stores and the number of items available
+    N, K = map(int, input().split())
 
-    # Read the inventory of each store
-    inventory = defaultdict(set)
-    for i in range(k):
-        store, item = input().split()
-        inventory[int(store)].add(item)
+    # Read the items available at each store
+    items_at_stores = defaultdict(list)
+    for _ in range(K):
+        i, S = input().split()
+        i = int(i)
+        items_at_stores[i].append(S)
 
     # Read the list of items purchased
-    m = int(input())
-    purchases = [input() for _ in range(m)]
+    M = int(input())
+    items_purchased = []
+    for _ in range(M):
+        items_purchased.append(input())
 
-    # Check if it is possible to determine which store each item was purchased from
-    possible = True
-    store = 0
-    for purchase in purchases:
-        if purchase not in inventory[store]:
-            possible = False
-            break
-        store = (store + 1) % n
+    # Find the stores where each item was purchased
+    item_to_store = {}
+    for item in items_purchased:
+        for store in range(N):
+            if item in items_at_stores[store]:
+                item_to_store[item] = store
+                break
 
-    # Print the result
-    if not possible:
-        print("impossible")
-    elif inventory[store] == set(purchases):
-        print("unique")
+    # Check if there is a unique path through the stores that matches the description
+    stores_visited = set()
+    for item in items_purchased:
+        store = item_to_store[item]
+        if store in stores_visited:
+            return "ambiguous"
+        else:
+            stores_visited.add(store)
+
+    if len(stores_visited) == N:
+        return "unique"
     else:
-        print("ambiguous")
+        return "impossible"
 
 if __name__ == "__main__":
-    main()
+    print(main())
