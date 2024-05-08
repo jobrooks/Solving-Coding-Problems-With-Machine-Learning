@@ -9,7 +9,7 @@ CS496 capstone project at Loyola University Maryland
 
 ## Project Description
 
-We created 3 machine learning models to predict how accurately Chat GPT 4 or Google Gemini will answer a programming question. This was the result of a semester-long research capstone. See our [research paper](/CS496_LLM_Research_Document%Final.pdf) for details.
+We created 3 machine learning models to predict how accurately Chat GPT 4 or Google Gemini will answer a programming question. This was the result of a semester-long research capstone. See our [research paper](/CS496_LLM_Research_Document%20Final.pdf) for details.
 
 ## File Structure
 
