@@ -25,7 +25,6 @@ pip install -q -U google-generativeai
 pip install openai
 ```
 To run our GPT4 scripts, you will need to have access to the OpenAI API and pay for GPT4 API access
+
 ## How to Run
-
-## How to Test
-
+Once you have cloned our repo, all machine learning scripts from Analysis.py should be able to be run normally. It will access the 164 questions with GPT-3.5 solutions and grading from the kattis folder. To collect problems from Kattis, use the [AutoKattis API](https://github.com/RussellDash332/autokattis) with your Kattis login. To grade them using the [kattis-cli](https://github.com/Kattis/kattis-cli), you must clone and install that repository on your computer. 
