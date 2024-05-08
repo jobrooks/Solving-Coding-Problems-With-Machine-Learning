@@ -1,0 +1,1 @@
+Input The first line of input consists of an integer q, where 1 leq q leq 1000. Then follow q lines, each containing an integer x where 1leq xleq 5000. Output Then for each query x, output a line containing C_ x, the x:th Catalan number. Sample Input 1 Sample Output 1 6 1 2 3 4 5 50 1 2 5 14 42 1978261657756160653623774456
